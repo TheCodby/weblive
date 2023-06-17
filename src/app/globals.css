@@ -1,27 +1,29 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .card {
+    @apply bg-gradient-to-b from-white to-slate-50 rounded-lg overflow-hidden dark:from-neutral-800 dark:to-neutral-900;
+  }
+  .btn {
+    @apply bg-transparent border-none p-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-all duration-200;
+  }
+  .input-group {
+    @apply gap-2;
+    @apply border-2 border-gray-300 dark:border-[#111111] bg-transparent p-2 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-950 dark:hover:bg-neutral-900 transition-all duration-200;
+    @apply flex flex-row items-center;
+    @apply overflow-hidden;
+    @apply focus-within:border-blue-500 dark:focus-within:border-blue-700;
+    @apply autofill:fill-current autofill:text-transparent;
+  }
+  .input-group input {
+    @apply outline-none bg-transparent w-full;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@tailwind utilities;
+@layer base {
+  body {
+    @apply flex flex-col min-h-screen relative;
+    @apply text-black dark:text-white min-h-screen;
+    @apply bg-gradient-to-b from-[#f1f1f1] to-[#cccccc] dark:from-[#000] dark:to-[#111111];
+  }
 }
