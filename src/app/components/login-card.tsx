@@ -32,7 +32,7 @@ const LoginCard = () => {
         </form>
       </div>
       <p className="text-sm text-center">
-        If you don't have an account please{" "}
+        If you don{`'`}t have an account please{" "}
         <Link className="text-blue-700 hover:text-blue-800" href={`/signup`}>
           Join Us
         </Link>{" "}
