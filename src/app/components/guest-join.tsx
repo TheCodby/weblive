@@ -7,16 +7,14 @@ const GuestJoin = () => {
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           Join To Room
         </p>
-        <div className="input-group p-4">
-          <input
-            className="text-center tracking-[0.2rem] rounded"
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            maxLength={6}
-            placeholder="Room ID"
-          />
-        </div>
+        <input
+          className="text-center tracking-[0.2rem] rounded"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          maxLength={6}
+          placeholder="Room ID"
+        />
         <div>
           <button className="w-1/2 btn">Join</button>
         </div>

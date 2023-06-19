@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import dynamic from "next/dynamic";
 import Footer from "./components/footer";
+import { ToastContainer } from "react-toastify";
 const ToggleTheme = dynamic(() => import("./components/ToggleTheme"), {
   ssr: false,
   loading: () => (
@@ -35,12 +36,12 @@ export default function RootLayout({
         <Context>
           <main className="mb-auto min-h-[90vh] relative">
             <ToggleTheme />
-
             {children}
           </main>
           <footer className="text-white p-4">
             <Footer />
           </footer>
+          <ToastContainer />
         </Context>
       </body>
     </html>
