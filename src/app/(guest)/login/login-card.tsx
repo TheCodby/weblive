@@ -101,7 +101,7 @@ const LoginCard = () => {
         </form>
       </div>
       <p className="text-sm text-center whitespace-pre-line">
-        Don't have an account?{" "}
+        Don{"'"}t have an account?{" "}
         <Link className="text-blue-700 hover:text-blue-800" href={`/signup`}>
           Sign up
         </Link>{" "}

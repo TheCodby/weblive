@@ -4,7 +4,7 @@ import Loading from "../components/loading";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const { isLoading, isSuccess } = useQuery({
     queryKey: ["user"],
@@ -35,4 +35,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   }
 };
 
-export default layout;
+export default Layout;
