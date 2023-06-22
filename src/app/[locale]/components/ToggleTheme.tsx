@@ -9,7 +9,7 @@ const ToggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
   return (
-    <button className="bg-transparent text-xl m-2" onClick={handleClick}>
+    <button className="bg-transparent text-xl" onClick={handleClick}>
       {theme === "light" ? (
         <MdDarkMode color="#00000" size={24} />
       ) : (

@@ -1,16 +1,14 @@
 import Context from "./context";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import dynamic from "next/dynamic";
 import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
-const ToggleTheme = dynamic(() => import("./components/ToggleTheme"), {
-  ssr: false,
-  loading: () => (
-    <div className="animate-pulse w-6 h-6 dark:bg-slate-700 bg-gray-300 rounded-full m-2"></div>
-  ),
-});
+import { notFound } from "next/navigation";
+import Header from "./components/header";
 const inter = Inter({ subsets: ["latin"] });
+const IBMar = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
 
 export const metadata = {
   title: "WebLive",
@@ -19,12 +17,18 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
+  // Show a 404 error if the user requests an unknown locale
+  if (!locale) {
+    notFound();
+  }
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>
+    <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} className="dark">
+      <body className={locale == "ar" ? IBMar.className : inter.className}>
         <div
           className="m-0 w-full h-full absolute -z-10 opacity-10 bg-blend-lighten"
           style={{
@@ -35,11 +39,11 @@ export default function RootLayout({
         ></div>
         <Context>
           <main className="mb-auto min-h-[90vh] relative">
-            <ToggleTheme />
+            <Header />
             {children}
           </main>
           <footer className="text-white p-4">
-            <Footer />
+            <Footer locale={locale} />
           </footer>
           <ToastContainer />
         </Context>

@@ -1,0 +1,27 @@
+{
+  "main": {
+    "LOADING": "Loading..."
+  },
+  "login": {
+    "WELCOME_MESSAGE": "Welcome again in",
+    "LOGIN_FIRST": "Please login first to continue",
+    "LOGIN": "Login",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "SIGNUP_NOW": "Signup now",
+    "JOIN_ROOM": "Join Room",
+    "ROOM_ID": "Room ID",
+    "JOIN": "Join"
+  },
+  "user": {
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGOUT": "Logout",
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "CREATE_ACCOUNT": "Create Account",
+    "SIGNUP": "Sign Up"
+  },
+  "footer": {
+    "POWERED_BY": "Powered by",
+    "AUTHOR": "Ahmed Kotby"
+  }
+}

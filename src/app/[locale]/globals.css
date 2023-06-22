@@ -25,13 +25,14 @@
     @apply relative;
   }
   .input-group .image {
-    @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+    @apply absolute inset-y-0 ps-3 flex items-center pointer-events-none;
   }
+
   .input-group .image svg {
     @apply absolute;
   }
   .input-group input {
-    @apply pl-8 w-full;
+    @apply ps-8 w-full;
   }
   .btn:disabled {
     @apply bg-gray-400 dark:bg-neutral-700;

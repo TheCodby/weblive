@@ -1,0 +1,27 @@
+{
+  "main": {
+    "LOADING": "جار التحميل..."
+  },
+  "login": {
+    "WELCOME_MESSAGE": "مرحبًا بك في",
+    "LOGIN_FIRST": "الرجاء تسجيل الدخول أولاً للإكمال",
+    "LOGIN": "تسجيل الدخول",
+    "ALREADY_HAVE_ACCOUNT": "هل لديك حساب؟",
+    "SIGNUP_NOW": "سجل الآن",
+    "JOIN_ROOM": "إنضم إلى الغرفة",
+    "ROOM_ID": "رقم الغرفة",
+    "JOIN": "انضم"
+  },
+  "user": {
+    "USERNAME": "اسم المستخدم",
+    "PASSWORD": "كلمه السر",
+    "LOGOUT": "تسجيل خروج",
+    "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
+    "CREATE_ACCOUNT": "إنشاء حساب",
+    "SIGNUP": "سجل"
+  },
+  "footer": {
+    "POWERED_BY": "مشغل بواسطة",
+    "AUTHOR": "أحمد كتبي"
+  }
+}

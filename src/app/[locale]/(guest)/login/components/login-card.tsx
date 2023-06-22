@@ -1,12 +1,12 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import Loading from "@/app/components/loading";
+import Loading from "../../../components/loading";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-const LoginCard = () => {
+import LocaleLink from "@/app/[locale]/components/locale-link";
+const LoginCard = ({ messages }: { messages: any }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -34,14 +34,14 @@ const LoginCard = () => {
     <div>
       <div className="card p-6 rounded-3xl justify-center text-center m-4">
         <h1 className="text-2xl font-black tracking-tight">
-          Welcome again in{" "}
+          {messages.login.WELCOME_MESSAGE}{" "}
           <span className="dark:text-blue-700 text-blue-500 tracking-tighter">
             WebLive
           </span>
           !
         </h1>
         <p className="dark:text-slate-200 tracking-tight font-medium text-slate-900 mt-1">
-          You should login first to start a new live stream
+          {messages.login.LOGIN_FIRST}
         </p>
         <form
           autoComplete="off"
@@ -57,7 +57,7 @@ const LoginCard = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 type="text"
-                placeholder="Username"
+                placeholder={messages.user.USERNAME}
                 className={`${error ? "invalid" : ""}`}
                 disabled={isLoading}
                 required
@@ -81,7 +81,7 @@ const LoginCard = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
-              placeholder="Password"
+              placeholder={messages.user.PASSWORD}
               disabled={isLoading}
               required
             />
@@ -91,21 +91,23 @@ const LoginCard = () => {
               {isLoading ? (
                 <>
                   <Loading />
-                  Loading...
+                  {messages.main.LOADING}
                 </>
               ) : (
-                "Login"
+                messages.login.LOGIN
               )}
             </button>
           </div>
         </form>
       </div>
       <p className="text-sm text-center whitespace-pre-line">
-        Don{"'"}t have an account?{" "}
-        <Link className="text-blue-700 hover:text-blue-800" href={`/signup`}>
-          Sign up
-        </Link>{" "}
-        now!
+        {messages.login.ALREADY_HAVE_ACCOUNT}{" "}
+        <LocaleLink
+          className="text-blue-700 hover:text-blue-800"
+          href={`/signup`}
+        >
+          {messages.login.SIGNUP_NOW}
+        </LocaleLink>{" "}
       </p>
     </div>
   );

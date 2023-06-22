@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -8,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import LocaleLink from "../../components/locale-link";
 const SignupCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("");
@@ -96,9 +96,12 @@ const SignupCard = () => {
       </div>
       <p className="text-sm text-center">
         If you have an account you can{" "}
-        <Link className="text-blue-700 hover:text-blue-800" href={`/login`}>
+        <LocaleLink
+          className="text-blue-700 hover:text-blue-800"
+          href={`/login`}
+        >
           Log In
-        </Link>{" "}
+        </LocaleLink>{" "}
       </p>
     </div>
   );
