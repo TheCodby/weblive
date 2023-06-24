@@ -35,8 +35,12 @@
   },
   "settings": {
     "TITLE": "الإعدادات",
-    "ACCOUNT": "الحساب",
-    "PREFERENCES": "تفضيلات"
+    "account": {
+      "TITLE": "الحساب"
+    },
+    "preferences": {
+      "TITLE": "التفضيلات"
+    }
   },
   "footer": {
     "POWERED_BY": "مشغل بواسطة",

@@ -7,11 +7,11 @@ const getLinks = (messages: any) => {
   return [
     {
       href: `/settings/account`,
-      label: messages.settings.ACCOUNT,
+      label: messages.settings.account.TITLE,
     },
     {
       href: `/settings/preferences`,
-      label: messages.settings.PREFERENCES,
+      label: messages.settings.preferences.TITLE,
     },
   ];
 };

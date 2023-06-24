@@ -35,8 +35,12 @@
   },
   "settings": {
     "TITLE": "Settings",
-    "ACCOUNT": "Account",
-    "PREFERENCES": "Preferences"
+    "account": {
+      "TITLE": "Account"
+    },
+    "preferences": {
+      "TITLE": "Preferences"
+    }
   },
   "footer": {
     "POWERED_BY": "Powered by",
