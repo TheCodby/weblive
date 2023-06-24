@@ -9,7 +9,7 @@ const GuestJoin = ({ messages }: { messages: any }) => {
           {messages.login.JOIN_ROOM}
         </p>
         <input
-          className="text-center tracking-[0.2rem] rounded"
+          className="text-center self-center ltr:tracking-[0.2rem] rounded w-3/4"
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"

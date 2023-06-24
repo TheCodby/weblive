@@ -13,7 +13,9 @@
     @apply text-red-500 text-sm font-bold;
   }
   .card {
-    @apply bg-gradient-to-b from-white to-slate-50 rounded-lg overflow-hidden dark:from-neutral-800 dark:to-neutral-900;
+    @apply overflow-hidden rounded-lg transition-colors duration-300;
+    /* @apply bg-gradient-to-b from-white to-slate-50 dark:from-neutral-800 dark:to-neutral-900; */
+    @apply bg-slate-100 dark:bg-neutral-900 dark:border-neutral-800 border;
   }
   .btn {
     @apply inline-flex items-center justify-center;
@@ -42,8 +44,10 @@
 @tailwind utilities;
 @layer base {
   body {
+    @apply transition-all duration-300;
     @apply flex flex-col min-h-screen relative;
     @apply text-black dark:text-white min-h-screen;
-    @apply bg-gradient-to-b from-[#f1f1f1] to-[#cccccc] dark:from-[#000] dark:to-[#111111];
+    @apply bg-[#f1f1f1] dark:bg-[#111111];
+    /* @apply bg-gradient-to-b from-[#f1f1f1] to-[#cccccc] dark:from-[#000] dark:to-[#111111]; */
   }
 }

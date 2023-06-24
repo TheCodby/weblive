@@ -2,15 +2,26 @@
   "main": {
     "LOADING": "جار التحميل..."
   },
+  "rooms": {
+    "TITLE": "الغرف"
+  },
   "login": {
+    "TITLE": "تسجيل الدخول",
     "WELCOME_MESSAGE": "مرحبًا بك في",
     "LOGIN_FIRST": "الرجاء تسجيل الدخول أولاً للإكمال",
     "LOGIN": "تسجيل الدخول",
-    "ALREADY_HAVE_ACCOUNT": "هل لديك حساب؟",
+    "DONT_HAVE_ACCOUNT": "ليس لديك حساب؟",
     "SIGNUP_NOW": "سجل الآن",
     "JOIN_ROOM": "إنضم إلى الغرفة",
     "ROOM_ID": "رقم الغرفة",
     "JOIN": "انضم"
+  },
+  "signup": {
+    "TITLE": "إنشاء حساب جديد",
+    "JOIN_NOW": "انضم الآن",
+    "SIGNUP": "سجل",
+    "ALREADY_HAVE_ACCOUNT": "هل لديك حساب؟",
+    "LOGIN_NOW": "تسجيل الدخول الآن"
   },
   "user": {
     "USERNAME": "اسم المستخدم",
@@ -18,7 +29,14 @@
     "LOGOUT": "تسجيل خروج",
     "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
     "CREATE_ACCOUNT": "إنشاء حساب",
-    "SIGNUP": "سجل"
+    "SIGNUP": "سجل",
+    "ROOMS": "الغرف",
+    "SETTINGS": "الإعدادات"
+  },
+  "settings": {
+    "TITLE": "الإعدادات",
+    "ACCOUNT": "الحساب",
+    "PREFERENCES": "تفضيلات"
   },
   "footer": {
     "POWERED_BY": "مشغل بواسطة",

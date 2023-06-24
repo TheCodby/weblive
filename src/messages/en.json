@@ -2,15 +2,26 @@
   "main": {
     "LOADING": "Loading..."
   },
+  "rooms": {
+    "TITLE": "Rooms"
+  },
   "login": {
+    "TITLE": "Login",
     "WELCOME_MESSAGE": "Welcome again in",
     "LOGIN_FIRST": "Please login first to continue",
     "LOGIN": "Login",
-    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "DONT_HAVE_ACCOUNT": "Don't have an account?",
     "SIGNUP_NOW": "Signup now",
     "JOIN_ROOM": "Join Room",
     "ROOM_ID": "Room ID",
     "JOIN": "Join"
+  },
+  "signup": {
+    "TITLE": "Signup",
+    "JOIN_NOW": "Join now",
+    "SIGNUP": "Signup",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_NOW": "Login now"
   },
   "user": {
     "USERNAME": "Username",
@@ -18,7 +29,14 @@
     "LOGOUT": "Logout",
     "FORGOT_PASSWORD": "Forgot Password?",
     "CREATE_ACCOUNT": "Create Account",
-    "SIGNUP": "Sign Up"
+    "SIGNUP": "Sign Up",
+    "ROOMS": "Rooms",
+    "SETTINGS": "Settings"
+  },
+  "settings": {
+    "TITLE": "Settings",
+    "ACCOUNT": "Account",
+    "PREFERENCES": "Preferences"
   },
   "footer": {
     "POWERED_BY": "Powered by",

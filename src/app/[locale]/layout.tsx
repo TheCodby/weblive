@@ -2,27 +2,32 @@ import Context from "./context";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
-import dynamic from "next/dynamic";
 import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import Header from "./components/header";
+import { isLoggedin } from "../utils/user";
+
 const inter = Inter({ subsets: ["latin"] });
 const IBMar = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
 
 export const metadata = {
-  title: "WebLive",
+  title: {
+    template: "WebLive | %s",
+    default: "WebLive",
+  },
   description: "A web application for live streaming",
 };
 
-export default function RootLayout({
-  children,
-  params: { locale },
-}: {
+export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // Show a 404 error if the user requests an unknown locale
+  const locale = props.params.locale;
+  const cookieStore = cookies();
+  const token = cookieStore.get("token")!;
+  const loggedin = await isLoggedin(token?.value.toString());
   if (!locale) {
     notFound();
   }
@@ -39,8 +44,8 @@ export default function RootLayout({
         ></div>
         <Context>
           <main className="mb-auto min-h-[90vh] relative">
-            <Header />
-            {children}
+            <Header loggedin={loggedin} locale={locale} />
+            {props.children}
           </main>
           <footer className="text-white p-4">
             <Footer locale={locale} />

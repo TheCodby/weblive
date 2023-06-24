@@ -1,7 +1,8 @@
+"use client";
 import useLocale from "@/app/hooks/useLocale";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
-const LocaleLink = (props: any) => {
+const LocaleLink: React.FC<any> = (props: any) => {
   const locale = useLocale();
   return (
     <Link {...props} href={`/${locale}${props.href}`}>

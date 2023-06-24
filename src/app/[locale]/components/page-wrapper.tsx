@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-const PageWraper = ({
+const PageWrapper = ({
   children,
   className = "",
 }: {
@@ -19,4 +19,4 @@ const PageWraper = ({
   );
 };
 
-export default PageWraper;
+export default PageWrapper;

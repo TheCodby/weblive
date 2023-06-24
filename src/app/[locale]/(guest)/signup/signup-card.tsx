@@ -8,7 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import LocaleLink from "../../components/locale-link";
-const SignupCard = () => {
+import useLocale from "@/app/hooks/useLocale";
+const SignupCard = ({ messages }: { messages: any }) => {
+  const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +30,7 @@ const SignupCard = () => {
       toast(data.message, {
         type: "success",
       });
-      router.push("/login");
+      router.push(`${locale}/login`);
     } catch (err: any) {
       setError(err.message);
     }
@@ -38,7 +40,7 @@ const SignupCard = () => {
     <div>
       <div className="card p-6 rounded-3xl justify-center text-center m-4 md:w-96">
         <p className="dark:text-slate-200 tracking-tight font-black text-slate-900 mt-1 text-3xl">
-          Join Us
+          {messages.signup.JOIN_NOW}
         </p>
         <form
           autoComplete="off"
@@ -52,7 +54,7 @@ const SignupCard = () => {
             <input
               className={`${error ? "invalid" : ""}`}
               type="text"
-              placeholder="Username"
+              placeholder={messages.user.USERNAME}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -65,7 +67,7 @@ const SignupCard = () => {
             <input
               className={`${error ? "invalid" : ""}`}
               type="password"
-              placeholder="Password"
+              placeholder={messages.user.PASSWORD}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -85,22 +87,22 @@ const SignupCard = () => {
               {isLoading ? (
                 <>
                   <Loading />
-                  Loading...
+                  {messages.main.LOADING}
                 </>
               ) : (
-                "Signup"
+                messages.signup.SIGNUP
               )}
             </button>
           </div>
         </form>
       </div>
       <p className="text-sm text-center">
-        If you have an account you can{" "}
+        {messages.signup.ALREADY_HAVE_ACCOUNT}{" "}
         <LocaleLink
           className="text-blue-700 hover:text-blue-800"
           href={`/login`}
         >
-          Log In
+          {messages.signup.LOGIN_NOW}
         </LocaleLink>{" "}
       </p>
     </div>

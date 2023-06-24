@@ -2,11 +2,14 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import Loading from "../../../components/loading";
+import Loading from "../../components/loading";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import LocaleLink from "@/app/[locale]/components/locale-link";
+import useLocale from "@/app/hooks/useLocale";
+import { setCookie } from "cookies-next";
 const LoginCard = ({ messages }: { messages: any }) => {
+  const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -24,7 +27,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       localStorage.setItem("token", data.token);
-      router.push("/");
+      setCookie("token", data.token);
+      router.push(`/${locale}/rooms`);
+      router.refresh();
     } catch (err: any) {
       setError(err.message);
     }
@@ -101,7 +106,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
         </form>
       </div>
       <p className="text-sm text-center whitespace-pre-line">
-        {messages.login.ALREADY_HAVE_ACCOUNT}{" "}
+        {messages.login.DONT_HAVE_ACCOUNT}{" "}
         <LocaleLink
           className="text-blue-700 hover:text-blue-800"
           href={`/signup`}
