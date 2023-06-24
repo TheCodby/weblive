@@ -27,7 +27,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       localStorage.setItem("token", data.token);
-      setCookie("token", data.token);
+      setCookie("token", data.token, {
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
+      });
       router.push(`/${locale}/rooms`);
       router.refresh();
     } catch (err: any) {
