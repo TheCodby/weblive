@@ -9,18 +9,23 @@
     @apply focus:border-blue-500 dark:focus:border-blue-700;
     @apply outline-none;
   }
+  textarea {
+    @apply border-2 border-gray-300 dark:border-[#111111] bg-transparent p-2 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-950 dark:hover:bg-neutral-900 transition-all duration-200;
+    @apply focus:border-blue-500 dark:focus:border-blue-700;
+    @apply outline-none;
+  }
   .invalid-feedback {
     @apply text-red-500 text-sm font-bold;
   }
   .card {
-    @apply overflow-hidden rounded-lg transition-colors duration-300;
+    @apply overflow-hidden rounded-lg transition-colors duration-200;
     /* @apply bg-gradient-to-b from-white to-slate-50 dark:from-neutral-800 dark:to-neutral-900; */
     @apply bg-slate-100 dark:bg-neutral-900 dark:border-neutral-800 border;
   }
   .btn {
     @apply inline-flex items-center justify-center;
     @apply shadow-lg shadow-blue-700/50;
-    @apply bg-transparent border-none p-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-all duration-200;
+    @apply bg-transparent border-none px-4 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 transition-all duration-200;
   }
   .input-group {
     @apply overflow-hidden;
@@ -44,7 +49,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply transition-all duration-300;
+    @apply transition-all duration-200;
     @apply flex flex-col min-h-screen relative;
     @apply text-black dark:text-white min-h-screen;
     @apply bg-[#f1f1f1] dark:bg-[#111111];

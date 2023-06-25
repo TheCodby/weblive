@@ -7,7 +7,8 @@ import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import Header from "./components/header";
-import { isLoggedin } from "../utils/user";
+import { getUserByToken } from "../utils/user";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const IBMar = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
@@ -27,7 +28,7 @@ export default async function RootLayout(props: {
   const locale = props.params.locale;
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
-  const loggedin = await isLoggedin(token?.value.toString());
+  const loggedin = await getUserByToken(token?.value.toString());
   if (!locale) {
     notFound();
   }

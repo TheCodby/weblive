@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
-export const isLoggedin = async (token: string) => {
+export const getUserByToken = async (token: string) => {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET as string) ? true : false;
+    return jwt.verify(token, process.env.JWT_SECRET as string);
   } catch (err) {
     return false;
   }

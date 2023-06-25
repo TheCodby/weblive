@@ -1,4 +1,4 @@
-import { isLoggedin } from "@/app/utils/user";
+import { getUserByToken } from "@/app/utils/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -9,7 +9,7 @@ const Layout = async (props: {
 }) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
-  const loggedin = await isLoggedin(token?.value.toString());
+  const loggedin = await getUserByToken(token?.value.toString());
   if (loggedin) redirect(`/${props.params.locale}/rooms`);
   return <>{props.children}</>;
 };

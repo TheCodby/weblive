@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import LocaleLink from "./locale-link";
 import { getDictionary } from "@/dictionaries";
 import UserMenu from "../(user)/components/user-menu";
+import { JwtPayload } from "jsonwebtoken";
 const ToggleTheme = dynamic(() => import("./ToggleTheme"), {
   ssr: false,
   loading: () => (
@@ -14,7 +15,7 @@ const Header = async ({
   loggedin,
   locale,
 }: {
-  loggedin: boolean;
+  loggedin: JwtPayload | boolean | string;
   locale: string;
 }) => {
   const dict = await getDictionary(locale);

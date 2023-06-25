@@ -1,11 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-const PageWrapper = ({
+interface PageWrapperProps {
+  children: React.ReactNode;
+  className?: string;
+}
+const PageWrapper: React.FC<PageWrapperProps> = ({
   children,
   className = "",
-}: {
-  children: React.ReactNode;
-  className: string;
 }) => {
   return (
     <motion.div

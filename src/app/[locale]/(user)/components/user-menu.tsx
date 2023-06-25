@@ -46,7 +46,7 @@ const UserMenu = ({ messages }: { messages: any }) => {
             <Menu.Item>
               {({ active }) => (
                 <LocaleLink
-                  href={`/settings`}
+                  href={`/settings/account`}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 ${
                     active ? "bg-blue-500 dark:bg-blue-700 text-white" : ""
                   }`}

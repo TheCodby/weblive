@@ -1,6 +1,7 @@
 {
   "main": {
-    "LOADING": "جار التحميل..."
+    "LOADING": "جار التحميل...",
+    "SAVE_CHANGES": "حفظ التغييرات"
   },
   "rooms": {
     "TITLE": "الغرف"
@@ -36,7 +37,18 @@
   "settings": {
     "TITLE": "الإعدادات",
     "account": {
-      "TITLE": "الحساب"
+      "TITLE": "الحساب",
+      "PROFILE_SETTINGS": "إعدادات الملف الشخصي",
+      "PROFILE_PICTURE": "صورة الملف الشخصي",
+      "CHANGE_PASSWORD": "تغيير كلمة المرور",
+      "USERNAME_REQUIRED": "اسم المستخدم مطلوب",
+      "BIO": "الوصف الشخصي",
+      "UPLOAD_PICTURE_DESCRIPTION": "إرفع صورة من جهازك الشخصي",
+      "UPLOAD_PICTURE": "تحميل الصورة",
+      "PIRCTURE_FORMATS": "يجب أن تكون الصورة بتنسيق JPG أو PNG ولا يمكن أن تتجاوز 1 ميغابايت",
+      "CURRENT_PASSWORD": "كلمة المرور الحالية",
+      "NEW_PASSWORD": "كلمة السر الجديدة",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور"
     },
     "preferences": {
       "TITLE": "التفضيلات"
