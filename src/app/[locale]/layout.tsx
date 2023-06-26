@@ -28,7 +28,7 @@ export default async function RootLayout(props: {
   const locale = props.params.locale;
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
-  const loggedin = await getUserByToken(token?.value.toString());
+  const loggedin = getUserByToken(token?.value.toString());
   if (!locale) {
     notFound();
   }

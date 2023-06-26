@@ -1,15 +1,57 @@
 "use client";
+import { getUserTheme } from "@/app/utils/theme";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 
 const ProfileSettings = ({ messages, user }: { messages: any; user: any }) => {
+  const router = useRouter();
+  const [isLoading, setLoading] = React.useState(false);
+  const [username, setUsername] = React.useState(user.username);
+  const [bio, setBio] = React.useState(user.bio);
+  const handleChange = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("http://127.0.0.1:3001/me/profile", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          username: username,
+          bio: bio,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
+      toast.success(data.message, {
+        theme: getUserTheme(),
+      });
+      router.refresh();
+    } catch (err: any) {
+      toast.error(err.message, {
+        theme: getUserTheme(),
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <div className="md:w-1/2 flex flex-col gap-3 card p-5 justify-start items-start">
+    <form
+      onSubmit={handleChange}
+      className="md:w-1/2 flex flex-col gap-3 card p-5 justify-start items-start"
+    >
       <label className="block">
         <span className="block text-sm font-medium text-neutral-400">
           {messages.user.USERNAME}
         </span>
         <input
-          defaultValue={user.username}
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
           required
           className="input dark:bg-neutral-800 dark:text-neutral-100 mt-1 peer invalid:border-red-500"
           type="text"
@@ -23,14 +65,19 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: any }) => {
           {messages.settings.account.BIO}
         </span>
         <textarea
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
           className="w-full dark:bg-neutral-800 mt-1"
           rows={6}
         ></textarea>
       </label>
-      <button className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none self-center">
-        {messages.main.SAVE_CHANGES}
+      <button
+        type="submit"
+        className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none self-center"
+      >
+        {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
       </button>
-    </div>
+    </form>
   );
 };
 

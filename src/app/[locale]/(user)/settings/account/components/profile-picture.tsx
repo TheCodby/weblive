@@ -1,11 +1,75 @@
 "use client";
-import React from "react";
-import { FaUserCircle } from "react-icons/fa";
-
+import React, { useRef } from "react";
+import Image from "next/image";
+import { toast } from "react-toastify";
+import { getUserTheme } from "@/app/utils/theme";
+import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
 const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
+  const [imageUrl, setImage] = React.useState(
+    `${process.env.NEXT_PUBLIC_API}${user.avatar}`
+  );
+  const [isLoading, setLoading] = React.useState(false);
+  const ref: any = useRef(null);
+  const router = useRouter();
+  const avatarRef: any = useRef(null);
+  const handleChange = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    const image = URL.createObjectURL(e.target.files[0]);
+    setImage(image);
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    try {
+      const res = await fetch("http://127.0.0.1:3001/me/picture", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
+      toast.success(data.message, {
+        theme: getUserTheme(),
+      });
+      setImage(`${process.env.NEXT_PUBLIC_API}${data.image_url}`);
+      localStorage.setItem(
+        "picture",
+        `${process.env.NEXT_PUBLIC_API}${data?.image_url}`
+      );
+
+      router.refresh();
+    } catch (e: any) {
+      toast.error(e.message, {
+        theme: getUserTheme(),
+      });
+      setImage(`${process.env.NEXT_PUBLIC_API}${user.avatar}`);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="card md:w-1/2 flex flex-col items-center md:flex-row gap-3 p-5">
-      <FaUserCircle size={128} />
+      <div
+        className={`w-40 h-32 dark:border-neutral-800 border-2 relative rounded-full overflow-hidden bg-white ${
+          isLoading ? "animate-pulse" : ""
+        }`}
+      >
+        <Image
+          ref={avatarRef}
+          alt="Profiel Picture"
+          src={imageUrl}
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          className="bg-white"
+        />
+      </div>
+
       <div className="text-md flex flex-col md:flex-row justify-between items-center w-full gap-3">
         <div>
           <p className="dark:text-neutral-100">
@@ -15,7 +79,16 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
             {messages.settings.account.PIRCTURE_FORMATS}
           </p>
         </div>
-        <button className="btn mb-3 dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none">
+        <input
+          type="file"
+          className="hidden"
+          ref={ref}
+          onChange={handleChange}
+        />
+        <button
+          onClick={() => ref!.current!.click()}
+          className="btn mb-3 dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none"
+        >
           {messages.settings.account.UPLOAD_PICTURE}
         </button>
       </div>

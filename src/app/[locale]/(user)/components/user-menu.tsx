@@ -1,14 +1,15 @@
 "use client";
 import { Menu, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import React, { Fragment, useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 import { IoMdLogOut } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
 import { IoRadioOutline } from "react-icons/io5";
 import LocaleLink from "../../components/locale-link";
-const UserMenu = ({ messages }: { messages: any }) => {
+import Image from "next/image";
+const UserMenu = ({ messages, user }: { messages: any; user: any }) => {
+  console.log(user);
   const router = useRouter();
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -18,7 +19,13 @@ const UserMenu = ({ messages }: { messages: any }) => {
   return (
     <Menu as="div" className="relative inline-block text-left z-20">
       <Menu.Button className="flex items-center rounded-full hover:bg-neutral-200 hover:dark:bg-neutral-800 p-2 transition-all duration-300">
-        <FaUserCircle size={24} />
+        <Image
+          width={24}
+          height={24}
+          src={`${process.env.NEXT_PUBLIC_API}${user.avatar}`}
+          className="rounded-full"
+          alt=""
+        />
       </Menu.Button>
       <Transition
         as={Fragment}

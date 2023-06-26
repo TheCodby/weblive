@@ -1,17 +1,30 @@
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import React from "react";
 import { getDictionary } from "@/dictionaries";
-import { getUserByToken } from "@/app/utils/user";
-import { cookies } from "next/headers";
 import ProfileSettings from "./components/profile-settings";
 import ProfilePicture from "./components/profile-picture";
 import ChangePassword from "./components/change-password";
+import { Metadata } from "next";
+import { getProfile } from "@/app/utils/server/user";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+type Props = {
+  params: { locale: string };
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const locale = params.locale;
+  const dict = await getDictionary(locale);
 
+  return {
+    title: dict.settings.account.TITLE,
+  };
+}
 const AccountPage = async ({ params }: { params: { locale: string } }) => {
-  const dict = await getDictionary(params.locale);
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")!;
-  const user = await getUserByToken(token?.value.toString());
+  const [dict, user] = await Promise.all([
+    getDictionary(params.locale),
+    getProfile(),
+  ]);
   return (
     <PageWrapper>
       <div className="flex flex-col gap-4">

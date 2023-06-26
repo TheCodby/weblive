@@ -5,6 +5,7 @@ import LocaleLink from "./locale-link";
 import { getDictionary } from "@/dictionaries";
 import UserMenu from "../(user)/components/user-menu";
 import { JwtPayload } from "jsonwebtoken";
+import { getProfile } from "@/app/utils/server/user";
 const ToggleTheme = dynamic(() => import("./ToggleTheme"), {
   ssr: false,
   loading: () => (
@@ -19,6 +20,7 @@ const Header = async ({
   locale: string;
 }) => {
   const dict = await getDictionary(locale);
+  const user = await getProfile();
   return (
     <header className="flex flex-row p-2 justify-between items-center">
       <div className="flex flex-row gap-4 items-center">
@@ -33,7 +35,7 @@ const Header = async ({
       </div>
       <div>
         {loggedin ? (
-          <UserMenu messages={dict.user} />
+          <UserMenu messages={dict.user} user={user} />
         ) : (
           <LocaleLink
             className="btn bg-black dark:bg-white text-white dark:text-black shadow-none"

@@ -30,7 +30,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
       toast(data.message, {
         type: "success",
       });
-      router.push(`${locale}/login`);
+      router.push(`/${locale}/login`);
     } catch (err: any) {
       setError(err.message);
     }

@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
+import { useRecoilState } from "recoil";
+import { decodeToken, getUserByToken } from "@/app/utils/user";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -30,6 +32,11 @@ const LoginCard = ({ messages }: { messages: any }) => {
       setCookie("token", data.token, {
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
       });
+      const userData = decodeToken(data.token);
+      localStorage.setItem(
+        "picture",
+        `${process.env.NEXT_PUBLIC_API}${userData?.picture}`
+      );
       router.push(`/${locale}/rooms`);
       router.refresh();
     } catch (err: any) {
