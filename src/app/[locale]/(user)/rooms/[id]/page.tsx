@@ -6,6 +6,8 @@ import LiveBox from "../../components/live-box";
 import { getDictionary } from "@/dictionaries";
 import RoomPassword from "../components/room-password";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { JwtPayload } from "jsonwebtoken";
 interface Props {
   params: { locale: string; id: string };
   children: React.ReactNode;
@@ -39,7 +41,7 @@ const RoomPage = async ({ params }: Props) => {
       </div>
     );
   return (
-    <div className="flex flex-row gap-10 p-6 items-start">
+    <div className="flex flex-col md:flex-row gap-10 p-6 absolute items-start h-full w-full">
       <Chat messages={dict} room={room} />
       <LiveBox messages={dict} room={room} />
     </div>

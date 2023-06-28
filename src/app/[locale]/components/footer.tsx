@@ -4,7 +4,7 @@ import React from "react";
 const Footer = async ({ locale }: { locale: string }) => {
   const dict = await getDictionary(locale);
   return (
-    <p className="text-md font-light text-center">
+    <p className="text-md font-light text-center text-black dark:text-white">
       {dict.footer.POWERED_BY}{" "}
       <a
         className="dark:text-blue-700 text-blue-500 hover:font-medium transition-all duration-300"

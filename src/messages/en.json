@@ -72,6 +72,10 @@
     "PASSWORD": "Password",
     "JOIN": "Join"
   },
+  "chat": {
+    "PLACEHOLDER": "Type a message",
+    "JOINED_ROOM": "joined the room"
+  },
   "footer": {
     "POWERED_BY": "Powered by",
     "AUTHOR": "Ahmed Kotby"

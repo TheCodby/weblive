@@ -1,47 +1,129 @@
 "use client";
 import { Room } from "@/app/interfaces/room";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Socket, io } from "socket.io-client";
+import Loading from "../../components/loading";
+import Image from "next/image";
+interface UserMessage {
+  sender?: string;
+  picture?: string;
+}
+interface Message extends UserMessage {
+  type: "user" | "system";
+  message: string;
+}
 interface Props {
   messages: any;
   room: Room;
 }
-const socket: Socket = io("http://127.0.0.1:3001", {
+const socket: Socket = io(`${process.env.NEXT_PUBLIC_API}`, {
   autoConnect: false,
 });
 const Chat: React.FC<Props> = ({ messages, room }) => {
+  const messagesDiv: any = useRef(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
   useEffect(() => {
+    socket.auth = { token: localStorage.getItem("token") };
+    socket.io.opts.query = { roomId: room.id };
+    function onConnect() {
+      setIsConnected(true);
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+    }
+    function onIncomeMessage(message: Message) {
+      setChatMessages((currentMessages: Message[]) => {
+        message.type = "user";
+        return [...currentMessages, message];
+      });
+    }
+    function userJoinedRoom(message: Message) {
+      setChatMessages((currentMessages: Message[]) => {
+        message.type = "system";
+        message.message = `${message.sender} ${messages.chat.JOINED_ROOM}`;
+        return [...currentMessages, message];
+      });
+    }
     socket.connect();
-    socket.emit("message", "hello");
+    socket.on("connect", onConnect);
+    socket.on("message", onIncomeMessage);
+    socket.on("joinedRoom", userJoinedRoom);
+    socket.on("disconnect", onDisconnect);
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("message", onIncomeMessage);
+      socket.off("disconnect", onDisconnect);
+      socket.off("joinedRoom", userJoinedRoom);
+      socket.disconnect();
+    };
   }, []);
+  const sendMessage = async (e: any) => {
+    e.preventDefault();
+    if (message.length > 0 && message.replace(/\s/g, "").length == 0) return;
+    console.log("dcsfcsddsc");
+    socket.emit("sendMessage", message);
+    setMessage("");
+    setTimeout(() => {
+      messagesDiv.current.scrollTop = messagesDiv.current.scrollHeight;
+    }, 100);
+  };
   return (
-    <div className="w-full h-full card">
-      <div className="flex flex-col h-full">
-        <div className="flex flex-row justify-between items-center p-4">
-          <div className="flex flex-row items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-            <div className="flex flex-col">
-              <div className="text-sm font-semibold">{room.name}</div>
-              <div className="text-xs text-gray-500">{room.description}</div>
+    <div className="w-full order-last md:order-1 card h-full">
+      <div className="flex flex-col h-full p-3">
+        {isConnected ? (
+          <div className="flex flex-col h-full justify-between gap-2">
+            <div
+              className="flex flex-col h-fit overflow-y-auto gap-4"
+              ref={messagesDiv}
+            >
+              {chatMessages.map((message: Message) => (
+                <div className="flex flex-col flex-grow">
+                  <div className="flex flex-col gap-2 p-4 mx-2 hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-xl">
+                    <div className="flex flex-row items-center gap-2 ">
+                      <div className="w-8 h-8 rounded-full bg-gray-300 relative overflow-hidden">
+                        <Image
+                          fill
+                          src={`${process.env.NEXT_PUBLIC_API}${message.picture}`}
+                          alt=""
+                        />
+                      </div>
+                      {message.type === "system" ? (
+                        <div className="text-sm font-semibold">
+                          {message.message}
+                        </div>
+                      ) : (
+                        <>
+                          <div className="flex flex-col">
+                            <div className="text-sm font-semibold">
+                              {message.sender}
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {message.message}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
+            <form className="w-full" onSubmit={sendMessage}>
+              <input
+                onChange={(e: any) => setMessage(e.target.value)}
+                value={message}
+                type="text"
+                className="w-full"
+                placeholder={messages.chat.PLACEHOLDER}
+              />
+            </form>
           </div>
-          <div className="flex flex-row gap-2">
-            <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-            <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-            <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-          </div>
-        </div>
-        <div className="flex flex-col flex-grow overflow-y-auto">
-          <div className="flex flex-col gap-2 p-4">
-            <div className="flex flex-row items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-              <div className="flex flex-col">
-                <div className="text-sm font-semibold">User</div>
-                <div className="text-xs text-gray-500">Message</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );

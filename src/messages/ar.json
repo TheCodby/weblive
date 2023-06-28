@@ -69,6 +69,10 @@
     "PASSWORD_PROTECTED": "محمي بكلمة مرور",
     "PASSWORD": "كلمه السر"
   },
+  "chat": {
+    "PLACEHOLDER": "اكتب رسالتك هنا ...",
+    "JOINED_ROOM": "انضم إلى الغرفة"
+  },
   "footer": {
     "POWERED_BY": "مشغل بواسطة",
     "AUTHOR": "أحمد كتبي"
