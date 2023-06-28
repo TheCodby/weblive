@@ -15,6 +15,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
   const avatarRef: any = useRef(null);
   const handleChange = async (e: any) => {
     e.preventDefault();
+    if (e.target.files.length === 0) return;
     setLoading(true);
     const image = URL.createObjectURL(e.target.files[0]);
     setImage(image);
@@ -54,7 +55,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
   return (
     <div className="card md:w-1/2 flex flex-col items-center md:flex-row gap-3 p-5">
       <div
-        className={`w-40 h-32 dark:border-neutral-800 border-2 relative rounded-full overflow-hidden bg-white ${
+        className={`w-40 h-32 relative overflow-hidden ${
           isLoading ? "animate-pulse" : ""
         }`}
       >
@@ -66,7 +67,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
           style={{
             objectFit: "cover",
           }}
-          className="bg-white"
+          className="rounded-full"
         />
       </div>
 

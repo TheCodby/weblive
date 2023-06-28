@@ -54,6 +54,24 @@
       "TITLE": "Preferences"
     }
   },
+  "join_room": {
+    "TITLE": "Join Room",
+    "ROOM_ID": "Room ID",
+    "JOIN": "Join"
+  },
+  "create_room": {
+    "TITLE": "Create Room",
+    "CREATE": "Create",
+    "ROOM_NAME": "Room Name",
+    "ROOM_DESCRIPTION": "Room Description(optional)",
+    "PASSWORD_PROTECTED": "Password Protected",
+    "PASSWORD": "Password"
+  },
+  "room_passwrod": {
+    "TITLE": "Room Password",
+    "PASSWORD": "Password",
+    "JOIN": "Join"
+  },
   "footer": {
     "POWERED_BY": "Powered by",
     "AUTHOR": "Ahmed Kotby"

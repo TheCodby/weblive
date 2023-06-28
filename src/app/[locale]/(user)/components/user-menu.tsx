@@ -9,7 +9,6 @@ import { IoRadioOutline } from "react-icons/io5";
 import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
 const UserMenu = ({ messages, user }: { messages: any; user: any }) => {
-  console.log(user);
   const router = useRouter();
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -18,14 +17,15 @@ const UserMenu = ({ messages, user }: { messages: any; user: any }) => {
   };
   return (
     <Menu as="div" className="relative inline-block text-left z-20">
-      <Menu.Button className="flex items-center rounded-full hover:bg-neutral-200 hover:dark:bg-neutral-800 p-2 transition-all duration-300">
-        <Image
-          width={24}
-          height={24}
-          src={`${process.env.NEXT_PUBLIC_API}${user.avatar}`}
-          className="rounded-full"
-          alt=""
-        />
+      <Menu.Button className="flex items-center rounded-full hover:opacity-40 hover:dark:bg-neutral-800 p-2 transition-all duration-300">
+        <div className="w-5 h-5 overflow-hidden">
+          <Image
+            fill
+            src={`${process.env.NEXT_PUBLIC_API}${user.avatar}`}
+            className="rounded-full border border-neutral-200 dark:border-neutral-700"
+            alt=""
+          />
+        </div>
       </Menu.Button>
       <Transition
         as={Fragment}

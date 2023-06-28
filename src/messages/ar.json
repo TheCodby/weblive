@@ -12,9 +12,11 @@
     "LOGIN_FIRST": "الرجاء تسجيل الدخول أولاً للإكمال",
     "LOGIN": "تسجيل الدخول",
     "DONT_HAVE_ACCOUNT": "ليس لديك حساب؟",
-    "SIGNUP_NOW": "سجل الآن",
-    "JOIN_ROOM": "إنضم إلى الغرفة",
-    "ROOM_ID": "رقم الغرفة",
+    "SIGNUP_NOW": "سجل الآن"
+  },
+  "room_passwrod": {
+    "TITLE": "كلمة مرور الغرفة",
+    "PASSWORD": "كلمة المرور مطلوبة",
     "JOIN": "انضم"
   },
   "signup": {
@@ -53,6 +55,19 @@
     "preferences": {
       "TITLE": "التفضيلات"
     }
+  },
+  "join_room": {
+    "TITLE": "انضم إلى الغرفة",
+    "JOIN": "انضم",
+    "ROOM_ID": "رقم الغرفة"
+  },
+  "create_room": {
+    "TITLE": "إنشاء غرفة",
+    "CREATE": "إنشاء",
+    "ROOM_NAME": "اسم الغرفة",
+    "ROOM_DESCRIPTION": "وصف الغرفة (اختياري)",
+    "PASSWORD_PROTECTED": "محمي بكلمة مرور",
+    "PASSWORD": "كلمه السر"
   },
   "footer": {
     "POWERED_BY": "مشغل بواسطة",
