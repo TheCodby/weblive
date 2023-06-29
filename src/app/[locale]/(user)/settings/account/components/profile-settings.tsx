@@ -13,7 +13,7 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: any }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:3001/me/profile", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/profile`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

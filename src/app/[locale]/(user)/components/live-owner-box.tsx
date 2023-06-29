@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Room } from "@/app/interfaces/room";
 import { useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
-import RecordRTC from "recordrtc";
 interface Props {
   messages: any;
   room: Room;
@@ -12,7 +11,10 @@ interface Props {
 const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
   const { stream, error, start, close } = useUserMedia({
     audio: true,
-    video: true,
+    video: {
+      width: 1280,
+      height: 720,
+    },
   });
   useEffect(() => {
     if (stream) {

@@ -22,7 +22,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
     try {
-      const res = await fetch("http://127.0.0.1:3001/me/picture", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/picture`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

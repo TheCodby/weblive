@@ -5,7 +5,7 @@ const useAuth = () => {
     queryKey: ["profile"],
     queryFn: async () => {
       if (localStorage.getItem("token")) {
-        const res = await fetch("http://127.0.0.1:3001/me/profile", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

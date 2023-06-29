@@ -5,7 +5,7 @@ export const getProfile = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
   try {
-    const res = await fetch("http://127.0.0.1:3001/me/profile", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/profile`, {
       headers: {
         Authorization: `Bearer ${token.value}`,
       },
