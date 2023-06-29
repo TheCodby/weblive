@@ -73,6 +73,10 @@
     "PLACEHOLDER": "اكتب رسالتك هنا ...",
     "JOINED_ROOM": "انضم إلى الغرفة"
   },
+  "live": {
+    "START": "بداية",
+    "STOP": "توقف"
+  },
   "footer": {
     "POWERED_BY": "مشغل بواسطة",
     "AUTHOR": "أحمد كتبي"

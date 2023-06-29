@@ -15,11 +15,9 @@ interface Message extends UserMessage {
 interface Props {
   messages: any;
   room: Room;
+  socket: Socket;
 }
-const socket: Socket = io(`${process.env.NEXT_PUBLIC_API}`, {
-  autoConnect: false,
-});
-const Chat: React.FC<Props> = ({ messages, room }) => {
+const Chat: React.FC<Props> = ({ messages, room, socket }) => {
   const messagesDiv: any = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
   const [message, setMessage] = useState("");
@@ -79,8 +77,8 @@ const Chat: React.FC<Props> = ({ messages, room }) => {
               className="flex flex-col h-fit overflow-y-auto gap-4"
               ref={messagesDiv}
             >
-              {chatMessages.map((message: Message) => (
-                <div className="flex flex-col flex-grow">
+              {chatMessages.map((message: Message, index: number) => (
+                <div className="flex flex-col flex-grow" key={index}>
                   <div className="flex flex-col gap-2 p-4 mx-2 hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-xl">
                     <div className="flex flex-row items-center gap-2 ">
                       <div className="w-8 h-8 rounded-full bg-gray-300 relative overflow-hidden">

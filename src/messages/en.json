@@ -76,6 +76,10 @@
     "PLACEHOLDER": "Type a message",
     "JOINED_ROOM": "joined the room"
   },
+  "live": {
+    "START": "Start",
+    "STOP": "Stop"
+  },
   "footer": {
     "POWERED_BY": "Powered by",
     "AUTHOR": "Ahmed Kotby"
