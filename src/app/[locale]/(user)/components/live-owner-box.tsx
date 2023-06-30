@@ -16,11 +16,61 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       height: 720,
     },
   });
+  const [connections, setConnections] = useState<
+    Map<string, RTCPeerConnection>
+  >(new Map());
   useEffect(() => {
-    if (stream) {
-      // add stream to video element and send it to server to broadcast
-    }
+    const onRequestLive = (sender: string) => {
+      if (!stream) return;
+      const connection: RTCPeerConnection = new RTCPeerConnection({
+        iceServers: [
+          {
+            urls: "stun:stun.l.google.com:19302",
+          },
+        ],
+      });
+      setConnections((currentConnection) => {
+        currentConnection.set(sender, connection);
+        return currentConnection;
+      });
+      stream.getTracks().forEach((track: any) => {
+        connection.addTrack(track, stream);
+      });
+      connection.onicecandidate = (event: any) => {
+        if (event.candidate) {
+          socket.emit("candidate", {
+            to: sender,
+            candidate: event.candidate,
+          });
+        }
+      };
+      connection.onnegotiationneeded = () => {
+        connection
+          .createOffer()
+          .then((offer: any) => {
+            return connection.setLocalDescription(offer);
+          })
+          .then(() => {
+            socket.emit("offer", {
+              to: sender,
+              offer: connection.localDescription,
+            });
+          });
+      };
+    };
+    const onReceiveAnswer = (answer: any) => {
+      console.log(answer);
+      if (connections.has(answer.sender)) {
+        connections.get(answer.sender)?.setRemoteDescription(answer.body);
+      }
+    };
+    socket.on("answer", onReceiveAnswer);
+    socket.on("userRequestLive", onRequestLive);
     return () => {
+      socket.off("answer", onReceiveAnswer);
+      socket.off("offer");
+      socket.off("userRequestLive", onRequestLive);
+      socket.off("candidate");
       close();
     };
   }, [stream]);
@@ -28,6 +78,14 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     console.log(error + "error");
     return null;
   }
+  const startLive = () => {
+    start();
+    socket.emit("live");
+  };
+  const stopLive = () => {
+    socket.emit("liveOffline");
+    close();
+  };
   return (
     <div className="card w-full md:order-2 h-fit p-2">
       <video
@@ -40,10 +98,10 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
         }}
       />
       <div className="flex flex-row gap-5 items-center justify-center my-4">
-        <button className="btn btn-primary" onClick={() => start()}>
+        <button className="btn btn-primary" onClick={() => startLive()}>
           {messages.live.START}
         </button>
-        <button className="btn btn-primary" onClick={() => close()}>
+        <button className="btn btn-primary" onClick={() => stopLive()}>
           {messages.live.STOP}
         </button>
       </div>

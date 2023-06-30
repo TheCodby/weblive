@@ -45,15 +45,24 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
         return [...currentMessages, message];
       });
     }
+    function onUserLeftRoom(message: Message) {
+      setChatMessages((currentMessages: Message[]) => {
+        message.type = "system";
+        message.message = `${message.sender} ${messages.chat.LEFT_ROOM}`;
+        return [...currentMessages, message];
+      });
+    }
     socket.connect();
     socket.on("connect", onConnect);
     socket.on("message", onIncomeMessage);
     socket.on("joinedRoom", userJoinedRoom);
+    socket.on("leftRoom", onUserLeftRoom);
     socket.on("disconnect", onDisconnect);
     return () => {
       socket.off("connect", onConnect);
       socket.off("message", onIncomeMessage);
       socket.off("disconnect", onDisconnect);
+      socket.off("leftRoom", onUserLeftRoom);
       socket.off("joinedRoom", userJoinedRoom);
       socket.disconnect();
     };
@@ -61,7 +70,6 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
   const sendMessage = async (e: any) => {
     e.preventDefault();
     if (message.length > 0 && message.replace(/\s/g, "").length == 0) return;
-    console.log("dcsfcsddsc");
     socket.emit("sendMessage", message);
     setMessage("");
     setTimeout(() => {
@@ -82,11 +90,13 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
                   <div className="flex flex-col gap-2 p-4 mx-2 hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-xl">
                     <div className="flex flex-row items-center gap-2 ">
                       <div className="w-8 h-8 rounded-full bg-gray-300 relative overflow-hidden">
-                        <Image
-                          fill
-                          src={`${process.env.NEXT_PUBLIC_API}${message.picture}`}
-                          alt=""
-                        />
+                        {message.picture ? (
+                          <Image
+                            fill
+                            src={`${process.env.NEXT_PUBLIC_API}${message.picture}`}
+                            alt=""
+                          />
+                        ) : null}
                       </div>
                       {message.type === "system" ? (
                         <div className="text-sm font-semibold">

@@ -2,16 +2,7 @@ import React from "react";
 import LocaleLink from "../../../components/locale-link";
 import { FaLock } from "react-icons/fa";
 import Image from "next/image";
-interface Room {
-  id: number;
-  name: string;
-  capacity: number;
-  owner: {
-    username: string;
-    avatar: string;
-  };
-  type: number;
-}
+import { Room } from "@/app/interfaces/room";
 interface Props {
   roomData: Room;
 }
@@ -24,8 +15,10 @@ const RoomCard: React.FC<Props> = ({ roomData }) => {
           {roomData.name} {roomData.type === 1 ? <FaLock /> : null}
         </h1>
         <div className="flex flex-row justify-between">
-          <p className="text-sm">Online: 1/{roomData.capacity}</p>
-          <p className="text-md inline-flex items-center gap-3">
+          <p className="text-sm">
+            Online: {roomData.onlineUsers}/{roomData.capacity}
+          </p>
+          <div className="text-md inline-flex items-center gap-3">
             {roomData.owner.username}
             <div className="w-8 h-8 overflow-hidden relative">
               <Image
@@ -35,7 +28,7 @@ const RoomCard: React.FC<Props> = ({ roomData }) => {
                 alt=""
               />
             </div>
-          </p>
+          </div>
         </div>
       </div>
     </LocaleLink>

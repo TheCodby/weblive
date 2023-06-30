@@ -1,7 +1,11 @@
 export interface Room {
-  id: string;
+  id: number;
   name: string;
-  description: string;
-  password?: string;
-  ownerId: number;
+  capacity: number;
+  owner: {
+    username: string;
+    avatar: string;
+  };
+  type: number;
+  onlineUsers: number;
 }

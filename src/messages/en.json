@@ -74,7 +74,8 @@
   },
   "chat": {
     "PLACEHOLDER": "Type a message",
-    "JOINED_ROOM": "joined the room"
+    "JOINED_ROOM": "joined the room",
+    "LEFT_ROOM": "left the room"
   },
   "live": {
     "START": "Start",

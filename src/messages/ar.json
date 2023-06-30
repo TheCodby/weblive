@@ -71,7 +71,8 @@
   },
   "chat": {
     "PLACEHOLDER": "اكتب رسالتك هنا ...",
-    "JOINED_ROOM": "انضم إلى الغرفة"
+    "JOINED_ROOM": "انضم إلى الغرفة",
+    "LEFT_ROOM": "غادر الغرفة"
   },
   "live": {
     "START": "بداية",
