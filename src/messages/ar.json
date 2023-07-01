@@ -3,6 +3,9 @@
     "LOADING": "جار التحميل...",
     "SAVE_CHANGES": "حفظ التغييرات"
   },
+  "home": {
+    "WELCOME_MESSAGE": "مرحبًا بك في"
+  },
   "rooms": {
     "TITLE": "الغرف"
   },

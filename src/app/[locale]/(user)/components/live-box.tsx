@@ -73,10 +73,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
       socket.off("candidate", onReceiveCandidate);
       connection.close();
     };
-  }, []);
-  // setInterval(() => {
-  //   console.log(stream);
-  // }, 100);
+  }, [socket]);
   return (
     <div className="card w-full md:order-2 h-96 p-3">
       {!isOffline ? (

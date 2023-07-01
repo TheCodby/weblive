@@ -79,7 +79,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       socket.off("userRequestLive", onRequestLive);
       socket.off("candidate");
     };
-  }, [stream]);
+  }, [stream, socket, connections]);
   if (error) {
     return null;
   }

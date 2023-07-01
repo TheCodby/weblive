@@ -66,7 +66,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
       socket.off("joinedRoom", userJoinedRoom);
       socket.disconnect();
     };
-  }, []);
+  }, [socket, room.id]);
   const sendMessage = async (e: any) => {
     e.preventDefault();
     if (message.length > 0 && message.replace(/\s/g, "").length == 0) return;

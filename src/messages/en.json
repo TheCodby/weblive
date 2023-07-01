@@ -3,6 +3,9 @@
     "LOADING": "Loading...",
     "SAVE_CHANGES": "Save Changes"
   },
+  "home": {
+    "WELCOME_MESSAGE": "Welcome to"
+  },
   "rooms": {
     "TITLE": "Rooms"
   },

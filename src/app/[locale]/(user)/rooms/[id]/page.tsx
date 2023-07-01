@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { getUserByToken } from "@/app/utils/user";
 import LiveViewer from "../../components/live-viewer";
+import PageWrapper from "@/app/[locale]/components/page-wrapper";
 interface Props {
   params: { locale: string; id: string };
 }
@@ -38,9 +39,9 @@ const RoomPage = async ({ params }: Props) => {
       </div>
     );
   return (
-    <div className="flex flex-col md:flex-row gap-10 p-6 absolute items-start h-full w-full">
+    <PageWrapper className="flex flex-col md:flex-row gap-10 p-6 absolute items-start h-full w-full">
       <LiveViewer dict={dict} room={room} user={user} />
-    </div>
+    </PageWrapper>
   );
 };
 
