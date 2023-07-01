@@ -93,7 +93,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
                         {message.picture ? (
                           <Image
                             fill
-                            src={`${process.env.NEXT_PUBLIC_API}${message.picture}`}
+                            src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${message.picture}`}
                             alt=""
                           />
                         ) : null}

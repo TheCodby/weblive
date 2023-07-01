@@ -23,7 +23,7 @@ const RoomCard: React.FC<Props> = ({ roomData }) => {
             <div className="w-8 h-8 overflow-hidden relative">
               <Image
                 fill
-                src={`${process.env.NEXT_PUBLIC_API}${roomData.owner.avatar}`}
+                src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${roomData.owner.avatar}`}
                 className="rounded-full border border-neutral-200 dark:border-neutral-700"
                 alt=""
               />

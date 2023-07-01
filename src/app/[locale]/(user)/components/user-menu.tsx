@@ -21,7 +21,7 @@ const UserMenu = ({ messages, user }: { messages: any; user: any }) => {
         <div className="w-5 h-5 overflow-hidden">
           <Image
             fill
-            src={`${process.env.NEXT_PUBLIC_API}${user.avatar}`}
+            src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`}
             className="rounded-full border border-neutral-200 dark:border-neutral-700"
             alt=""
           />

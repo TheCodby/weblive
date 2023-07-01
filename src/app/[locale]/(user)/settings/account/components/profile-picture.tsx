@@ -4,10 +4,9 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
 const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
   const [imageUrl, setImage] = React.useState(
-    `${process.env.NEXT_PUBLIC_API}${user.avatar}`
+    `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
   );
   const [isLoading, setLoading] = React.useState(false);
   const ref: any = useRef(null);
@@ -36,10 +35,12 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
       toast.success(data.message, {
         theme: getUserTheme(),
       });
-      setImage(`${process.env.NEXT_PUBLIC_API}${data.image_url}`);
+      setImage(
+        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${data.image_url}`
+      );
       localStorage.setItem(
         "picture",
-        `${process.env.NEXT_PUBLIC_API}${data?.image_url}`
+        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${data?.image_url}`
       );
 
       router.refresh();
@@ -47,7 +48,9 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
       toast.error(e.message, {
         theme: getUserTheme(),
       });
-      setImage(`${process.env.NEXT_PUBLIC_API}${user.avatar}`);
+      setImage(
+        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
+      );
     } finally {
       setLoading(false);
     }
