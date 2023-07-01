@@ -54,10 +54,8 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     const liveStarted = () => {
       socket.emit("receiveLive");
       setIsOffline(false);
-      setStream(undefined);
     };
     const liveStopped = () => {
-      console.log("live stopped");
       setStream(undefined);
       setIsOffline(true);
     };
@@ -76,6 +74,9 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
       connection.close();
     };
   }, []);
+  // setInterval(() => {
+  //   console.log(stream);
+  // }, 100);
   return (
     <div className="card w-full md:order-2 h-96 p-3">
       {!isOffline ? (

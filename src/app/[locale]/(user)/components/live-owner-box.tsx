@@ -59,31 +59,51 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       };
     };
     const onReceiveAnswer = (answer: any) => {
-      console.log(answer);
       if (connections.has(answer.sender)) {
         connections.get(answer.sender)?.setRemoteDescription(answer.body);
       }
     };
+    const onUserLeft = (sender: string) => {
+      if (connections.has(sender)) {
+        connections.get(sender)?.close();
+        connections.delete(sender);
+      }
+    };
+    socket.on("leftRoom", onUserLeft);
     socket.on("answer", onReceiveAnswer);
     socket.on("userRequestLive", onRequestLive);
     return () => {
       socket.off("answer", onReceiveAnswer);
       socket.off("offer");
+      socket.off("leftRoom", onUserLeft);
       socket.off("userRequestLive", onRequestLive);
       socket.off("candidate");
-      close();
     };
   }, [stream]);
   if (error) {
-    console.log(error + "error");
     return null;
   }
   const startLive = () => {
-    start();
-    socket.emit("live");
+    setConnections((currentConnection) => {
+      currentConnection.forEach((connection) => {
+        connection.close();
+      });
+      currentConnection.clear();
+      return currentConnection;
+    });
+    start().then(() => {
+      socket.emit("live");
+    });
   };
   const stopLive = () => {
-    socket.emit("liveOffline");
+    setConnections((currentConnection) => {
+      currentConnection.forEach((connection) => {
+        connection.close();
+      });
+      currentConnection.clear();
+      return currentConnection;
+    });
+    socket.emit("stopLive");
     close();
   };
   return (
