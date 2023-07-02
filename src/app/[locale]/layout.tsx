@@ -1,7 +1,5 @@
 import Context from "./context";
 import "./globals.css";
-import { Inter } from "next/font/google";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
@@ -9,9 +7,7 @@ import { cookies } from "next/headers";
 import Header from "./components/header";
 import { getUserByToken } from "../utils/user";
 import "react-toastify/dist/ReactToastify.css";
-
-const inter = Inter({ subsets: ["latin"] });
-const IBMar = IBM_Plex_Sans_Arabic({ subsets: ["arabic"], weight: ["400"] });
+import { IBMar, inter } from "../fonts";
 
 export const metadata = {
   title: {
