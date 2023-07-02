@@ -6,13 +6,19 @@ import RoomCard from "./(user)/rooms/components/room-card";
 import { getRooms } from "../utils/server/room";
 import { Room } from "../interfaces/room";
 import Image from "next/image";
+import Link from "next/link";
+import LocaleLink from "./components/locale-link";
 
 const HomePage = async ({
   params: { locale },
 }: {
   params: { locale: string };
 }) => {
-  const [dict, rooms] = await Promise.all([getDictionary(locale), getRooms()]);
+  const [dict, rooms]: [rooms: Room[], dict: any] = await Promise.all([
+    getDictionary(locale),
+    getRooms(),
+  ]);
+
   return (
     <PageWrapper className="p-24 flex flex-row text-center h-full justify-between">
       <div className="rounded-3xl basis-2/5 flex flex-col text-start gap-6">
@@ -25,11 +31,15 @@ const HomePage = async ({
           one place.
         </p>
       </div>
-      <div className="bg-black/50 h-96 basis-2/5 rounded-3xl shadow-lg overflow-hidden">
-        <div className="flex flex-col gap-5 p-5 overflow-y-auto">
+      <div className="bg-black/50 h-fit basis-2/5 rounded-3xl shadow-lg overflow-hidden">
+        <div className="flex flex-col gap-5 p-5 overflow-hidden">
           <h1 className="font-black text-3xl">Top Rooms</h1>
-          {rooms.map((room: Room) => (
-            <div className="flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5">
+          {rooms.slice(0, 3).map((room: Room) => (
+            <LocaleLink
+              key={room.id}
+              href={`/rooms/${room.id}`}
+              className="flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5"
+            >
               <div className="flex flex-row gap-4 items-center">
                 <div className="w-16 h-16 overflow-hidden relative">
                   <Image
@@ -55,7 +65,7 @@ const HomePage = async ({
                   {room.onlineUsers}/{room.capacity}
                 </p>
               </div>
-            </div>
+            </LocaleLink>
           ))}
         </div>
       </div>

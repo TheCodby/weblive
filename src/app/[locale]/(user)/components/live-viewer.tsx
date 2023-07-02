@@ -21,7 +21,7 @@ const LiveViewer: React.FC<Props> = ({ dict, room, user }) => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [room.id]);
 
   return (
     <>
