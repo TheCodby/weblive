@@ -82,7 +82,8 @@
   },
   "live": {
     "START": "Start",
-    "STOP": "Stop"
+    "STOP": "Stop",
+    "NO_STREAM": "You don't have a stream yet, click start to start streaming"
   },
   "footer": {
     "POWERED_BY": "Powered by",

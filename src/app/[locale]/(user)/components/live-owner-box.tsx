@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Room } from "@/app/interfaces/room";
 import { useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
+import { useRouter } from "next/navigation";
 interface Props {
   messages: any;
   room: Room;
   socket: Socket;
 }
 const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
+  const [isLive, setIsLive] = useState(false);
   const { stream, error, start, close } = useUserMedia({
     audio: true,
     video: {
@@ -79,7 +81,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       socket.off("userRequestLive", onRequestLive);
       socket.off("candidate");
     };
-  }, [stream, socket, connections]);
+  }, [stream]);
   if (error) {
     return null;
   }
@@ -93,6 +95,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     });
     start().then(() => {
       socket.emit("live");
+      setIsLive(true);
     });
   };
   const stopLive = () => {
@@ -105,23 +108,38 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     });
     socket.emit("stopLive");
     close();
+    setIsLive(false);
   };
   return (
-    <div className="card w-full md:order-2 h-fit p-2">
-      <video
-        className="w-full h-full"
-        autoPlay
-        ref={(video) => {
-          if (video) {
-            video.srcObject = stream as MediaStream;
-          }
-        }}
-      />
-      <div className="flex flex-row gap-5 items-center justify-center my-4">
-        <button className="btn btn-primary" onClick={() => startLive()}>
+    <div className="flex flex-col gap-4 card w-full basis-2/3 md:order-2 p-5 min-h-min text-center">
+      {isLive ? (
+        <video
+          className="w-full h-full"
+          autoPlay
+          ref={(video) => {
+            if (video) {
+              video.srcObject = stream as MediaStream;
+            }
+          }}
+        />
+      ) : (
+        <div className="flex justify-center items-center">
+          <p className="text-2xl font-bold">{messages.live.NO_STREAM}</p>
+        </div>
+      )}
+      <div className="flex flex-row gap-5 items-center justify-center">
+        <button
+          disabled={isLive}
+          className="btn btn-primary"
+          onClick={() => startLive()}
+        >
           {messages.live.START}
         </button>
-        <button className="btn btn-primary" onClick={() => stopLive()}>
+        <button
+          disabled={!isLive}
+          className="btn btn-primary"
+          onClick={() => stopLive()}
+        >
           {messages.live.STOP}
         </button>
       </div>

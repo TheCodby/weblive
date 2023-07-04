@@ -1,4 +1,4 @@
-import GuestJoin from "../../components/guest-join";
+import GuestJoin from "../../(user)/components/join-room";
 import LoginCard from "./login-card";
 import PageWrapper from "../../components/page-wrapper";
 import { getDictionary } from "@/dictionaries";
@@ -23,7 +23,6 @@ export default async function LoginPage({
   return (
     <PageWrapper className="flex flex-col md:flex-row gap-4 justify-center items-center absolute w-full h-full">
       <LoginCard messages={dict} />
-      <GuestJoin messages={dict} />
     </PageWrapper>
   );
 }

@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { getUserByToken } from "@/app/utils/user";
 import LiveViewer from "../../components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
+import { notFound } from "next/navigation";
 interface Props {
   params: { locale: string; id: string };
 }
@@ -32,15 +33,24 @@ const RoomPage = async ({ params }: Props) => {
     getRoom(params.id),
   ]);
   const user: any = getUserByToken(cookies().get("token")?.value.toString()!);
-  if (!room)
-    return (
-      <div className="flex flex-row items-center justify-center">
-        <RoomPassword messages={dict} />
-      </div>
-    );
+  console.log(room);
+  if (typeof room === "number" || !room) {
+    if (room === 404) {
+      notFound();
+    } else {
+      return (
+        <div className="flex flex-row items-center justify-center">
+          <RoomPassword messages={dict} />
+        </div>
+      );
+    }
+  }
   return (
-    <PageWrapper className="flex flex-col md:flex-row gap-10 p-6 absolute items-start h-full w-full">
-      <LiveViewer dict={dict} room={room} user={user} />
+    <PageWrapper className="flex flex-col gap-6 p-6">
+      <p className="text-2xl md:text-3xl font-black">{room.name}</p>
+      <div className="flex flex-col md:flex-row gap-10 items-start h-full w-full">
+        <LiveViewer dict={dict} room={room} user={user} />
+      </div>
     </PageWrapper>
   );
 };

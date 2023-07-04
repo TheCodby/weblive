@@ -1,7 +1,7 @@
 import { getDictionary } from "@/dictionaries";
 import { Metadata } from "next";
 import RoomCard from "./components/room-card";
-import GuestJoin from "@/app/[locale]/components/guest-join";
+import JoinRoom from "@/app/[locale]/(user)/components/join-room";
 import CreateRoom from "../components/create-room";
 import { getRooms } from "@/app/utils/server/room";
 import type { Room } from "@/app/interfaces/room";
@@ -37,7 +37,7 @@ const RoomsPage = async ({
         </div>
       </aside>
       <div className="flex flex-col gap-3">
-        <GuestJoin messages={dict} />
+        <JoinRoom messages={dict} />
         <CreateRoom messages={dict} />
       </div>
     </PageWrapper>
