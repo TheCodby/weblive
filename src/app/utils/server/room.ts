@@ -13,13 +13,11 @@ export const getRooms = async (page: string = "1") => {
       }
     );
     const data = await res.json();
-    console.log(data);
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
     return data;
   } catch (err) {
-    console.log(err);
     return null;
   }
 };

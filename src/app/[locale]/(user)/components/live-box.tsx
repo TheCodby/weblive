@@ -23,12 +23,9 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
       ],
     });
     connection.ontrack = (event) => {
-      console.log("receive stream");
-      console.log(event.streams[0]);
       setStream(event.streams[0]);
     };
     const onReceiveOffer = (offer: any) => {
-      console.log("receive offer");
       connection
         .setRemoteDescription(offer)
         .then(() => {
@@ -43,11 +40,9 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     };
 
     const onReceiveCandidate = (candidate: any) => {
-      console.log("receive candidate");
       connection.addIceCandidate(candidate);
     };
     const onReceiveLiveOffline = () => {
-      console.log("live offline");
       setStream(undefined);
       setIsOffline(true);
     };

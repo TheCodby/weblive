@@ -33,7 +33,6 @@ const RoomPage = async ({ params }: Props) => {
     getRoom(params.id),
   ]);
   const user: any = getUserByToken(cookies().get("token")?.value.toString()!);
-  console.log(room);
   if (typeof room === "number" || !room) {
     if (room === 404) {
       notFound();

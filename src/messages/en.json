@@ -4,7 +4,9 @@
     "SAVE_CHANGES": "Save Changes"
   },
   "home": {
-    "WELCOME_MESSAGE": "Welcome to"
+    "MAIN_MESSAGE": "Unleash Your Gaming Prowess and Dive into Captivating Podcasts",
+    "MESSAGE2": "Experience the thrill of live gaming and immerse yourself in\ncaptivating podcasts on WebLive. Join now for endless entertainment in\none place.",
+    "TOP_ROOMS": "Top Rooms"
   },
   "rooms": {
     "TITLE": "Rooms"

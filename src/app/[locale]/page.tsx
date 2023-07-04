@@ -11,7 +11,7 @@ const HomePage = async ({
 }: {
   params: { locale: string };
 }) => {
-  const [dict, rooms]: [rooms: Room[], dict: any] = await Promise.all([
+  const [dict, rooms]: [dict: any, rooms: Room[]] = await Promise.all([
     getDictionary(locale),
     getRooms(),
   ]);
@@ -19,17 +19,15 @@ const HomePage = async ({
     <PageWrapper className="p-10 md:p-24 flex flex-col md:flex-row text-center h-full justify-between gap-4">
       <div className="rounded-3xl basis-2/5 flex flex-col text-start gap-6">
         <p className="text-3xl md:text-5xl font-black tracking-tighter text-center">
-          Unleash Your Gaming Prowess and Dive into Captivating Podcasts
+          {dict.home.MAIN_MESSAGE}
         </p>
         <p className={`text-md md:text-xl font-medium text-center`}>
-          Experience the thrill of live gaming and immerse yourself in
-          captivating podcasts on WebLive. Join now for endless entertainment in
-          one place.
+          {dict.home.MESSAGE2}
         </p>
       </div>
-      <div className="bg-black/50 h-fit basis-2/5 rounded-3xl shadow-lg overflow-hidden">
+      <div className="bg-white/50 dark:bg-black/50 h-fit basis-2/5 rounded-3xl shadow-lg overflow-hidden">
         <div className="flex flex-col gap-5 p-5 overflow-hidden">
-          <h1 className="font-black text-3xl">Top Rooms</h1>
+          <h1 className="font-black text-3xl"> {dict.home.TOP_ROOMS}</h1>
           {rooms?.length > 0
             ? rooms.slice(0, 3).map((room: Room) => (
                 <LocaleLink
@@ -60,7 +58,7 @@ const HomePage = async ({
                     </div>
                   </div>
                   <div className="flex flex-row gap-4 items-center">
-                    <p className="text-sm text-gray-300 rounded-full bg-green-500/50 px-5 py-2 font-bold shadow-xl shadow-green-600/20">
+                    <p className="text-sm dark:text-gray-300 rounded-full bg-green-500/50 px-5 py-2 font-bold shadow-xl shadow-green-600/20">
                       {room.onlineUsers}/{room.capacity}
                     </p>
                   </div>
