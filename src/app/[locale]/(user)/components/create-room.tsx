@@ -35,10 +35,10 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          roomName: state.roomName,
-          roomDescription: state.roomDescription,
-          passwordProtected: state.passwordProtected,
-          roomPassword: state.password,
+          name: state.roomName,
+          description: state.roomDescription,
+          password_protected: state.passwordProtected,
+          password: state.password,
         }),
       });
       const data = await res.json();
