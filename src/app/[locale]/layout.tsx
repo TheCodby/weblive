@@ -9,14 +9,6 @@ import { getUserByToken } from "../utils/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 
-export const metadata = {
-  title: {
-    template: "WebLive | %s",
-    default: "WebLive",
-  },
-  description: "A web application for live streaming",
-};
-
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };

@@ -6,7 +6,7 @@ import { getDictionary } from "@/dictionaries";
 import UserMenu from "../(user)/components/user-menu";
 import { JwtPayload } from "jsonwebtoken";
 import { getProfile } from "@/app/utils/server/user";
-const ToggleTheme = dynamic(() => import("./ToggleTheme"), {
+const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (
     <div className="animate-pulse w-6 h-6 dark:bg-slate-700 bg-gray-300 rounded-full m-2"></div>
