@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import LocaleLink from "../../components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
+import Button from "../../components/ui/button";
 const SignupCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +84,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
             </motion.div>
           ) : null}
           <div>
-            <button className="w-1/2 btn" disabled={isLoading}>
+            <Button className="w-1/2" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loading />
@@ -92,7 +93,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
               ) : (
                 messages.signup.SIGNUP
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

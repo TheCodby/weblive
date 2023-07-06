@@ -2,6 +2,7 @@
 import useLocale from "@/app/hooks/useLocale";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Button from "../../components/ui/button";
 
 const JoinRoom = ({ messages }: { messages: any }) => {
   const locale = useLocale();
@@ -29,9 +30,9 @@ const JoinRoom = ({ messages }: { messages: any }) => {
           value={roomId}
         />
         <div>
-          <button type="submit" className="w-1/2 btn">
+          <Button type="submit" className="w-1/2">
             {messages.join_room.JOIN}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

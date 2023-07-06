@@ -9,6 +9,7 @@ import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
 import { decodeToken } from "@/app/utils/user";
+import Button from "../../components/ui/button";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -100,7 +101,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
             />
           </div>
           <div>
-            <button type="submit" className="w-1/2 btn" disabled={isLoading}>
+            <Button type="submit" className="w-1/2" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loading />
@@ -109,7 +110,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
               ) : (
                 messages.login.LOGIN
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

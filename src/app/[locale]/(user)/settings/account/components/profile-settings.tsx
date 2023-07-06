@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/app/[locale]/components/ui/button";
 import { User } from "@/app/interfaces/user";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
@@ -72,12 +73,12 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
           rows={6}
         ></textarea>
       </label>
-      <button
+      <Button
         type="submit"
         className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none self-center"
       >
         {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
-      </button>
+      </Button>
     </form>
   );
 };

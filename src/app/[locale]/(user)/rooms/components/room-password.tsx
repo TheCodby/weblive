@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Loading from "@/app/[locale]/components/loading";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
+import Button from "@/app/[locale]/components/ui/button";
 const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
   const [password, setPassword] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -55,7 +56,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
           placeholder={messages.room_passwrod.PASSWORD}
         />
         <div>
-          <button disabled={isLoading} type="submit" className="w-1/2 btn">
+          <Button disabled={isLoading} type="submit" className="w-1/2">
             {isLoading ? (
               <>
                 <Loading /> {messages.main.LOADING}
@@ -63,7 +64,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
             ) : (
               messages.room_passwrod.JOIN
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

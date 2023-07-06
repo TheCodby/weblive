@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
 import { User } from "@/app/interfaces/user";
+import Button from "@/app/[locale]/components/ui/button";
 const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
   const [imageUrl, setImage] = React.useState(
     `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
@@ -90,12 +91,12 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
           ref={ref}
           onChange={handleChange}
         />
-        <button
+        <Button
           onClick={() => ref!.current!.click()}
           className="btn mb-3 dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none"
         >
           {messages.settings.account.UPLOAD_PICTURE}
-        </button>
+        </Button>
       </div>
     </div>
   );

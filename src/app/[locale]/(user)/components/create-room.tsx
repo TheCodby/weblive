@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import Loading from "../../components/loading";
 import { useRouter } from "next/navigation";
+import Button from "../../components/ui/button";
 interface State {
   roomName: string;
   roomDescription: string;
@@ -135,7 +136,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           ) : null}
         </AnimatePresence>
         <div>
-          <button disabled={isLoading} type="submit" className="w-1/2 btn">
+          <Button disabled={isLoading} type="submit" className="w-1/2">
             {isLoading ? (
               <>
                 <Loading /> {messages.main.LOADING}
@@ -143,7 +144,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
             ) : (
               messages.create_room.CREATE
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

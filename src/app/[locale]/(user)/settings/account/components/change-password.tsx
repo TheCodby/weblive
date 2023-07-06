@@ -1,5 +1,6 @@
 "use client";
 import Loading from "@/app/[locale]/components/loading";
+import Button from "@/app/[locale]/components/ui/button";
 import { getUserTheme } from "@/app/utils/theme";
 import React, { useReducer } from "react";
 import { toast } from "react-toastify";
@@ -118,7 +119,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
       </label>
-      <button
+      <Button
         type="submit"
         disabled={isLoading}
         className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none"
@@ -130,7 +131,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         ) : (
           messages.settings.account.CHANGE_PASSWORD
         )}
-      </button>
+      </Button>
     </form>
   );
 };

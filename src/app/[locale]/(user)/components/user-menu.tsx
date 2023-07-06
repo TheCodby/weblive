@@ -9,6 +9,7 @@ import { IoRadioOutline } from "react-icons/io5";
 import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
 import { User } from "@/app/interfaces/user";
+import Button from "../../components/ui/button";
 const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
   const router = useRouter();
   const handleLogout = async () => {
@@ -66,14 +67,14 @@ const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
 
             <Menu.Item>
               {({ active }) => (
-                <button
+                <Button
                   onClick={handleLogout}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 ${
                     active ? "bg-blue-500 dark:bg-blue-700 text-white" : ""
                   }`}
                 >
                   <IoMdLogOut className="me-2 h-5" /> {messages.LOGOUT}
-                </button>
+                </Button>
               )}
             </Menu.Item>
           </div>

@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Room } from "@/app/interfaces/room";
 import { UserMedia, useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
+import Button from "../../components/ui/button";
+import { MdFiberManualRecord } from "react-icons/md";
+import { AiOutlinePause } from "react-icons/ai";
 interface Props {
   messages: any;
   room: Room;
@@ -110,38 +113,64 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     setIsLive(false);
   };
   return (
-    <div className="flex flex-col gap-4 card w-full basis-2/3 md:order-2 p-5 min-h-min text-center">
-      {isLive ? (
-        <video
-          className="w-full h-full"
-          autoPlay
-          ref={(video) => {
-            if (video) {
-              video.srcObject = stream as MediaStream;
-            }
-          }}
-        />
-      ) : (
-        <div className="flex justify-center items-center">
-          <p className="text-2xl font-bold">{messages.live.NO_STREAM}</p>
+    <div className="flex flex-col gap-4 card w-full basis-2/3 md:order-2 min-h-min text-center">
+      <div className="flex flex-col gap-4 p-5">
+        {isLive ? (
+          <video
+            className="w-full h-full"
+            autoPlay
+            ref={(video) => {
+              if (video) {
+                video.srcObject = stream as MediaStream;
+              }
+            }}
+          />
+        ) : (
+          <div className="flex justify-center items-center">
+            <p className="text-2xl font-bold">{messages.live.NO_STREAM}</p>
+          </div>
+        )}
+        <div className="flex flex-row gap-5 items-center justify-center bg-black/20 p-2 rounded-full">
+          <div className="group flex relative">
+            <button
+              disabled={isLive}
+              onClick={() => startLive()}
+              className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-3 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent ${
+                isLive ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              <MdFiberManualRecord size={32} />
+            </button>
+            <span
+              className="group-hover:opacity-100 transition-opacity bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
+    -translate-x-1/2 translate-y-full opacity-0 m-4 p-2 mx-auto"
+            >
+              Start
+            </span>
+          </div>
+
+          <div className="group flex relative">
+            <button
+              disabled={!isLive}
+              onClick={() => stopLive()}
+              className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-3 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent ${
+                isLive ? "text-gray-500" : "text-red-500"
+              }}`}
+            >
+              <AiOutlinePause size={32} />
+            </button>
+            <span
+              className="group-hover:opacity-100 transition-opacity bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
+    -translate-x-1/2 translate-y-full opacity-0 m-4 p-2 mx-auto"
+            >
+              Stop
+            </span>
+          </div>
         </div>
-      )}
-      <div className="flex flex-row gap-5 items-center justify-center">
-        <button
-          disabled={isLive}
-          className="btn btn-primary"
-          onClick={() => startLive()}
-        >
-          {messages.live.START}
-        </button>
-        <button
-          disabled={!isLive}
-          className="btn btn-primary"
-          onClick={() => stopLive()}
-        >
-          {messages.live.STOP}
-        </button>
       </div>
+      <Button variant="primary" className="rounded-none">
+        Room Settings
+      </Button>
     </div>
   );
 };
