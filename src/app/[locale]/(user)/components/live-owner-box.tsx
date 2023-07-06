@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Room } from "@/app/interfaces/room";
 import { UserMedia, useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
-import Button from "../../components/ui/button";
 import { MdFiberManualRecord } from "react-icons/md";
-import { AiOutlinePause } from "react-icons/ai";
+import { BsFillStopFill } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
+import TimerCounter from "./timer-counter";
 interface Props {
   messages: any;
   room: Room;
@@ -113,8 +114,9 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     setIsLive(false);
   };
   return (
-    <div className="flex flex-col gap-4 card w-full basis-2/3 md:order-2 min-h-min text-center">
+    <div className="flex flex-col card w-full basis-2/3 md:order-2 min-h-min text-center">
       <div className="flex flex-col gap-4 p-5">
+        <TimerCounter isLive={isLive} />
         {isLive ? (
           <video
             className="w-full h-full"
@@ -127,50 +129,59 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
           />
         ) : (
           <div className="flex justify-center items-center">
-            <p className="text-2xl font-bold">{messages.live.NO_STREAM}</p>
+            <p className="text-2xl font-bold uppercase">
+              {messages.live.NO_STREAM}
+            </p>
           </div>
         )}
-        <div className="flex flex-row gap-5 items-center justify-center bg-black/20 p-2 rounded-full">
+      </div>
+      <div className="flex flex-row gap-5 items-center justify-center bg-white/50 dark:bg-black/20 p-2 rounded-t-full shadow-2xl">
+        {isLive ? (
           <div className="group flex relative">
             <button
-              disabled={isLive}
-              onClick={() => startLive()}
-              className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-3 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent ${
-                isLive ? "text-green-500" : "text-red-500"
-              }`}
-            >
-              <MdFiberManualRecord size={32} />
-            </button>
-            <span
-              className="group-hover:opacity-100 transition-opacity bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
-    -translate-x-1/2 translate-y-full opacity-0 m-4 p-2 mx-auto"
-            >
-              Start
-            </span>
-          </div>
-
-          <div className="group flex relative">
-            <button
-              disabled={!isLive}
               onClick={() => stopLive()}
-              className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-3 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent ${
-                isLive ? "text-gray-500" : "text-red-500"
-              }}`}
+              className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 peer hover:bg-neutral-200 rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
             >
-              <AiOutlinePause size={32} />
+              <BsFillStopFill size={32} />
             </button>
             <span
-              className="group-hover:opacity-100 transition-opacity bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
-    -translate-x-1/2 translate-y-full opacity-0 m-4 p-2 mx-auto"
+              className="peer-hover:flex transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
+              -translate-x-1/2 translate-y-[-150%] hidden m-4 p-2 mx-auto"
             >
               Stop
             </span>
           </div>
+        ) : (
+          <div className="group flex relative">
+            <button
+              disabled={isLive}
+              onClick={() => startLive()}
+              className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 hover:bg-neutral-200 peer rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
+            >
+              <MdFiberManualRecord size={32} />
+            </button>
+            <span
+              className="peer-hover:flex transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
+  -translate-x-1/2 translate-y-[-150%] hidden m-4 p-2 mx-auto"
+            >
+              Start
+            </span>
+          </div>
+        )}
+        <div className="group flex relative">
+          <button
+            className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-2 transition-all peer duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent text-neutral-800 dark:text-white`}
+          >
+            <FiSettings size={24} />
+          </button>
+          <span
+            className="peer-hover:flex hidden transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
+    -translate-x-1/2 translate-y-[-150%] m-4 p-2 mx-auto"
+          >
+            Settings
+          </span>
         </div>
       </div>
-      <Button variant="primary" className="rounded-none">
-        Room Settings
-      </Button>
     </div>
   );
 };
