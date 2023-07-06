@@ -5,10 +5,11 @@ import LiveBox from "./live-box";
 import LiveOwnerBox from "./live-owner-box";
 import { Room } from "@/app/interfaces/room";
 import { Socket, io } from "socket.io-client";
+import { User } from "@/app/interfaces/user";
 interface Props {
   dict: any;
   room: Room;
-  user: any;
+  user: User;
 }
 const socket: Socket = io(`${process.env.NEXT_PUBLIC_API}`, {
   autoConnect: false,

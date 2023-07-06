@@ -25,7 +25,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     connection.ontrack = (event) => {
       setStream(event.streams[0]);
     };
-    const onReceiveOffer = (offer: any) => {
+    const onReceiveOffer = (offer: RTCSessionDescriptionInit) => {
       connection
         .setRemoteDescription(offer)
         .then(() => {
@@ -39,7 +39,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
         });
     };
 
-    const onReceiveCandidate = (candidate: any) => {
+    const onReceiveCandidate = (candidate: RTCIceCandidateInit) => {
       connection.addIceCandidate(candidate);
     };
     const onReceiveLiveOffline = () => {

@@ -10,7 +10,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const params = useParams();
   const router = useRouter();
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {

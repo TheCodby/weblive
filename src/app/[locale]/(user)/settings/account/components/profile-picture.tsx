@@ -4,7 +4,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
-const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
+import { User } from "@/app/interfaces/user";
+const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
   const [imageUrl, setImage] = React.useState(
     `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
   );
@@ -12,14 +13,14 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: any }) => {
   const ref: any = useRef(null);
   const router = useRouter();
   const avatarRef: any = useRef(null);
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.files.length === 0) return;
+    if (!e.target!.files && e.target!.files!.length === 0) return;
     setLoading(true);
-    const image = URL.createObjectURL(e.target.files[0]);
+    const image = URL.createObjectURL(e.target!.files![0]);
     setImage(image);
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
+    formData.append("file", e.target!.files![0]);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/picture`, {
         method: "POST",

@@ -8,7 +8,8 @@ import { deleteCookie } from "cookies-next";
 import { IoRadioOutline } from "react-icons/io5";
 import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
-const UserMenu = ({ messages, user }: { messages: any; user: any }) => {
+import { User } from "@/app/interfaces/user";
+const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
   const router = useRouter();
   const handleLogout = async () => {
     localStorage.removeItem("token");

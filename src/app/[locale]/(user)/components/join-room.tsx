@@ -7,7 +7,7 @@ const JoinRoom = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [roomId, setRoomId] = React.useState("");
   const router = useRouter();
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     router.push(`/${locale}/rooms/${roomId}`);
     e.preventDefault();
   };

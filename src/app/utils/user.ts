@@ -1,3 +1,4 @@
+"server-only";
 import * as jwt from "jsonwebtoken";
 
 export const getUserByToken = (token: string) => {

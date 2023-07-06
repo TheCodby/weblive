@@ -5,7 +5,18 @@ import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import Loading from "../../components/loading";
 import { useRouter } from "next/navigation";
-const reducer = (state: any, action: any) => {
+interface State {
+  roomName: string;
+  roomDescription: string;
+  passwordProtected: boolean;
+  password: string;
+}
+interface Action {
+  type: string;
+  field: string;
+  value: string | boolean;
+}
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "CHANGE":
       return { ...state, [action.field]: action.value };
@@ -24,7 +35,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
-  const handleCreate = async (e: any) => {
+  const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {

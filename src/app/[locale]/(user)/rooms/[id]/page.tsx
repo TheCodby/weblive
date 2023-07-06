@@ -9,6 +9,7 @@ import { getUserByToken } from "@/app/utils/user";
 import LiveViewer from "../../components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import { notFound } from "next/navigation";
+import { User } from "@/app/interfaces/user";
 interface Props {
   params: { locale: string; id: string };
 }

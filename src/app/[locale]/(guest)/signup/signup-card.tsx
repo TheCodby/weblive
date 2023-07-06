@@ -16,7 +16,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const router = useRouter();
-  const sendSignupRequest = async (e: any) => {
+  const sendSignupRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {

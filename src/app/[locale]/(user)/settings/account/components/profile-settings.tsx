@@ -1,15 +1,16 @@
 "use client";
+import { User } from "@/app/interfaces/user";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 
-const ProfileSettings = ({ messages, user }: { messages: any; user: any }) => {
+const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
   const router = useRouter();
   const [isLoading, setLoading] = React.useState(false);
   const [username, setUsername] = React.useState(user.username);
   const [bio, setBio] = React.useState(user.bio);
-  const handleChange = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -42,7 +43,7 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: any }) => {
   };
   return (
     <form
-      onSubmit={handleChange}
+      onSubmit={handleSubmit}
       className="md:w-1/2 flex flex-col gap-3 card p-5 justify-start items-start"
     >
       <label className="block">

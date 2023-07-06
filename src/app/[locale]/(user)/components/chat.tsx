@@ -67,7 +67,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
       socket.disconnect();
     };
   }, [socket, room.id]);
-  const sendMessage = async (e: any) => {
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (message.length > 0 && message.replace(/\s/g, "").length == 0) return;
     socket.emit("sendMessage", message);
@@ -121,7 +121,9 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
             </div>
             <form className="w-full" onSubmit={sendMessage}>
               <input
-                onChange={(e: any) => setMessage(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setMessage(e.target.value)
+                }
                 value={message}
                 type="text"
                 className="w-full"

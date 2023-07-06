@@ -33,7 +33,7 @@ const initialValues = {
 const ChangePassword = ({ messages }: { messages: any }) => {
   const [formData, dispatch] = useReducer(reducer, initialValues);
   const [isLoading, setLoading] = React.useState(false);
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -67,7 +67,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
       setLoading(false);
     }
   };
-  const changeInput = (e: any) => {
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: "CHANGE",
       field: e.target.name,

@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Room } from "@/app/interfaces/room";
-import { useUserMedia } from "@/app/hooks/useUserMedia";
+import { UserMedia, useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
-import { useRouter } from "next/navigation";
 interface Props {
   messages: any;
   room: Room;
@@ -17,7 +16,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       width: 1280,
       height: 720,
     },
-  });
+  }) as UserMedia & { stream: MediaStream | null };
   const [connections, setConnections] = useState<
     Map<string, RTCPeerConnection>
   >(new Map());
@@ -35,10 +34,10 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
         currentConnection.set(sender, connection);
         return currentConnection;
       });
-      stream.getTracks().forEach((track: any) => {
+      stream.getTracks().forEach((track: MediaStreamTrack) => {
         connection.addTrack(track, stream);
       });
-      connection.onicecandidate = (event: any) => {
+      connection.onicecandidate = (event: RTCPeerConnectionIceEvent) => {
         if (event.candidate) {
           socket.emit("candidate", {
             to: sender,
@@ -49,7 +48,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       connection.onnegotiationneeded = () => {
         connection
           .createOffer()
-          .then((offer: any) => {
+          .then((offer: RTCLocalSessionDescriptionInit) => {
             return connection.setLocalDescription(offer);
           })
           .then(() => {
@@ -60,7 +59,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
           });
       };
     };
-    const onReceiveAnswer = (answer: any) => {
+    const onReceiveAnswer = (answer: { sender: string; body: any }) => {
       if (connections.has(answer.sender)) {
         connections.get(answer.sender)?.setRemoteDescription(answer.body);
       }

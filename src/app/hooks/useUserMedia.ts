@@ -10,16 +10,15 @@ type MediaStream = {
   stop?: () => void;
 };
 
-export type UserMediaReturnType = {
-  stream: any;
+export interface UserMedia {
+  stream: MediaStream | null;
   error: Error | null;
   start: () => Promise<void>;
   close: () => void;
-};
-
+}
 export const useUserMedia = (
   constraints: MediaStreamConstraints
-): UserMediaReturnType => {
+): UserMedia => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [error, setError] = useState<Error | null>(null);
 

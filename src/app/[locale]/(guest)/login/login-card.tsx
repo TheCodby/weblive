@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
-import { useRecoilState } from "recoil";
-import { decodeToken, getUserByToken } from "@/app/utils/user";
+import { decodeToken } from "@/app/utils/user";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -17,7 +16,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(false);
   const router = useRouter();
-  const sendLoginRequest = async (e: any) => {
+  const sendLoginRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
