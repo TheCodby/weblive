@@ -5,11 +5,10 @@ import { getDictionary } from "@/dictionaries";
 import RoomPassword from "../components/room-password";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { getUserByToken } from "@/app/utils/user";
+import { getUserByToken } from "@/app/utils/server/user";
 import LiveViewer from "../../components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import { notFound } from "next/navigation";
-import { User } from "@/app/interfaces/user";
 interface Props {
   params: { locale: string; id: string };
 }

@@ -1,4 +1,4 @@
-import { getUserByToken } from "@/app/utils/user";
+import { getUserByToken } from "@/app/utils/server/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";

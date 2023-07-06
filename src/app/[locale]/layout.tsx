@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import Header from "./components/header";
-import { getUserByToken } from "../utils/user";
+import { getUserByToken } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 
