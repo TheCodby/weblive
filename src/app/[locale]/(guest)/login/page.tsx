@@ -1,4 +1,3 @@
-import GuestJoin from "../../(user)/components/join-room";
 import LoginCard from "./login-card";
 import PageWrapper from "../../components/page-wrapper";
 import { getDictionary } from "@/dictionaries";

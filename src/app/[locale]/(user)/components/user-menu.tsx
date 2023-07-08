@@ -67,14 +67,14 @@ const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
 
             <Menu.Item>
               {({ active }) => (
-                <Button
+                <button
                   onClick={handleLogout}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 ${
                     active ? "bg-blue-500 dark:bg-blue-700 text-white" : ""
                   }`}
                 >
                   <IoMdLogOut className="me-2 h-5" /> {messages.LOGOUT}
-                </Button>
+                </button>
               )}
             </Menu.Item>
           </div>

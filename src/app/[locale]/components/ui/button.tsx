@@ -13,6 +13,8 @@ const buttonVariants = cva(
           "bg-green-500 hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800 shadow-green-700/50 shadow-lg",
         outlined:
           "hover:dark:bg-neutral-800 hover:bg-neutral-200 border-solid dark:hover:text-white text-gray-800 dark:text-gray-100 border border-neutral-300 dark:border-neutral-800",
+        reverse:
+          "bg-white hover:bg-gray-200 shadow-sm dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-800 dark:text-gray-100 border border-neutral-300 dark:border-neutral-800",
       },
       size: {
         small: ["text-sm", "py-1", "px-2"],

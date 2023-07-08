@@ -6,6 +6,7 @@ import { getDictionary } from "@/dictionaries";
 import UserMenu from "../(user)/components/user-menu";
 import { JwtPayload } from "jsonwebtoken";
 import { getProfile } from "@/app/utils/server/user";
+import Button from "./ui/button";
 const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (
@@ -37,11 +38,8 @@ const Header = async ({
         {loggedin ? (
           <UserMenu messages={dict.user} user={user} />
         ) : (
-          <LocaleLink
-            className="btn bg-black dark:bg-white text-white dark:text-black shadow-none"
-            href="/login"
-          >
-            {dict.login.LOGIN}
+          <LocaleLink href="/login">
+            <Button variant="reverse">{dict.login.LOGIN}</Button>
           </LocaleLink>
         )}
       </div>

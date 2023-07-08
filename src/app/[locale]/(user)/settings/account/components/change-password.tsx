@@ -119,11 +119,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
       </label>
-      <Button
-        type="submit"
-        disabled={isLoading}
-        className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none"
-      >
+      <Button type="submit" disabled={isLoading} variant="reverse">
         {isLoading ? (
           <>
             <Loading /> {messages.main.LOADING}

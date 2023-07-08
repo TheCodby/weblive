@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
-import { decodeToken } from "@/app/utils/user";
 import Button from "../../components/ui/button";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
@@ -17,6 +16,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState(false);
   const router = useRouter();
+
   const sendLoginRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -32,10 +32,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
       setCookie("token", data.token, {
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
       });
-      const userData = decodeToken(data.token);
       localStorage.setItem(
         "picture",
-        `${process.env.NEXT_PUBLIC_API}${userData?.picture}`
+        `${process.env.NEXT_PUBLIC_API}${data?.user?.picture}`
       );
       router.push(`/${locale}/rooms`);
       router.refresh();
@@ -58,9 +57,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
           {messages.login.LOGIN_FIRST}
         </p>
         <form
-          autoComplete="off"
           className="flex flex-col mt-6 gap-4"
           onSubmit={sendLoginRequest}
+          autoComplete="on"
         >
           <div>
             <div className="input-group">
@@ -68,7 +67,10 @@ const LoginCard = ({ messages }: { messages: any }) => {
                 <FaUserAlt />
               </div>
               <input
+                autoComplete="username"
                 value={username}
+                name="username"
+                id="username"
                 onChange={(e) => setUsername(e.target.value)}
                 type="text"
                 placeholder={messages.user.USERNAME}
@@ -92,6 +94,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
               <RiLockPasswordFill />
             </div>
             <input
+              autoComplete="current-password"
+              name="password"
+              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"

@@ -73,10 +73,7 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
           rows={6}
         ></textarea>
       </label>
-      <Button
-        type="submit"
-        className="btn dark:bg-neutral-800 dark:hover:bg-neutral-700 bg-neutral-300 text-black dark:text-white shadow-none self-center"
-      >
+      <Button type="submit" variant="reverse">
         {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
       </Button>
     </form>
