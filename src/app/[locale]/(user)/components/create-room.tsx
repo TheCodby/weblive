@@ -6,6 +6,7 @@ import { getUserTheme } from "@/app/utils/theme";
 import Loading from "../../components/loading";
 import { useRouter } from "next/navigation";
 import Button from "../../components/ui/button";
+import TextInput from "../../components/ui/text-input";
 interface State {
   roomName: string;
   roomDescription: string;
@@ -75,8 +76,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.create_room.TITLE}
         </p>
-
-        <input
+        <TextInput
           onChange={(e) =>
             dispatch({
               type: "CHANGE",
@@ -100,8 +100,8 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           placeholder={messages.create_room.ROOM_DESCRIPTION}
           rows={6}
         ></textarea>
-        <label>
-          <input
+        <label className="inline-flex gap-3 items-center justify-center">
+          <TextInput
             onChange={(e) =>
               dispatch({
                 type: "CHANGE",
@@ -117,22 +117,25 @@ const CreateRoom = ({ messages }: { messages: any }) => {
         </label>
         <AnimatePresence>
           {state.passwordProtected ? (
-            <motion.input
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
               exit={{ opacity: 0 }}
-              onChange={(e) =>
-                dispatch({
-                  type: "CHANGE",
-                  field: "password",
-                  value: e.target.value,
-                })
-              }
-              value={state.password}
-              type="password"
-              placeholder={messages.create_room.PASSWORD}
-            />
+            >
+              <TextInput
+                onChange={(e) =>
+                  dispatch({
+                    type: "CHANGE",
+                    field: "password",
+                    value: e.target.value,
+                  })
+                }
+                value={state.password}
+                type="password"
+                placeholder={messages.create_room.PASSWORD}
+              />
+            </motion.div>
           ) : null}
         </AnimatePresence>
         <div>

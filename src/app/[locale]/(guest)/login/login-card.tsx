@@ -9,12 +9,13 @@ import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
 import Button from "../../components/ui/button";
+import TextInput from "../../components/ui/text-input";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState(false);
+  const [error, setError] = React.useState();
   const router = useRouter();
 
   const sendLoginRequest = async (e: React.FormEvent) => {
@@ -61,50 +62,34 @@ const LoginCard = ({ messages }: { messages: any }) => {
           onSubmit={sendLoginRequest}
           autoComplete="on"
         >
-          <div>
-            <div className="input-group">
-              <div className="image">
-                <FaUserAlt />
-              </div>
-              <input
-                autoComplete="username"
-                value={username}
-                name="username"
-                id="username"
-                onChange={(e) => setUsername(e.target.value)}
-                type="text"
-                placeholder={messages.user.USERNAME}
-                className={`${error ? "invalid" : ""}`}
-                disabled={isLoading}
-                required
-              />
-            </div>
-            {error ? (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-              >
-                <label className="invalid-feedback">{error}</label>
-              </motion.div>
-            ) : null}
-          </div>
-          <div className="input-group">
-            <div className="image">
-              <RiLockPasswordFill />
-            </div>
-            <input
-              autoComplete="current-password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder={messages.user.PASSWORD}
-              disabled={isLoading}
-              required
-            />
-          </div>
+          <TextInput
+            icon={<FaUserAlt />}
+            autoComplete="username"
+            value={username}
+            name="username"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder={messages.user.USERNAME}
+            className={`${error ? "invalid" : ""}`}
+            disabled={isLoading}
+            error={error}
+            required
+            animatedPlaceholder
+          />
+          <TextInput
+            icon={<RiLockPasswordFill />}
+            autoComplete="current-password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder={messages.user.PASSWORD}
+            disabled={isLoading}
+            required
+            animatedPlaceholder
+          />
           <div>
             <Button type="submit" className="w-1/2" disabled={isLoading}>
               {isLoading ? (

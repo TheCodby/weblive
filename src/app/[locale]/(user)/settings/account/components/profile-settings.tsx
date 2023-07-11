@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/app/[locale]/components/ui/button";
+import TextInput from "@/app/[locale]/components/ui/text-input";
 import { User } from "@/app/interfaces/user";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
@@ -51,11 +52,10 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
         <span className="block text-sm font-medium text-neutral-400">
           {messages.user.USERNAME}
         </span>
-        <input
+        <TextInput
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           required
-          className="input dark:bg-neutral-800 dark:text-neutral-100 mt-1 peer invalid:border-red-500"
           type="text"
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
@@ -73,7 +73,7 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
           rows={6}
         ></textarea>
       </label>
-      <Button type="submit" variant="reverse">
+      <Button type="submit" variant="primary">
         {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
       </Button>
     </form>

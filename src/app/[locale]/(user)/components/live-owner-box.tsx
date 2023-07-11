@@ -7,12 +7,14 @@ import { MdFiberManualRecord } from "react-icons/md";
 import { BsFillStopFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import TimerCounter from "./timer-counter";
+import SettingsModal from "../rooms/[id]/settings-modal";
 interface Props {
   messages: any;
   room: Room;
   socket: Socket;
 }
 const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLive, setIsLive] = useState(false);
   const { stream, error, start, close } = useUserMedia({
     audio: true,
@@ -170,6 +172,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
         )}
         <div className="group flex relative">
           <button
+            onClick={() => setIsSettingsOpen(true)}
             className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-2 transition-all peer duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent text-neutral-800 dark:text-white`}
           >
             <FiSettings size={24} />
@@ -182,6 +185,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
           </span>
         </div>
       </div>
+      <SettingsModal isOpen={isSettingsOpen} setIsOpen={setIsSettingsOpen} />
     </div>
   );
 };

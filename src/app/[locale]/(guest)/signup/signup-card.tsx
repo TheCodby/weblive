@@ -10,12 +10,13 @@ import { motion } from "framer-motion";
 import LocaleLink from "../../components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import Button from "../../components/ui/button";
+import TextInput from "../../components/ui/text-input";
 const SignupCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const router = useRouter();
   const sendSignupRequest = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,41 +49,32 @@ const SignupCard = ({ messages }: { messages: any }) => {
           className="flex flex-col mt-6 gap-4"
           onSubmit={sendSignupRequest}
         >
-          <div className="input-group">
-            <div className="image">
-              <FaUserAlt />
-            </div>
-            <input
-              className={`${error ? "invalid" : ""}`}
-              type="text"
-              placeholder={messages.user.USERNAME}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <div className="image">
-              <RiLockPasswordFill />
-            </div>
-            <input
-              className={`${error ? "invalid" : ""}`}
-              type="password"
-              placeholder={messages.user.PASSWORD}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {error ? (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
-              <label className="invalid-feedback">{error}</label>
-            </motion.div>
-          ) : null}
+          <TextInput
+            icon={<FaUserAlt />}
+            value={username}
+            name="username"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder={messages.user.USERNAME}
+            className={`${error ? "invalid" : ""}`}
+            disabled={isLoading}
+            error={error}
+            required
+            animatedPlaceholder
+          />
+          <TextInput
+            icon={<RiLockPasswordFill />}
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder={messages.user.PASSWORD}
+            disabled={isLoading}
+            required
+            animatedPlaceholder
+          />
           <div>
             <Button className="w-1/2" disabled={isLoading}>
               {isLoading ? (

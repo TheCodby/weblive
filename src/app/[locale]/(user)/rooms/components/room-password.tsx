@@ -6,6 +6,7 @@ import Loading from "@/app/[locale]/components/loading";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import Button from "@/app/[locale]/components/ui/button";
+import TextInput from "@/app/[locale]/components/ui/text-input";
 const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
   const [password, setPassword] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -48,7 +49,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.room_passwrod.TITLE}
         </p>
-        <input
+        <TextInput
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           className="text-center self-center rounded-full"

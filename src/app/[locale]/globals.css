@@ -1,14 +1,6 @@
 @tailwind base;
 @tailwind components;
 @layer components {
-  input.invalid {
-    @apply border-red-300 dark:border-red-800;
-  }
-  input {
-    @apply border-2 border-gray-300 dark:border-[#111111] bg-transparent p-2 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-950 dark:hover:bg-neutral-900 transition-all duration-200;
-    @apply focus:border-blue-500 dark:focus:border-blue-700;
-    @apply outline-none;
-  }
   textarea {
     @apply border-2 border-gray-300 dark:border-[#111111] bg-transparent p-2 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-950 dark:hover:bg-neutral-900 transition-all duration-200;
     @apply focus:border-blue-500 dark:focus:border-blue-700;
@@ -21,20 +13,6 @@
     @apply overflow-hidden rounded-lg transition-colors duration-200;
     /* @apply bg-gradient-to-b from-white to-slate-50 dark:from-neutral-800 dark:to-neutral-900; */
     @apply bg-slate-100 dark:bg-neutral-900 dark:border-neutral-800 border;
-  }
-  .input-group {
-    @apply overflow-hidden;
-    @apply relative;
-  }
-  .input-group .image {
-    @apply absolute inset-y-0 ps-3 flex items-center pointer-events-none;
-  }
-
-  .input-group .image svg {
-    @apply absolute;
-  }
-  .input-group input {
-    @apply ps-8 w-full;
   }
 }
 @tailwind utilities;

@@ -39,7 +39,7 @@ const Header = async ({
           <UserMenu messages={dict.user} user={user} />
         ) : (
           <LocaleLink href="/login">
-            <Button variant="reverse">{dict.login.LOGIN}</Button>
+            <Button variant="primary">{dict.login.LOGIN}</Button>
           </LocaleLink>
         )}
       </div>

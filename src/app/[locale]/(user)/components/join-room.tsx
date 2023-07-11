@@ -3,6 +3,7 @@ import useLocale from "@/app/hooks/useLocale";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Button from "../../components/ui/button";
+import TextInput from "../../components/ui/text-input";
 
 const JoinRoom = ({ messages }: { messages: any }) => {
   const locale = useLocale();
@@ -19,8 +20,8 @@ const JoinRoom = ({ messages }: { messages: any }) => {
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.join_room.TITLE}
         </p>
-        <input
-          className="text-center self-center ltr:tracking-[0.2rem] rounded w-3/4"
+        <TextInput
+          className="text-center self-center ltr:tracking-[0.2rem] rounded"
           type="text"
           inputMode="numeric"
           pattern="[0-9]*"

@@ -16,15 +16,18 @@ export default function Error({
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
-      <Button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </Button>
+      <div className="flex flex-col gap-3 justify-center items-center">
+        <p className="text-3xl font-black">Something went wrong!</p>
+        <Button
+          variant="primary"
+          onClick={
+            // Attempt to recover by trying to re-render the segment
+            () => reset()
+          }
+        >
+          Try again
+        </Button>
+      </div>
     </div>
   );
 }

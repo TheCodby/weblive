@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/app/[locale]/components/loading";
 import Button from "@/app/[locale]/components/ui/button";
+import TextInput from "@/app/[locale]/components/ui/text-input";
 import { getUserTheme } from "@/app/utils/theme";
 import React, { useReducer } from "react";
 import { toast } from "react-toastify";
@@ -84,12 +85,13 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         <span className="block text-sm font-medium text-neutral-400">
           {messages.settings.account.CURRENT_PASSWORD}
         </span>
-        <input
+        <TextInput
+          variant="underline"
           value={formData.currentPassword}
           name="currentPassword"
           onChange={changeInput}
-          className="input dark:bg-neutral-800 dark:text-neutral-100 mt-1 peer invalid:border-red-500"
           type="password"
+          placeholder="Current Password"
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
       </label>
@@ -97,11 +99,10 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         <span className="block text-sm font-medium text-neutral-400">
           {messages.settings.account.NEW_PASSWORD}
         </span>
-        <input
+        <TextInput
           value={formData.newPassword}
           name="newPassword"
           onChange={changeInput}
-          className="input dark:bg-neutral-800 dark:text-neutral-100 mt-1 peer invalid:border-red-500"
           type="password"
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
@@ -110,16 +111,15 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         <span className="block text-sm font-medium text-neutral-400">
           {messages.settings.account.CONFIRM_PASSWORD}
         </span>
-        <input
+        <TextInput
           value={formData.confirmPassword}
           name="confirmPassword"
           onChange={changeInput}
-          className="input dark:bg-neutral-800 dark:text-neutral-100 mt-1 peer invalid:border-red-500"
           type="password"
         />
         <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
       </label>
-      <Button type="submit" disabled={isLoading} variant="reverse">
+      <Button type="submit" disabled={isLoading} variant="primary">
         {isLoading ? (
           <>
             <Loading /> {messages.main.LOADING}

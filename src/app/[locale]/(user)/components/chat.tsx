@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Socket, io } from "socket.io-client";
 import Loading from "../../components/loading";
 import Image from "next/image";
+import TextInput from "../../components/ui/text-input";
 interface UserMessage {
   sender?: string;
   picture?: string;
@@ -78,7 +79,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
   };
   return (
     <div className="w-full order-last md:order-1 card h-[calc(100vh-30vh)]">
-      <div className="flex flex-col h-full p-3">
+      <div className="flex flex-col h-full">
         {isConnected ? (
           <div className="flex flex-col h-full justify-between gap-2">
             <div
@@ -120,13 +121,13 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
               ))}
             </div>
             <form className="w-full" onSubmit={sendMessage}>
-              <input
+              <TextInput
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setMessage(e.target.value)
                 }
                 value={message}
                 type="text"
-                className="w-full"
+                className="w-full rounded-b-lg rounded-t-none"
                 placeholder={messages.chat.PLACEHOLDER}
               />
             </form>
