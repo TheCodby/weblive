@@ -54,5 +54,5 @@ const SettingsModal = React.forwardRef(({ isOpen, setIsOpen }: Props, ref) => {
     </Transition>
   );
 });
-
+SettingsModal.displayName = "SettingsModal";
 export default SettingsModal;
