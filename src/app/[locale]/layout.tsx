@@ -8,6 +8,7 @@ import Header from "./components/header";
 import { getUserByToken } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
+import NextTopLoader from "nextjs-toploader";
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
@@ -32,6 +33,7 @@ export default async function RootLayout(props: {
           }}
         ></div>
         <Context>
+          <NextTopLoader color="#3366CC" />
           <main className="mb-auto min-h-[90vh] relative">
             <Header loggedin={loggedin} locale={locale} />
             {props.children}
