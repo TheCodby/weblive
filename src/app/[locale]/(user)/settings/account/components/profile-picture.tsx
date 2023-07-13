@@ -88,7 +88,11 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
           ref={ref}
           onChange={handleChange}
         />
-        <Button onClick={() => ref!.current!.click()} variant="primary">
+        <Button
+          onClick={() => ref!.current!.click()}
+          variant="primary"
+          disabled={isLoading}
+        >
           {messages.settings.account.UPLOAD_PICTURE}
         </Button>
       </div>

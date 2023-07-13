@@ -76,7 +76,7 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
             rows={6}
           />
         </label>
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" disabled={isLoading}>
           {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
         </Button>
       </form>
