@@ -10,7 +10,7 @@ function getLocale(request: NextRequest) {
   let defaultLocale = "en";
   return match(languages, locales, defaultLocale);
 }
-
+const ignorePaths = ["/assets", "/icon.ico"];
 export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
@@ -19,7 +19,10 @@ export function middleware(request: NextRequest) {
   );
 
   // Redirect if there is no locale
-  if (pathnameIsMissingLocale && !pathname.startsWith("/assets")) {
+  if (
+    pathnameIsMissingLocale &&
+    !ignorePaths.some((path) => pathname.startsWith(path))
+  ) {
     const locale = getLocale(request);
 
     // e.g. incoming request is /products

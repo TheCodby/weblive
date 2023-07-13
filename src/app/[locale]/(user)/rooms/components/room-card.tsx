@@ -3,6 +3,7 @@ import LocaleLink from "../../../components/locale-link";
 import { FaLock } from "react-icons/fa";
 import Image from "next/image";
 import { Room } from "@/app/interfaces/room";
+import Card from "@/app/[locale]/components/ui/card";
 interface Props {
   roomData: Room;
 }
@@ -10,7 +11,7 @@ interface Props {
 const RoomCard: React.FC<Props> = ({ roomData }) => {
   return (
     <LocaleLink href={`/rooms/${roomData.id}`}>
-      <div className="card flex flex-col p-4 justify-between hover:bg-neutral-300 hover:dark:bg-neutral-800">
+      <Card className="flex flex-col p-4 justify-between hover:bg-neutral-300 hover:dark:bg-neutral-800">
         <h1 className="text-2xl font-black inline-flex gap-2 items-center">
           {roomData.name} {roomData.type === 1 ? <FaLock /> : null}
         </h1>
@@ -30,7 +31,7 @@ const RoomCard: React.FC<Props> = ({ roomData }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Card>
     </LocaleLink>
   );
 };

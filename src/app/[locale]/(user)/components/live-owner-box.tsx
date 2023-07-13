@@ -8,6 +8,7 @@ import { BsFillStopFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import TimerCounter from "./timer-counter";
 import SettingsModal from "../rooms/[id]/settings-modal";
+import Card from "../../components/ui/card";
 interface Props {
   messages: any;
   room: Room;
@@ -116,7 +117,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     setIsLive(false);
   };
   return (
-    <div className="flex flex-col card w-full basis-2/3 md:order-2 min-h-min text-center">
+    <Card className="flex flex-col w-full basis-2/3 md:order-2 min-h-min text-center">
       <div className="flex flex-col gap-4 p-5">
         <TimerCounter isLive={isLive} />
         {isLive ? (
@@ -186,7 +187,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
         </div>
       </div>
       <SettingsModal isOpen={isSettingsOpen} setIsOpen={setIsSettingsOpen} />
-    </div>
+    </Card>
   );
 };
 

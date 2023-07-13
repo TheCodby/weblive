@@ -1,3 +1,4 @@
+import Card from "@/app/[locale]/components/ui/card";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 interface Props {
@@ -36,16 +37,21 @@ const SettingsModal = React.forwardRef(({ isOpen, setIsOpen }: Props, ref) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel as="div" className="card p-5">
-                <Dialog.Title as="h3" className="text-2xl leading-6 font-bold">
-                  Room Settings
-                </Dialog.Title>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequatur amet labore.
-                  </p>
-                </div>
+              <Dialog.Panel>
+                <Card className="p-5">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-2xl leading-6 font-bold"
+                  >
+                    Room Settings
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Consequatur amet labore.
+                    </p>
+                  </div>
+                </Card>
               </Dialog.Panel>
             </Transition.Child>
           </div>

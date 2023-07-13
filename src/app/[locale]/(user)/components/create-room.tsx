@@ -7,6 +7,8 @@ import Loading from "../../components/loading";
 import { useRouter } from "next/navigation";
 import Button from "../../components/ui/button";
 import TextInput from "../../components/ui/text-input";
+import Card from "../../components/ui/card";
+import Textarea from "../../components/ui/textarea";
 interface State {
   roomName: string;
   roomDescription: string;
@@ -71,7 +73,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
     }
   };
   return (
-    <div className="card p-6 rounded-3xl justify-center text-center m-4">
+    <Card className="p-6 rounded-3xl justify-center text-center m-4">
       <form onSubmit={handleCreate} className="flex flex-col gap-4">
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.create_room.TITLE}
@@ -88,7 +90,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           type="text"
           placeholder={messages.create_room.ROOM_NAME}
         />
-        <textarea
+        <Textarea
           onChange={(e) =>
             dispatch({
               type: "CHANGE",
@@ -99,7 +101,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           value={state.roomDescription}
           placeholder={messages.create_room.ROOM_DESCRIPTION}
           rows={6}
-        ></textarea>
+        />
         <label className="inline-flex gap-3 items-center justify-center">
           <TextInput
             onChange={(e) =>
@@ -150,7 +152,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           </Button>
         </div>
       </form>
-    </div>
+    </Card>
   );
 };
 

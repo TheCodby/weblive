@@ -27,7 +27,7 @@
     "framer-motion": "^10.12.16",
     "jsonwebtoken": "^9.0.0",
     "negotiator": "^0.6.3",
-    "next": "^13.4.7",
+    "next": "^13.4.9",
     "next-themes": "^0.2.1",
     "nextjs-toploader": "^1.4.2",
     "postcss": "8.4.24",

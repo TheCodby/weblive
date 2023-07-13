@@ -5,6 +5,7 @@ import { Socket, io } from "socket.io-client";
 import Loading from "../../components/loading";
 import Image from "next/image";
 import TextInput from "../../components/ui/text-input";
+import Card from "../../components/ui/card";
 interface UserMessage {
   sender?: string;
   picture?: string;
@@ -78,12 +79,12 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
     }, 100);
   };
   return (
-    <div className="w-full order-last md:order-1 card h-[calc(100vh-30vh)]">
+    <Card className="w-full order-last md:order-1 h-[calc(100vh-30vh)]">
       <div className="flex flex-col h-full">
         {isConnected ? (
           <div className="flex flex-col h-full justify-between gap-2">
             <div
-              className="flex flex-col h-fit overflow-y-auto gap-4"
+              className="flex flex-col h-fit overflow-y-auto gap-4 py-5"
               ref={messagesDiv}
             >
               {chatMessages.map((message: Message, index: number) => (
@@ -136,7 +137,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
           <Loading />
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

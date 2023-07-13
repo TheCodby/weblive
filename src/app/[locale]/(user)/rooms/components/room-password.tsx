@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import Button from "@/app/[locale]/components/ui/button";
 import TextInput from "@/app/[locale]/components/ui/text-input";
+import Card from "@/app/[locale]/components/ui/card";
 const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
   const [password, setPassword] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -44,7 +45,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
     }
   };
   return (
-    <div className="card p-6 rounded-3xl justify-center text-center m-4">
+    <Card className="p-6 rounded-3xl justify-center text-center m-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.room_passwrod.TITLE}
@@ -68,7 +69,7 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
           </Button>
         </div>
       </form>
-    </div>
+    </Card>
   );
 };
 

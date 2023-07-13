@@ -14,9 +14,6 @@ const textInputVariants = cva(
         underline:
           "border-b-2 border-gray-300 dark:border-neutral-800 dark:hover:border-neutral-700 bg-transparent rounded-none hover:border-blue-500 dark:hover:border-blue-600 focus:border-blue-600 dark:focus:border-blue-700",
       },
-      animatedPlaceholder: {
-        true: "pt-4",
-      },
     },
     compoundVariants: [],
     defaultVariants: {
@@ -26,66 +23,31 @@ const textInputVariants = cva(
 );
 
 export interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     VariantProps<typeof textInputVariants> {
-  icon?: React.ReactNode;
   error?: string;
 }
 
-const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    {
-      className = "",
-      icon,
-      error,
-      variant,
-      placeholder,
-      animatedPlaceholder,
-      ...props
-    },
-    ref
-  ) => {
-    const [focus, setFocus] = React.useState(false);
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextInputProps>(
+  ({ className = "", error, variant, placeholder, ...props }, ref) => {
     const mergedClassName = twMerge(
       className,
       textInputVariants({
         variant,
-        animatedPlaceholder,
         className: className,
       }),
-      icon ? "ps-8" : "",
       error ? "border-red-500 dark:border-red-500" : ""
     );
     return (
       <div>
         <div className="relative overflow-hidden">
-          {icon ? (
-            <div className="absolute inset-y-0 ps-3 flex items-center pointer-events-none">
-              {icon}
-            </div>
-          ) : null}
           <div>
-            <input
-              onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
+            <textarea
               className={mergedClassName}
               ref={ref}
-              placeholder={animatedPlaceholder ? "" : placeholder}
+              placeholder={placeholder}
               {...props}
             />
-            {animatedPlaceholder ? (
-              <label
-                className={`absolute pointer-events-none ${
-                  icon ? "ps-8" : "ps-2"
-                } top-0 left-0 w-full flex items-center transition-all duration-300 dark:text-neutral-400 ${
-                  focus || props.value !== ""
-                    ? "h-1/2 transform-gpu text-[0.6rem]"
-                    : "h-full"
-                }`}
-              >
-                {placeholder}
-              </label>
-            ) : null}
           </div>
         </div>
         {error ? (
@@ -101,5 +63,5 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     );
   }
 );
-TextInput.displayName = "TextInput";
-export default TextInput;
+Textarea.displayName = "Textarea";
+export default Textarea;

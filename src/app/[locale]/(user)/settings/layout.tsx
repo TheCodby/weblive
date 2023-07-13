@@ -10,7 +10,7 @@ const layout = async ({
 }) => {
   const messages = await getDictionary(params.locale);
   return (
-    <div className="flex flex-col gap-2 justify-between p-10 ">
+    <div className="flex flex-col gap-2 justify-between p-4 lg:p-10 ">
       <aside className="basis-1/3">
         <Navbar messages={messages} />
       </aside>

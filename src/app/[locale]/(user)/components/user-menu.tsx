@@ -10,6 +10,7 @@ import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
 import { User } from "@/app/interfaces/user";
 import Button from "../../components/ui/button";
+import Card from "../../components/ui/card";
 const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
   const router = useRouter();
   const handleLogout = async () => {
@@ -38,8 +39,8 @@ const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="dark:text-white absolute w-36 end-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="px-1 py-1 ">
+        <Menu.Items className="dark:text-white absolute w-36 end-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Card className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
                 <LocaleLink
@@ -77,7 +78,7 @@ const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
                 </button>
               )}
             </Menu.Item>
-          </div>
+          </Card>
         </Menu.Items>
       </Transition>
     </Menu>

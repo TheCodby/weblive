@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import Button from "../../components/ui/button";
 import TextInput from "../../components/ui/text-input";
+import Card from "../../components/ui/card";
 
 const JoinRoom = ({ messages }: { messages: any }) => {
   const locale = useLocale();
@@ -15,7 +16,7 @@ const JoinRoom = ({ messages }: { messages: any }) => {
   };
 
   return (
-    <div className="card p-6 rounded-3xl justify-center text-center m-4">
+    <Card className="p-6 rounded-3xl justify-center text-center m-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.join_room.TITLE}
@@ -36,7 +37,7 @@ const JoinRoom = ({ messages }: { messages: any }) => {
           </Button>
         </div>
       </form>
-    </div>
+    </Card>
   );
 };
 

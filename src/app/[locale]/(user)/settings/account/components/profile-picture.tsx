@@ -6,6 +6,7 @@ import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
 import { User } from "@/app/interfaces/user";
 import Button from "@/app/[locale]/components/ui/button";
+import Card from "@/app/[locale]/components/ui/card";
 const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
   const [imageUrl, setImage] = React.useState(
     `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
@@ -58,23 +59,19 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
     }
   };
   return (
-    <div className="card md:w-1/2 flex flex-col items-center md:flex-row gap-3 p-5">
-      <div
-        className={`w-40 h-32 relative overflow-hidden ${
-          isLoading ? "animate-pulse" : ""
-        }`}
-      >
-        <Image
-          ref={avatarRef}
-          alt="Profiel Picture"
-          src={imageUrl}
-          fill
-          style={{
-            objectFit: "cover",
-          }}
-          className="rounded-full"
-        />
-      </div>
+    <Card className="flex flex-col items-center md:flex-row gap-3 p-5">
+      <Image
+        width={100}
+        height={100}
+        quality={100}
+        ref={avatarRef}
+        alt="Profiel Picture"
+        src={imageUrl}
+        style={{
+          objectFit: "cover",
+        }}
+        className={`rounded-full ${isLoading ? "animate-pulse" : ""}`}
+      />
 
       <div className="text-md flex flex-col md:flex-row justify-between items-center w-full gap-3">
         <div>
@@ -95,7 +92,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
           {messages.settings.account.UPLOAD_PICTURE}
         </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 

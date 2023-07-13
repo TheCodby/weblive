@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/app/[locale]/components/loading";
 import Button from "@/app/[locale]/components/ui/button";
+import Card from "@/app/[locale]/components/ui/card";
 import TextInput from "@/app/[locale]/components/ui/text-input";
 import { getUserTheme } from "@/app/utils/theme";
 import React, { useReducer } from "react";
@@ -77,58 +78,58 @@ const ChangePassword = ({ messages }: { messages: any }) => {
     });
   };
   return (
-    <form
-      onSubmit={handleChange}
-      className="md:w-1/2 flex flex-col gap-3 card p-5 justify-start items-start"
-    >
-      <label className="block">
-        <span className="block text-sm font-medium text-neutral-400">
-          {messages.settings.account.CURRENT_PASSWORD}
-        </span>
-        <TextInput
-          variant="underline"
-          value={formData.currentPassword}
-          name="currentPassword"
-          onChange={changeInput}
-          type="password"
-          placeholder="Current Password"
-        />
-        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-      </label>
-      <label className="block">
-        <span className="block text-sm font-medium text-neutral-400">
-          {messages.settings.account.NEW_PASSWORD}
-        </span>
-        <TextInput
-          value={formData.newPassword}
-          name="newPassword"
-          onChange={changeInput}
-          type="password"
-        />
-        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-      </label>
-      <label className="block">
-        <span className="block text-sm font-medium text-neutral-400">
-          {messages.settings.account.CONFIRM_PASSWORD}
-        </span>
-        <TextInput
-          value={formData.confirmPassword}
-          name="confirmPassword"
-          onChange={changeInput}
-          type="password"
-        />
-        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-      </label>
-      <Button type="submit" disabled={isLoading} variant="primary">
-        {isLoading ? (
-          <>
-            <Loading /> {messages.main.LOADING}
-          </>
-        ) : (
-          messages.settings.account.CHANGE_PASSWORD
-        )}
-      </Button>
-    </form>
+    <Card>
+      <form
+        onSubmit={handleChange}
+        className="flex flex-col gap-3 p-5 justify-start items-start"
+      >
+        <label className="block">
+          <span className="block text-sm font-medium text-neutral-400">
+            {messages.settings.account.CURRENT_PASSWORD}
+          </span>
+          <TextInput
+            value={formData.currentPassword}
+            name="currentPassword"
+            onChange={changeInput}
+            type="password"
+          />
+          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+        </label>
+        <label className="block">
+          <span className="block text-sm font-medium text-neutral-400">
+            {messages.settings.account.NEW_PASSWORD}
+          </span>
+          <TextInput
+            value={formData.newPassword}
+            name="newPassword"
+            onChange={changeInput}
+            type="password"
+          />
+          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+        </label>
+        <label className="block">
+          <span className="block text-sm font-medium text-neutral-400">
+            {messages.settings.account.CONFIRM_PASSWORD}
+          </span>
+          <TextInput
+            value={formData.confirmPassword}
+            name="confirmPassword"
+            onChange={changeInput}
+            type="password"
+          />
+          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+        </label>
+        <Button type="submit" disabled={isLoading} variant="primary">
+          {isLoading ? (
+            <>
+              <Loading /> {messages.main.LOADING}
+            </>
+          ) : (
+            messages.settings.account.CHANGE_PASSWORD
+          )}
+        </Button>
+      </form>
+    </Card>
   );
 };
 

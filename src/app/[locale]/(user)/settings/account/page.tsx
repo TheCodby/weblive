@@ -27,7 +27,7 @@ const AccountPage = async ({ params }: { params: { locale: string } }) => {
   ]);
   return (
     <PageWrapper>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 lg:w-1/2">
         <dl className="flex flex-col gap-2">
           <dt className="text-2xl dark:text-neutral-100 text-neutral-800 flex flex-col">
             <p>{dict.settings.account.PROFILE_SETTINGS}</p>

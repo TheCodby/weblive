@@ -11,6 +11,7 @@ import LocaleLink from "../../components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
 import Button from "../../components/ui/button";
 import TextInput from "../../components/ui/text-input";
+import Card from "../../components/ui/card";
 const SignupCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +41,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
   };
   return (
     <div>
-      <div className="card p-6 rounded-3xl justify-center text-center m-4 md:w-96">
+      <Card className="p-6 rounded-3xl justify-center text-center m-4 md:w-96">
         <p className="dark:text-slate-200 tracking-tight font-black text-slate-900 mt-1 text-3xl">
           {messages.signup.JOIN_NOW}
         </p>
@@ -88,7 +89,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
             </Button>
           </div>
         </form>
-      </div>
+      </Card>
       <p className="text-sm text-center">
         {messages.signup.ALREADY_HAVE_ACCOUNT}{" "}
         <LocaleLink

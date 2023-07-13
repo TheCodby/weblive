@@ -1,6 +1,8 @@
 "use client";
 import Button from "@/app/[locale]/components/ui/button";
+import Card from "@/app/[locale]/components/ui/card";
 import TextInput from "@/app/[locale]/components/ui/text-input";
+import Textarea from "@/app/[locale]/components/ui/textarea";
 import { User } from "@/app/interfaces/user";
 import { getUserTheme } from "@/app/utils/theme";
 import { useRouter } from "next/navigation";
@@ -44,39 +46,41 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="md:w-1/2 flex flex-col gap-3 card p-5 justify-start items-start"
-    >
-      <label className="block">
-        <span className="block text-sm font-medium text-neutral-400">
-          {messages.user.USERNAME}
-        </span>
-        <TextInput
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          required
-          type="text"
-        />
-        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
-          {messages.settings.account.USERNAME_REQUIRED}
-        </p>
-      </label>
-      <label className="block w-full">
-        <span className="block text-sm font-medium text-neutral-400">
-          {messages.settings.account.BIO}
-        </span>
-        <textarea
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          className="w-full dark:bg-neutral-800 mt-1"
-          rows={6}
-        ></textarea>
-      </label>
-      <Button type="submit" variant="primary">
-        {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
-      </Button>
-    </form>
+    <Card>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-3 p-5 justify-start items-start"
+      >
+        <label className="block">
+          <span className="block text-sm font-medium text-neutral-400">
+            {messages.user.USERNAME}
+          </span>
+          <TextInput
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            required
+            type="text"
+          />
+          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
+            {messages.settings.account.USERNAME_REQUIRED}
+          </p>
+        </label>
+        <label className="block w-full">
+          <span className="block text-sm font-medium text-neutral-400">
+            {messages.settings.account.BIO}
+          </span>
+          <Textarea
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            className="w-full dark:bg-neutral-800 mt-1"
+            rows={6}
+          />
+        </label>
+        <Button type="submit" variant="primary">
+          {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
+        </Button>
+      </form>
+    </Card>
   );
 };
 

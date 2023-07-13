@@ -4,6 +4,9 @@ export const metadata = {
     default: "WebLive",
   },
   description: "A web application for live streaming",
+  icons: {
+    icon: "/assets/transparent-icon.png",
+  },
 };
 
 export default function RootLayout({

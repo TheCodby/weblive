@@ -10,6 +10,7 @@ import useLocale from "@/app/hooks/useLocale";
 import { setCookie } from "cookies-next";
 import Button from "../../components/ui/button";
 import TextInput from "../../components/ui/text-input";
+import Card from "../../components/ui/card";
 const LoginCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -46,7 +47,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
   };
   return (
     <div>
-      <div className="card p-6 rounded-3xl justify-center text-center m-4">
+      <Card className="p-6 rounded-3xl justify-center text-center m-4">
         <h1 className="text-2xl font-black tracking-tight">
           {messages.login.WELCOME_MESSAGE}{" "}
           <span className="dark:text-blue-700 text-blue-500 tracking-tighter">
@@ -103,7 +104,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
             </Button>
           </div>
         </form>
-      </div>
+      </Card>
       <p className="text-sm text-center whitespace-pre-line">
         {messages.login.DONT_HAVE_ACCOUNT}{" "}
         <LocaleLink

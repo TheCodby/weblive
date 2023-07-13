@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Room } from "@/app/interfaces/room";
 import { Socket } from "socket.io-client";
 import { useRouter } from "next/navigation";
+import Card from "../../components/ui/card";
 
 interface Props {
   messages: any;
@@ -70,7 +71,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     };
   }, [socket]);
   return (
-    <div className="card w-full md:order-2 h-96 p-3">
+    <Card className="w-full md:order-2 h-96 p-3">
       {!isOffline ? (
         <video
           className="w-full h-full"
@@ -87,7 +88,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
           <p className="text-2xl">Live Offline</p>
         </div>
       )}
-    </div>
+    </Card>
   );
 };
 
