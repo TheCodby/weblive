@@ -1,8 +1,8 @@
 import { getDictionary } from "@/dictionaries";
 import { Metadata } from "next";
 import RoomCard from "./components/room-card";
-import JoinRoom from "@/app/[locale]/(user)/components/join-room";
-import CreateRoom from "../components/create-room";
+import JoinRoom from "@/app/[locale]/(user)/rooms/components/join-room";
+import CreateRoom from "./components/create-room";
 import { getRooms } from "@/app/utils/server/room";
 import type { Room } from "@/app/interfaces/room";
 import PageWrapper from "../../components/page-wrapper";

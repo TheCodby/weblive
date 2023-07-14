@@ -1,9 +1,10 @@
 import "server-only";
 import { cookies } from "next/headers";
 import * as jwt from "jsonwebtoken";
-export const getUserByToken = (token: string) => {
+import { User } from "@/app/interfaces/user";
+export const getUserByToken = (token: string): User | false => {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET as string);
+    return jwt.verify(token, process.env.JWT_SECRET as string) as User;
   } catch (err) {
     return false;
   }

@@ -1,11 +1,11 @@
 "use client";
 import { Room } from "@/app/interfaces/room";
 import React, { useEffect, useRef, useState } from "react";
-import { Socket, io } from "socket.io-client";
-import Loading from "../../components/loading";
+import { Socket } from "socket.io-client";
+import Loading from "@/app/[locale]/components/loading";
 import Image from "next/image";
-import TextInput from "../../components/ui/text-input";
-import Card from "../../components/ui/card";
+import TextInput from "@/app/[locale]/components/ui/text-input";
+import Card from "@/app/[locale]/components/ui/card";
 interface UserMessage {
   sender?: string;
   picture?: string;

@@ -2,9 +2,9 @@
 import useLocale from "@/app/hooks/useLocale";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Button from "../../components/ui/button";
-import TextInput from "../../components/ui/text-input";
-import Card from "../../components/ui/card";
+import Button from "../../../components/ui/button";
+import TextInput from "../../../components/ui/text-input";
+import Card from "../../../components/ui/card";
 
 const JoinRoom = ({ messages }: { messages: any }) => {
   const locale = useLocale();

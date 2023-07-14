@@ -9,7 +9,6 @@ import { IoRadioOutline } from "react-icons/io5";
 import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
 import { User } from "@/app/interfaces/user";
-import Button from "../../components/ui/button";
 import Card from "../../components/ui/card";
 const UserMenu = ({ messages, user }: { messages: any; user: User }) => {
   const router = useRouter();

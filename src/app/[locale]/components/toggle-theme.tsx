@@ -56,6 +56,8 @@ const ToggleTheme = () => {
       variants={variants}
       className="bg-transparent text-xl"
       onClick={handleClick}
+      id="toggle_theme"
+      aria-label="Toggle Theme"
     >
       {icon}
     </motion.button>

@@ -63,6 +63,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
           onSubmit={sendLoginRequest}
           autoComplete="on"
         >
+          <label className="hidden" htmlFor="username">
+            Username
+          </label>
           <TextInput
             icon={<FaUserAlt />}
             autoComplete="username"
@@ -78,6 +81,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
             required
             animatedPlaceholder
           />
+          <label className="hidden" htmlFor="password">
+            Password
+          </label>
           <TextInput
             icon={<RiLockPasswordFill />}
             autoComplete="current-password"

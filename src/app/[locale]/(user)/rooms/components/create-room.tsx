@@ -3,12 +3,12 @@ import React, { useReducer } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
-import Loading from "../../components/loading";
+import Loading from "@/app/[locale]/components/loading";
 import { useRouter } from "next/navigation";
-import Button from "../../components/ui/button";
-import TextInput from "../../components/ui/text-input";
-import Card from "../../components/ui/card";
-import Textarea from "../../components/ui/textarea";
+import Button from "@/app/[locale]/components/ui/button";
+import TextInput from "@/app/[locale]/components/ui/text-input";
+import Card from "@/app/[locale]/components/ui/card";
+import Textarea from "@/app/[locale]/components/ui/textarea";
 interface State {
   roomName: string;
   roomDescription: string;

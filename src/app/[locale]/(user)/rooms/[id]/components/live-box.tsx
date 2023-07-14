@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Room } from "@/app/interfaces/room";
 import { Socket } from "socket.io-client";
-import { useRouter } from "next/navigation";
-import Card from "../../components/ui/card";
+import Card from "@/app/[locale]/components/ui/card";
 
 interface Props {
   messages: any;

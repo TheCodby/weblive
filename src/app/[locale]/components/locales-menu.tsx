@@ -12,7 +12,11 @@ const LocalesMenu = () => {
   const pathname = usePathname().split("/").slice(2).join("/");
   return (
     <Menu as="div" className="relative inline-block text-left z-20">
-      <Menu.Button className="w-6 h-6 flex items-center">
+      <Menu.Button
+        className="w-6 h-6 flex items-center"
+        id="locales-button"
+        aria-label="Locales Button"
+      >
         {locale === "en" ? <US /> : <AE />}
       </Menu.Button>
       <Transition

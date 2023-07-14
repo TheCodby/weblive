@@ -9,7 +9,6 @@ import { getUserByToken } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 import NextTopLoader from "nextjs-toploader";
-import { Metadata } from "next";
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };

@@ -7,8 +7,8 @@ import { MdFiberManualRecord } from "react-icons/md";
 import { BsFillStopFill } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import TimerCounter from "./timer-counter";
-import SettingsModal from "../rooms/[id]/settings-modal";
-import Card from "../../components/ui/card";
+import SettingsModal from "./settings-modal";
+import Card from "@/app/[locale]/components/ui/card";
 interface Props {
   messages: any;
   room: Room;
