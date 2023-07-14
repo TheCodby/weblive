@@ -65,6 +65,9 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             </div>
           ) : null}
           <div>
+            <label className="hidden" htmlFor={props.id}>
+              {placeholder}
+            </label>
             <input
               onFocus={() => setFocus(true)}
               onBlur={() => setFocus(false)}
