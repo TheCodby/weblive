@@ -32,9 +32,7 @@ const JoinRoom = ({ messages }: { messages: any }) => {
           value={roomId}
         />
         <div>
-          <Button type="submit" className="w-1/2">
-            {messages.join_room.JOIN}
-          </Button>
+          <Button type="submit">{messages.join_room.JOIN}</Button>
         </div>
       </form>
     </Card>

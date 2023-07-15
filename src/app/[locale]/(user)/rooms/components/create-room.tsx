@@ -141,7 +141,7 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           ) : null}
         </AnimatePresence>
         <div>
-          <Button disabled={isLoading} type="submit" className="w-1/2">
+          <Button disabled={isLoading} type="submit">
             {isLoading ? (
               <>
                 <Loading /> {messages.main.LOADING}

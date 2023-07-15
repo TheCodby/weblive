@@ -1,10 +1,15 @@
 import DeleteModal from "@/app/[locale]/components/delete-modal";
+import Loading from "@/app/[locale]/components/loading";
 import Button from "@/app/[locale]/components/ui/button";
 import Card from "@/app/[locale]/components/ui/card";
 import TextInput from "@/app/[locale]/components/ui/text-input";
+import useLocale from "@/app/hooks/useLocale";
 import { Room } from "@/app/interfaces/room";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import React, { Fragment } from "react";
+import { getUserTheme } from "@/app/utils/theme";
 interface Props {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,11 +18,75 @@ interface Props {
 
 const SettingsModal = React.forwardRef(
   ({ isOpen, setIsOpen, room }: Props, ref) => {
+    const router = useRouter();
+    const locale = useLocale();
     const [roomName, setRoomName] = React.useState(room.name);
+    const [isDeleting, setIsDeleting] = React.useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
-    const deleteRoom = () => {};
-    const saveChanges = (e: React.FormEvent) => {
+    const [isUpdating, setIsUpdating] = React.useState(false);
+    const deleteRoom = async () => {
+      setDeleteModalOpen(false);
+      setIsDeleting(true);
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/rooms/${room.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+        router.push(`/${locale}/rooms`);
+        toast(data.message, {
+          type: "success",
+          theme: getUserTheme(),
+        });
+      } catch (err: any) {
+        toast(err.message, {
+          type: "error",
+          theme: getUserTheme(),
+        });
+      } finally {
+        setIsDeleting(false);
+        setIsOpen(false);
+      }
+    };
+    const saveChanges = async (e: React.FormEvent) => {
       e.preventDefault();
+      setIsUpdating(true);
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/rooms/${room.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              name: roomName,
+            }),
+          }
+        );
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+        router.refresh();
+        toast(data.message, {
+          type: "success",
+          theme: getUserTheme(),
+        });
+      } catch (err: any) {
+        toast(err.message, {
+          type: "error",
+          theme: getUserTheme(),
+        });
+      } finally {
+        setIsUpdating(false);
+      }
     };
     return (
       <>
@@ -78,8 +147,15 @@ const SettingsModal = React.forwardRef(
                           <Button
                             type="submit"
                             className="hover:text-white hover:bg-green-600 dark:hover:bg-green-800"
+                            disabled={isUpdating}
                           >
-                            Save Changes
+                            {isUpdating ? (
+                              <>
+                                <Loading /> Updating...{" "}
+                              </>
+                            ) : (
+                              "Save Changes"
+                            )}
                           </Button>
                         </form>
                         <hr color="black" />
@@ -87,8 +163,15 @@ const SettingsModal = React.forwardRef(
                           onClick={() => setDeleteModalOpen(true)}
                           variant="outlined"
                           className="hover:text-white hover:bg-red-600 dark:hover:bg-red-800"
+                          disabled={isDeleting}
                         >
-                          Delete Room
+                          {isDeleting ? (
+                            <>
+                              <Loading /> Deleting...{" "}
+                            </>
+                          ) : (
+                            "Delete Room"
+                          )}
                         </Button>
                       </div>
                     </Card>

@@ -89,7 +89,8 @@
   "live": {
     "START": "Start",
     "STOP": "Stop",
-    "NO_STREAM": "You don't have a stream yet, click start to start streaming"
+    "NO_STREAM": "You don't have a stream yet, click start to start streaming",
+    "ROOM_DELETED": "Room has been deleted"
   },
   "footer": {
     "POWERED_BY": "Powered by",

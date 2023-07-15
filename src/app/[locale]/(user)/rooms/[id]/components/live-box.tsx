@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Room } from "@/app/interfaces/room";
 import { Socket } from "socket.io-client";
 import Card from "@/app/[locale]/components/ui/card";
+import { useRouter } from "next/navigation";
+import useLocale from "@/app/hooks/useLocale";
+import { toast } from "react-toastify";
+import { getUserTheme } from "@/app/utils/theme";
 
 interface Props {
   messages: any;
@@ -11,6 +15,8 @@ interface Props {
 }
 
 const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
+  const router = useRouter();
+  const locale = useLocale();
   const [stream, setStream] = useState<MediaStream>();
   const [isOffline, setIsOffline] = useState<boolean>(false);
   useEffect(() => {
@@ -54,7 +60,23 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
       setStream(undefined);
       setIsOffline(true);
     };
+    const onRoomUpdated = () => {
+      router.refresh();
+      toast(messages.live.ROOM_UPDATED, {
+        type: "success",
+        theme: getUserTheme(),
+      });
+    };
+    const onRoomDeleted = () => {
+      router.push(`/${locale}/rooms`);
+      toast(messages.live.ROOM_DELETED, {
+        type: "success",
+        theme: getUserTheme(),
+      });
+    };
     socket.on("liveStarted", liveStarted);
+    socket.on("roomUpdated", onRoomUpdated);
+    socket.on("roomDeleted", onRoomDeleted);
     socket.on("liveStopped", liveStopped);
     socket.on("liveOffline", onReceiveLiveOffline);
     socket.on("offer", onReceiveOffer);
@@ -63,6 +85,8 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     return () => {
       socket.off("offer", onReceiveOffer);
       socket.off("liveOffline", onReceiveLiveOffline);
+      socket.off("roomUpdated", onRoomUpdated);
+      socket.off("roomDeleted", onRoomDeleted);
       socket.off("liveStopped", liveStopped);
       socket.off("liveStarted", liveStarted);
       socket.off("candidate", onReceiveCandidate);

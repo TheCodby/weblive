@@ -52,7 +52,10 @@ const DeleteModal = React.forwardRef(
                     </Dialog.Title>
                     <div className="flex flex-col gap-4 mt-2">
                       <p className="text-lg text-gray-500">{message}</p>
-                      <Button className="hover:text-white bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
+                      <Button
+                        onClick={onSubmit}
+                        className="hover:text-white bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+                      >
                         DELETE
                       </Button>
                     </div>
