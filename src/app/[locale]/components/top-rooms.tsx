@@ -26,14 +26,14 @@ const TopRooms: React.FC<Props> = ({ dict, rooms }) => {
                 className="flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5 hover:dark:bg-neutral-900 hover:bg-neutral-200"
               >
                 <div className="flex flex-row gap-4 items-center">
-                  <div className="w-16 h-16 overflow-hidden relative">
-                    <Image
-                      fill
-                      src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${room.owner.avatar}`}
-                      className="rounded-full border border-neutral-200 dark:border-neutral-700"
-                      alt=""
-                    />
-                  </div>
+                  <Image
+                    quality={100}
+                    width={64}
+                    height={64}
+                    src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${room.owner.avatar}`}
+                    className="rounded-full border border-neutral-200 dark:border-neutral-700"
+                    alt="Top Room Avatar"
+                  />
                   <div className="flex flex-col gap-1 text-start">
                     <p className="text-xl font-bold inline-flex items-center gap-2">
                       {room.name}{" "}

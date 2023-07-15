@@ -186,7 +186,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
           </span>
         </div>
       </div>
-      <SettingsModal isOpen={isSettingsOpen} setIsOpen={setIsSettingsOpen} />
+      <SettingsModal isOpen={isSettingsOpen} setIsOpen={setIsSettingsOpen} room={room} />
     </Card>
   );
 };

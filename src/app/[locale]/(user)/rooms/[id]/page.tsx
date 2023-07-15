@@ -9,6 +9,8 @@ import { getUserByToken } from "@/app/utils/server/user";
 import LiveViewer from "./components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import { notFound } from "next/navigation";
+import LocaleLink from "@/app/[locale]/components/locale-link";
+import { AiFillCaretLeft } from "react-icons/ai";
 interface Props {
   params: { locale: string; id: string };
 }
@@ -46,6 +48,13 @@ const RoomPage = async ({ params }: Props) => {
   }
   return (
     <PageWrapper className="flex flex-col gap-6 p-6">
+      <LocaleLink
+        className="inline-flex gap-2 hover:gap-3 items-center transition-all duration-300 text-blue-600 font-semibold hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500"
+        href={`/rooms`}
+      >
+        <AiFillCaretLeft />
+        Back To Rooms
+      </LocaleLink>
       <p className="text-2xl md:text-3xl font-black">{room.name}</p>
       <div className="flex flex-col md:flex-row gap-10 items-start h-full w-full">
         <LiveViewer dict={dict} room={room} user={user} />
