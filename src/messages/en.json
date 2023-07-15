@@ -12,6 +12,9 @@
   "rooms": {
     "TITLE": "Rooms"
   },
+  "room": {
+    "BACK_TO_ROOMS": "Back to Rooms"
+  },
   "login": {
     "TITLE": "Login",
     "WELCOME_MESSAGE": "Welcome again in",
