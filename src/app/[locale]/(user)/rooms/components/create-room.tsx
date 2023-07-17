@@ -9,6 +9,7 @@ import Button from "@/app/[locale]/components/ui/button";
 import TextInput from "@/app/[locale]/components/ui/text-input";
 import Card from "@/app/[locale]/components/ui/card";
 import Textarea from "@/app/[locale]/components/ui/textarea";
+import { RoomForm } from "@/app/interfaces/room";
 interface State {
   roomName: string;
   roomDescription: string;
@@ -54,18 +55,20 @@ const CreateRoom = ({ messages }: { messages: any }) => {
           description: state.roomDescription,
           password_protected: state.passwordProtected,
           password: state.password,
-        }),
+        } as RoomForm),
       });
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.message);
       }
-      toast.success(data.message, {
+      toast(data.message, {
+        type: "success",
         theme: getUserTheme(),
       });
       router.refresh();
     } catch (e: any) {
-      toast.error(e.message, {
+      toast(e.message, {
+        type: "error",
         theme: getUserTheme(),
       });
     } finally {

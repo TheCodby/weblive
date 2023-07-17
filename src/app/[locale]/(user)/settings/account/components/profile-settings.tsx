@@ -33,12 +33,14 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
       if (!res.ok) {
         throw new Error(data.message);
       }
-      toast.success(data.message, {
+      toast(data.message, {
+        type: "success",
         theme: getUserTheme(),
       });
       router.refresh();
     } catch (err: any) {
-      toast.error(err.message, {
+      toast(err.message, {
+        type: "error",
         theme: getUserTheme(),
       });
     } finally {

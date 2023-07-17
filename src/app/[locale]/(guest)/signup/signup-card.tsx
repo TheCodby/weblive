@@ -12,6 +12,7 @@ import useLocale from "@/app/hooks/useLocale";
 import Button from "../../components/ui/button";
 import TextInput from "../../components/ui/text-input";
 import Card from "../../components/ui/card";
+import { getUserTheme } from "@/app/utils/theme";
 const SignupCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +33,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
       if (!res.ok) throw new Error(data.message);
       toast(data.message, {
         type: "success",
+        theme: getUserTheme(),
       });
       router.push(`/${locale}/login`);
     } catch (err: any) {

@@ -32,13 +32,15 @@ const RoomPassword: React.FC<{ messages: any }> = ({ messages }) => {
       if (!res.ok) {
         throw new Error(data.message);
       }
-      toast.success(data.message, {
+      toast(data.message, {
         theme: getUserTheme(),
+        type: "success",
       });
       router.refresh();
     } catch (err: any) {
-      toast.error(err.message, {
+      toast(err.message, {
         theme: getUserTheme(),
+        type: "error",
       });
     } finally {
       setIsLoading(false);

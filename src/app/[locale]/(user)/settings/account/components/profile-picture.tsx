@@ -35,7 +35,8 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
       if (!res.ok) {
         throw new Error(data.message);
       }
-      toast.success(data.message, {
+      toast(data.message, {
+        type: "success",
         theme: getUserTheme(),
       });
       setImage(
@@ -48,7 +49,8 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
 
       router.refresh();
     } catch (e: any) {
-      toast.error(e.message, {
+      toast(e.message, {
+        type: "error",
         theme: getUserTheme(),
       });
       setImage(
@@ -60,18 +62,21 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
   };
   return (
     <Card className="flex flex-col items-center md:flex-row gap-3 p-5">
-      <Image
-        width={100}
-        height={100}
-        quality={100}
-        ref={avatarRef}
-        alt="Profiel Picture"
-        src={imageUrl}
-        style={{
-          objectFit: "cover",
-        }}
-        className={`rounded-full ${isLoading ? "animate-pulse" : ""}`}
-      />
+      <div className="basis-1/4">
+        <div className="w-32 h-32 relative overflow-hidden ">
+          <Image
+            quality={100}
+            ref={avatarRef}
+            alt="Profiel Picture"
+            src={imageUrl}
+            fill
+            style={{
+              objectFit: "cover",
+            }}
+            className={`rounded-full ${isLoading ? "animate-pulse" : ""}`}
+          />
+        </div>
+      </div>
 
       <div className="text-md flex flex-col md:flex-row justify-between items-center w-full gap-3">
         <div>

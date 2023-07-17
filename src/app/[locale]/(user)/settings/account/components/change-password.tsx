@@ -59,11 +59,13 @@ const ChangePassword = ({ messages }: { messages: any }) => {
       if (!res.ok) {
         throw new Error(data.message);
       }
-      toast.success(data.message, {
-        theme: localStorage.getItem("theme") === "dark" ? "dark" : "light",
+      toast(data.message, {
+        type: "success",
+        theme: getUserTheme(),
       });
     } catch (err: any) {
-      toast.error(err.message, {
+      toast(err.message, {
+        type: "error",
         theme: getUserTheme(),
       });
     } finally {

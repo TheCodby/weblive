@@ -6,7 +6,11 @@ const queryClient = new QueryClient();
 const Context = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" themes={["light", "dark"]}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        themes={["light", "dark"]}
+      >
         {children}
       </ThemeProvider>
     </QueryClientProvider>

@@ -4,23 +4,33 @@ import Button from "@/app/[locale]/components/ui/button";
 import Card from "@/app/[locale]/components/ui/card";
 import TextInput from "@/app/[locale]/components/ui/text-input";
 import useLocale from "@/app/hooks/useLocale";
-import { Room } from "@/app/interfaces/room";
+import { Room, RoomForm } from "@/app/interfaces/room";
 import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import React, { Fragment } from "react";
 import { getUserTheme } from "@/app/utils/theme";
+import Textarea from "@/app/[locale]/components/ui/textarea";
+import { AnimatePresence, motion } from "framer-motion";
 interface Props {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   room: Room;
+  messages: any;
 }
 
 const SettingsModal = React.forwardRef(
-  ({ isOpen, setIsOpen, room }: Props, ref) => {
+  ({ isOpen, setIsOpen, room, messages }: Props, ref) => {
     const router = useRouter();
     const locale = useLocale();
     const [roomName, setRoomName] = React.useState(room.name);
+    const [roomDescription, setRoomDescription] = React.useState(
+      room.description
+    );
+    const [roomProtected, setRoomProtected] = React.useState<boolean>(
+      room.type === 1
+    );
+    const [roomPassword, setRoomPassword] = React.useState(room.password);
     const [isDeleting, setIsDeleting] = React.useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
     const [isUpdating, setIsUpdating] = React.useState(false);
@@ -69,7 +79,10 @@ const SettingsModal = React.forwardRef(
             },
             body: JSON.stringify({
               name: roomName,
-            }),
+              description: roomDescription,
+              password_protected: roomProtected,
+              password: roomPassword,
+            } as RoomForm),
           }
         );
         const data = await res.json();
@@ -137,13 +150,66 @@ const SettingsModal = React.forwardRef(
                           <p className="text-sm text-gray-500">
                             You can change the room settings here.
                           </p>
-                          <TextInput
-                            variant="outlined"
-                            placeholder="Room Name"
-                            value={roomName}
-                            onChange={(e) => setRoomName(e.target.value)}
-                            animatedPlaceholder
-                          />
+                          <label
+                            htmlFor="name"
+                            className="block text-start text-sm"
+                          >
+                            Name
+                            <TextInput
+                              id="name"
+                              variant="outlined"
+                              value={roomName}
+                              onChange={(e) => setRoomName(e.target.value)}
+                            />
+                          </label>
+
+                          <label
+                            htmlFor="desc"
+                            className="block text-start text-sm"
+                          >
+                            Description
+                            <Textarea
+                              id="desc"
+                              variant="outlined"
+                              rows={5}
+                              value={roomDescription}
+                              onChange={(e) =>
+                                setRoomDescription(e.target.value)
+                              }
+                            />
+                          </label>
+                          <label className="inline-flex gap-2 ">
+                            <TextInput
+                              onChange={(e) =>
+                                setRoomProtected(e.target.checked)
+                              }
+                              checked={roomProtected}
+                              type="checkbox"
+                              className="accent-blue-500"
+                            />{" "}
+                            {messages.create_room.PASSWORD_PROTECTED}
+                          </label>
+                          <AnimatePresence>
+                            {roomProtected ? (
+                              <motion.label
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                                exit={{ opacity: 0 }}
+                                className="block text-start text-sm"
+                              >
+                                Password
+                                <TextInput
+                                  variant="outlined"
+                                  onChange={(e) =>
+                                    setRoomPassword(e.target.value)
+                                  }
+                                  value={roomPassword}
+                                  type="password"
+                                />
+                              </motion.label>
+                            ) : null}
+                          </AnimatePresence>
                           <Button
                             type="submit"
                             className="hover:text-white hover:bg-green-600 dark:hover:bg-green-800"
