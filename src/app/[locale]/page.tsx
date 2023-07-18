@@ -21,10 +21,13 @@ const HomePage = async ({
 }: {
   params: { locale: string };
 }) => {
-  const [dict, rooms]: [dict: any, rooms: Room[]] = await Promise.all([
-    getDictionary(locale),
-    getRooms(),
-  ]);
+  const [dict, data]: [
+    dict: any,
+    rooms: {
+      rooms: Room[];
+      pages: number;
+    }
+  ] = await Promise.all([getDictionary(locale), getRooms("1")]);
   return (
     <PageWrapper className="p-3 lg:p-16 xl:p-24 flex flex-col h-full justify-between gap-8">
       <div className="rounded-3xl basis-2/5 flex flex-col text-start gap-6 lg:p-32">
@@ -46,7 +49,7 @@ const HomePage = async ({
           </LocaleLink>
         </div>
       </div>
-      <TopRooms dict={dict} rooms={rooms} />
+      <TopRooms dict={dict} rooms={data.rooms} />
     </PageWrapper>
   );
 };

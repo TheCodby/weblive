@@ -6,6 +6,7 @@ import CreateRoom from "./components/create-room";
 import { getRooms } from "@/app/utils/server/room";
 import type { Room } from "@/app/interfaces/room";
 import PageWrapper from "../../components/page-wrapper";
+import Pagination from "../../components/ui/pagination";
 type Props = {
   params: { locale: string };
 };
@@ -20,20 +21,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const RoomsPage = async ({
   params: { locale },
-  searchParams: { page },
+  searchParams: { page = "1" },
 }: {
   params: { locale: string };
   searchParams: { page: string };
 }) => {
-  const [dict, rooms] = await Promise.all([getDictionary(locale), getRooms()]);
+  const [dict, data] = await Promise.all([
+    getDictionary(locale),
+    getRooms(page),
+  ]);
   return (
     <PageWrapper className="flex flex-col md:flex-row gap-4 justify-center p-6">
       <aside className="basis-1/2 w-full md:w-1/2 p-6 md:p-0">
         <h1 className="text-2xl font-black">{dict.rooms.TITLE}</h1>
         <div className="flex flex-col gap-5">
-          {rooms.map((room: Room) => (
+          {data.rooms.map((room: Room) => (
             <RoomCard roomData={room} key={room.id} />
           ))}
+          {data.pages > 1 && (
+            <Pagination
+              currentPage={parseInt(page)}
+              pages={data.pages}
+              path="/rooms"
+            />
+          )}
         </div>
       </aside>
       <div className="flex flex-col gap-3">

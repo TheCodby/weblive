@@ -18,9 +18,9 @@ const TopRooms: React.FC<Props> = ({ dict, rooms }) => {
       transition={{ duration: 0.5 }}
     >
       <h1 className="font-black text-3xl"> {dict.home.TOP_ROOMS}</h1>
-      <div className="grid grid-cols-3 mt-4">
+      <div className="grid grid-cols-3 mt-4 gap-4">
         {rooms?.length > 0
-          ? rooms.slice(0, 3).map((room: Room) => (
+          ? rooms.slice(0, 6).map((room: Room) => (
               <LocaleLink key={room.id} href={`/rooms/${room.id}`} className="">
                 <Card className="flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5 hover:dark:bg-neutral-800 hover:bg-neutral-200">
                   <div className="flex flex-row gap-4 items-center">

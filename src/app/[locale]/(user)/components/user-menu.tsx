@@ -47,29 +47,22 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
         <Menu.Items className="dark:text-white absolute w-56 end-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <Card className="flex flex-col gap-1 p-1">
             <Menu.Item>
-              <div className="flex flex-row items-center gap-2 p-2 border-b dark:border-neutral-700">
-                <div className="relative w-10 h-10 overflow-hidden">
-                  <Image
-                    fill
-                    src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`}
-                    className="rounded-full border border-neutral-200 dark:border-neutral-700"
-                    alt=""
-                  />
+              <LocaleLink
+                href="/profile"
+                className="border-b dark:border-neutral-700 pb-1"
+              >
+                <div className="flex flex-row items-center gap-2 p-2 dark:hover:bg-neutral-700 transition-all duration-200 rounded-md ">
+                  <div className="relative w-10 h-10 overflow-hidden">
+                    <Image
+                      fill
+                      src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`}
+                      className="rounded-full border border-neutral-200 dark:border-neutral-700"
+                      alt=""
+                    />
+                  </div>
+                  <p className="font-semibold text-md">{user.username}</p>
                 </div>
-                <p className="font-semibold text-md">{user.username}</p>
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <LocaleLink
-                  href={`/rooms`}
-                  className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 text-sm ${
-                    active ? "bg-blue-500 dark:bg-blue-700 text-white" : ""
-                  }`}
-                >
-                  <CgProfile className="me-2 h-5" /> {messages.PROFILE}
-                </LocaleLink>
-              )}
+              </LocaleLink>
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
