@@ -42,7 +42,9 @@
     "CREATE_ACCOUNT": "Create Account",
     "SIGNUP": "Sign Up",
     "ROOMS": "Rooms",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Settings",
+    "ADMIN": "Admin",
+    "PROFILE": "Profile"
   },
   "settings": {
     "TITLE": "Settings",

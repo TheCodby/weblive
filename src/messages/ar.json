@@ -41,7 +41,9 @@
     "CREATE_ACCOUNT": "إنشاء حساب",
     "SIGNUP": "سجل",
     "ROOMS": "الغرف",
-    "SETTINGS": "الإعدادات"
+    "SETTINGS": "الإعدادات",
+    "ADMIN": "الإدارة",
+    "PROFILE": "الملف الشخصي"
   },
   "settings": {
     "TITLE": "الإعدادات",
