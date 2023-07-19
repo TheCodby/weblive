@@ -66,7 +66,10 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
           });
       };
     };
-    const onReceiveAnswer = (answer: { sender: string; body: any }) => {
+    const onReceiveAnswer = (answer: {
+      sender: string;
+      body: RTCSessionDescriptionInit;
+    }) => {
       if (connections.has(answer.sender)) {
         connections.get(answer.sender)?.setRemoteDescription(answer.body);
       }
