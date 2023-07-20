@@ -35,7 +35,7 @@ export default async function RootLayout(props: {
           <NextTopLoader showSpinner={false} color="#3366CC" />
           <main className="mb-auto min-h-[90vh] relative">
             <Header loggedin={loggedin} locale={locale} />
-            {props.children}
+            <div className="mt-14">{props.children}</div>
           </main>
           <footer className="text-white p-4">
             <Footer locale={locale} />

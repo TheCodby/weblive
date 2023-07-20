@@ -9,3 +9,15 @@
     @apply bg-[#f1f1f1] dark:bg-[#111111];
   }
 }
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-clip: padding-box;
+  border: 5px solid rgba(255, 255, 255, 0.25);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}

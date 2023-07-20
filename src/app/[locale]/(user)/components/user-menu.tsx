@@ -48,7 +48,7 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
           <Card className="flex flex-col gap-1 p-1">
             <Menu.Item>
               <LocaleLink
-                href="/profile"
+                href="/me"
                 className="border-b dark:border-neutral-700 pb-1"
               >
                 <div className="flex flex-row items-center gap-2 p-2 dark:hover:bg-neutral-700 transition-all duration-200 rounded-md ">

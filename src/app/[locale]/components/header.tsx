@@ -7,6 +7,7 @@ import UserMenu from "../(user)/components/user-menu";
 import { JwtPayload } from "jsonwebtoken";
 import { getProfile } from "@/app/utils/server/user";
 import Button from "./ui/button";
+import Notifications from "../(user)/components/notifications";
 const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (
@@ -23,7 +24,7 @@ const Header = async ({
   const dict = await getDictionary(locale);
   const user = await getProfile();
   return (
-    <header className="flex flex-row p-2 justify-between items-center">
+    <header className="flex flex-row p-2 justify-between items-center bg-neutral-200 dark:bg-neutral-900 shadow-md fixed w-full z-10 h-14">
       <div className="flex flex-row gap-4 items-center">
         <LocaleLink
           href="/"
@@ -36,7 +37,10 @@ const Header = async ({
       </div>
       <div>
         {loggedin ? (
-          <UserMenu messages={dict.user} user={user} />
+          <div className="flex flex-row gap-4 items-center">
+            <Notifications />
+            <UserMenu messages={dict.user} user={user} />
+          </div>
         ) : (
           <LocaleLink href="/login">
             <Button variant="primary">{dict.login.LOGIN}</Button>
