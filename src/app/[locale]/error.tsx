@@ -10,14 +10,10 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-  }, [error]);
-
   return (
     <div>
       <div className="flex flex-col gap-3 justify-center items-center">
-        <p className="text-3xl font-black">Something went wrong!</p>
+        <p className="text-3xl font-black">{error.message}</p>
         <Button
           variant="primary"
           onClick={
