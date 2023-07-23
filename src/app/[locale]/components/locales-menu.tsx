@@ -5,11 +5,14 @@ import { Menu, Transition } from "@headlessui/react";
 import React from "react";
 import { US, AE } from "country-flag-icons/react/3x2";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Card from "./ui/card";
 const LocalesMenu = () => {
   const locale = useLocale();
+  const searchParams = useSearchParams().toString();
+  console.log(searchParams);
   const pathname = usePathname().split("/").slice(2).join("/");
+  const fullpath = `${pathname}${searchParams ? `?${searchParams}` : ""}`;
   return (
     <Menu as="div" className="relative inline-block text-left z-20">
       <Menu.Button
@@ -33,7 +36,7 @@ const LocalesMenu = () => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href={`/en/${pathname}`}
+                  href={`/en/${fullpath}`}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 ${
                     active ? "scale-90 opacity-75" : "text-gray-900"
                   }`}
@@ -45,7 +48,7 @@ const LocalesMenu = () => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href={`/ar/${pathname}`}
+                  href={`/ar/${fullpath}`}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 ${
                     active ? "scale-90 opacity-75" : "text-gray-900"
                   }`}

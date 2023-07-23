@@ -2,6 +2,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { ApiError } from "../errors/api-errors";
 import { Room } from "@/app/interfaces/room";
+import { notFound } from "next/navigation";
 
 export const getRooms = async (page: string = "1") => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rooms?page=${page}`, {
@@ -16,7 +17,7 @@ export const getRooms = async (page: string = "1") => {
   }
   return data;
 };
-export const getRoom = async (id: string): Promise<Room | false> => {
+export const getRoom = async (id: string): Promise<Room> => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rooms/${id}`, {
@@ -25,12 +26,8 @@ export const getRoom = async (id: string): Promise<Room | false> => {
     },
   });
   const data = await res.json();
-  console.log(res.status);
   if (!res.ok) {
-    // If the room is sucred by a password, the server will return a 403 status code and redirect to the password page
-    if (res.status === 403) {
-      return false;
-    }
+    if (res.status === 404) notFound();
     throw new ApiError(data.message, res.status);
   }
   return data;

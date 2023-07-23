@@ -1,17 +1,9 @@
-"use client"; // Error components must be Client Components
-
-import { useEffect } from "react";
+"use client";
 import Button from "./components/ui/button";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
   return (
-    <div>
+    <div className="mt-10">
       <div className="flex flex-col gap-3 justify-center items-center">
         <p className="text-3xl font-black">{error.message}</p>
         <Button
@@ -26,4 +18,5 @@ export default function Error({
       </div>
     </div>
   );
-}
+};
+export default Error;

@@ -11,7 +11,8 @@
     "GET_STARTED": "Get Started"
   },
   "rooms": {
-    "TITLE": "Rooms"
+    "TITLE": "Rooms",
+    "NO_ROOMS": "No Rooms Found, Please try again later"
   },
   "room": {
     "BACK_TO_ROOMS": "Back to Rooms"

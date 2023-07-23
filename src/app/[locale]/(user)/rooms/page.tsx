@@ -18,7 +18,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: dict.rooms.TITLE,
   };
 }
-
+interface Response {
+  rooms: Room[];
+  pages: number;
+}
 const RoomsPage = async ({
   params: { locale },
   searchParams: { page = "1" },
@@ -26,7 +29,7 @@ const RoomsPage = async ({
   params: { locale: string };
   searchParams: { page: string };
 }) => {
-  const [dict, data] = await Promise.all([
+  const [dict, data]: [any, Response] = await Promise.all([
     getDictionary(locale),
     getRooms(page),
   ]);
@@ -35,9 +38,15 @@ const RoomsPage = async ({
       <aside className="basis-1/2 w-full md:w-1/2 p-6 md:p-0">
         <h1 className="text-2xl font-black">{dict.rooms.TITLE}</h1>
         <div className="flex flex-col gap-5">
-          {data.rooms.map((room: Room) => (
-            <RoomCard roomData={room} key={room.id} />
-          ))}
+          {data.rooms.length > 0 ? (
+            data.rooms.map((room: Room) => (
+              <RoomCard roomData={room} key={room.id} />
+            ))
+          ) : (
+            <p className="text-xl font-semibold text-center">
+              {dict.rooms.NO_ROOMS}
+            </p>
+          )}
           {data.pages > 1 && (
             <Pagination
               currentPage={parseInt(page)}
