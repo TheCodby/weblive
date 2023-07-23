@@ -7,7 +7,6 @@ import RoomsGrid from "../../components/rooms-grid";
 
 const MyProfilePage = async () => {
   const user: User = await getProfile();
-  console.log(user);
   return (
     <div>
       <div className="w-full h-[70vh] relative">

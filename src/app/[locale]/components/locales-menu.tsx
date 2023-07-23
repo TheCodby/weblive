@@ -10,7 +10,6 @@ import Card from "./ui/card";
 const LocalesMenu = () => {
   const locale = useLocale();
   const searchParams = useSearchParams().toString();
-  console.log(searchParams);
   const pathname = usePathname().split("/").slice(2).join("/");
   const fullpath = `${pathname}${searchParams ? `?${searchParams}` : ""}`;
   return (

@@ -7,7 +7,6 @@ interface Props {
   rooms: Room[];
 }
 const RoomsGrid: React.FC<Props> = ({ rooms }) => {
-  console.log(rooms);
   if (!rooms || rooms?.length === 0) {
     return (
       <div className="flex flex-col gap-4 items-center justify-center">

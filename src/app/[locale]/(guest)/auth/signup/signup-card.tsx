@@ -1,45 +1,40 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import Loading from "../../components/loading";
-import { motion } from "framer-motion";
+import Loading from "@/app/[locale]/components/loading";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import useLocale from "@/app/hooks/useLocale";
-import { setCookie } from "cookies-next";
-import Button from "../../components/ui/button";
-import TextInput from "../../components/ui/text-input";
-import Card from "../../components/ui/card";
-const LoginCard = ({ messages }: { messages: any }) => {
+import Button from "@/app/[locale]/components/ui/button";
+import TextInput from "@/app/[locale]/components/ui/text-input";
+import Card from "@/app/[locale]/components/ui/card";
+import { getUserTheme } from "@/app/utils/theme";
+const SignupCard = ({ messages }: { messages: any }) => {
   const locale = useLocale();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState();
   const router = useRouter();
-
-  const sendLoginRequest = async (e: React.FormEvent) => {
+  const sendSignupRequest = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, password: password }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
-      localStorage.setItem("token", data.token);
-      setCookie("token", data.token, {
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
+      toast(data.message, {
+        type: "success",
+        theme: getUserTheme(),
       });
-      localStorage.setItem(
-        "picture",
-        `${process.env.NEXT_PUBLIC_API}${data?.user?.picture}`
-      );
-      router.push(`/${locale}/rooms`);
-      router.refresh();
+      router.push(`/${locale}/login`);
     } catch (err: any) {
       setError(err.message);
     }
@@ -47,25 +42,17 @@ const LoginCard = ({ messages }: { messages: any }) => {
   };
   return (
     <div>
-      <Card className="p-6 rounded-3xl justify-center text-center m-4">
-        <h1 className="text-2xl font-black tracking-tight">
-          {messages.login.WELCOME_MESSAGE}{" "}
-          <span className="dark:text-blue-700 text-blue-500 tracking-tighter">
-            WebLive
-          </span>
-          !
-        </h1>
-        <p className="dark:text-slate-200 tracking-tight font-medium text-slate-900 mt-1">
-          {messages.login.LOGIN_FIRST}
+      <Card className="p-6 rounded-3xl justify-center text-center m-4 md:w-96">
+        <p className="dark:text-slate-200 tracking-tight font-black text-slate-900 mt-1 text-3xl">
+          {messages.signup.JOIN_NOW}
         </p>
         <form
+          autoComplete="off"
           className="flex flex-col mt-6 gap-4"
-          onSubmit={sendLoginRequest}
-          autoComplete="on"
+          onSubmit={sendSignupRequest}
         >
           <TextInput
             icon={<FaUserAlt />}
-            autoComplete="username"
             value={username}
             name="username"
             id="username"
@@ -80,7 +67,6 @@ const LoginCard = ({ messages }: { messages: any }) => {
           />
           <TextInput
             icon={<RiLockPasswordFill />}
-            autoComplete="current-password"
             name="password"
             id="password"
             value={password}
@@ -92,30 +78,30 @@ const LoginCard = ({ messages }: { messages: any }) => {
             animatedPlaceholder
           />
           <div>
-            <Button type="submit" className="w-1/2" disabled={isLoading}>
+            <Button className="w-1/2" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <Loading />
                   {messages.main.LOADING}
                 </>
               ) : (
-                messages.login.LOGIN
+                messages.signup.SIGNUP
               )}
             </Button>
           </div>
         </form>
       </Card>
-      <p className="text-sm text-center whitespace-pre-line">
-        {messages.login.DONT_HAVE_ACCOUNT}{" "}
+      <p className="text-sm text-center">
+        {messages.signup.ALREADY_HAVE_ACCOUNT}{" "}
         <LocaleLink
           className="text-blue-700 hover:text-blue-800"
-          href={`/signup`}
+          href={`/auth/login`}
         >
-          {messages.login.SIGNUP_NOW}
+          {messages.signup.LOGIN_NOW}
         </LocaleLink>{" "}
       </p>
     </div>
   );
 };
 
-export default LoginCard;
+export default SignupCard;

@@ -1,6 +1,5 @@
-import React from "react";
-import SignupCard from "./signup-card";
-import PageWrapper from "../../components/page-wrapper";
+import LoginCard from "./login-card";
+import PageWrapper from "../../../components/page-wrapper";
 import { getDictionary } from "@/dictionaries";
 import { Metadata } from "next";
 type Props = {
@@ -11,16 +10,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dict = await getDictionary(locale);
 
   return {
-    title: dict.signup.TITLE,
+    title: dict.login.TITLE,
   };
 }
-const page = async ({ params: { locale } }: { params: { locale: string } }) => {
+export default async function LoginPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
   const dict = await getDictionary(locale);
   return (
     <PageWrapper className="flex flex-col md:flex-row gap-4 justify-center items-center absolute w-full h-full">
-      <SignupCard messages={dict} />
+      <LoginCard messages={dict} />
     </PageWrapper>
   );
-};
-
-export default page;
+}

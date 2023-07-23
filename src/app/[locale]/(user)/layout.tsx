@@ -9,7 +9,7 @@ const Layout = async (props: {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
   const loggedin = getUserByToken(token?.value.toString());
-  if (!loggedin) redirect(`/${props.params.locale}/login`);
+  if (!loggedin) redirect(`/${props.params.locale}/auth/login`);
   return <>{props.children}</>;
 };
 

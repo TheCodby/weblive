@@ -8,10 +8,29 @@ import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import { AiFillCaretLeft } from "react-icons/ai";
 import RoomPassword from "../components/room-password";
+import { Metadata } from "next";
 interface Props {
   params: { locale: string; id: string };
 }
-
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata | void> {
+  const dict = await getDictionary(params.locale);
+  try {
+    const room = await getRoom(params.id);
+    if (room)
+      return {
+        title: room.name,
+      };
+    return {
+      title: dict.join_room.TITLE,
+    };
+  } catch {
+    return {
+      title: dict.main.ERROR,
+    };
+  }
+}
 const RoomPage = async ({ params }: Props) => {
   const dict = await getDictionary(params.locale);
   const room = await getRoom(params.id);

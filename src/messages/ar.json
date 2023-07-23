@@ -1,7 +1,8 @@
 {
   "main": {
     "LOADING": "جار التحميل...",
-    "SAVE_CHANGES": "حفظ التغييرات"
+    "SAVE_CHANGES": "حفظ التغييرات",
+    "ERROR": "خطأ"
   },
   "home": {
     "TITLE": "الرئيسية",

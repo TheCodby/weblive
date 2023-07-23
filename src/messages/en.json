@@ -1,7 +1,8 @@
 {
   "main": {
     "LOADING": "Loading...",
-    "SAVE_CHANGES": "Save Changes"
+    "SAVE_CHANGES": "Save Changes",
+    "ERROR": "Error"
   },
   "home": {
     "TITLE": "Home",

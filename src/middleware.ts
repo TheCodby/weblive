@@ -14,8 +14,12 @@ const ignorePaths = ["/assets", "/icon.ico"];
 export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
+  const searchParams = new URL(request.nextUrl).searchParams;
   const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+    (locale) =>
+      !pathname.startsWith(`/${locale}/`) &&
+      pathname !== `/${locale}` &&
+      !pathname.startsWith(`/oauth`)
   );
 
   // Redirect if there is no locale
@@ -28,7 +32,10 @@ export function middleware(request: NextRequest) {
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
     return NextResponse.redirect(
-      new URL(`/${locale}/${pathname}`, request.url)
+      new URL(
+        `/${locale}/${pathname}${searchParams ? `?${searchParams}` : ""}`,
+        request.url
+      )
     );
   }
 }
