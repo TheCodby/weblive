@@ -14,6 +14,8 @@ const ignorePaths = ["/assets", "/icon.ico"];
 export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
   const searchParams = new URL(request.nextUrl).searchParams;
   const pathnameIsMissingLocale = locales.every(
     (locale) =>
@@ -35,9 +37,15 @@ export function middleware(request: NextRequest) {
       new URL(
         `/${locale}/${pathname}${searchParams ? `?${searchParams}` : ""}`,
         request.url
-      )
+      ),
+      {
+        headers: requestHeaders,
+      }
     );
   }
+  return NextResponse.next({
+    headers: requestHeaders,
+  });
 }
 
 export const config = {

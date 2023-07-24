@@ -3,9 +3,8 @@ import "./globals.css";
 import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 import Header from "./components/header";
-import { getUserByToken } from "@/app/utils/server/user";
+import { getProfile } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 import NextTopLoader from "nextjs-toploader";
@@ -14,9 +13,7 @@ export default async function RootLayout(props: {
   params: { locale: string };
 }) {
   const locale = props.params.locale;
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")!;
-  const loggedin = getUserByToken(token?.value.toString());
+  const user = await getProfile();
   if (!locale) {
     notFound();
   }
@@ -34,7 +31,7 @@ export default async function RootLayout(props: {
         <Context>
           <NextTopLoader showSpinner={false} color="#3366CC" />
           <main className="mb-auto min-h-[90vh] relative">
-            <Header loggedin={loggedin} locale={locale} />
+            <Header user={user} locale={locale} />
             <div className="mt-14">{props.children}</div>
           </main>
           <footer className="text-white p-4">

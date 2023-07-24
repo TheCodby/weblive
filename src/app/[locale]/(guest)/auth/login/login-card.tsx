@@ -96,7 +96,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
             </Button>
           </div>
           <div className="flex flex-col gap-4 border-t pt-4 dark:border-neutral-800">
-            <Link href="">
+            <Link
+              href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_WEB}/oauth/callback/google&response_type=code&scope=openid%20profile%20email`}
+            >
               <Button className="bg-[#DB4437] dark:bg-[#DB4437] hover:bg-[#872920] hover:dark:bg-[#872920] p-3 w-full">
                 Continue with Google <BsGoogle size={24} />
               </Button>
