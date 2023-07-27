@@ -2,6 +2,7 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
+import { useController } from "react-hook-form";
 const textInputVariants = cva(
   "p-2 w-full outline-none transition-all duration-200",
   {
@@ -69,8 +70,8 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
               {placeholder}
             </label>
             <input
-              onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
+              onFocusCapture={() => setFocus(true)}
+              onBlurCapture={() => setFocus(false)}
               className={mergedClassName}
               ref={ref}
               placeholder={animatedPlaceholder ? "" : placeholder}

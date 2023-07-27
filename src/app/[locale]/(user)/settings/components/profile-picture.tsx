@@ -81,10 +81,10 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
       <div className="text-md flex flex-col md:flex-row justify-between items-center w-full gap-3">
         <div>
           <p className="dark:text-neutral-100">
-            {messages.settings.account.UPLOAD_PICTURE_DESCRIPTION}
+            {messages.settings.profile.UPLOAD_PICTURE_DESCRIPTION}
           </p>
           <p className="dark:text-neutral-300 text-sm">
-            {messages.settings.account.PIRCTURE_FORMATS}
+            {messages.settings.profile.PIRCTURE_FORMATS}
           </p>
         </div>
         <input
@@ -98,7 +98,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
           variant="primary"
           disabled={isLoading}
         >
-          {messages.settings.account.UPLOAD_PICTURE}
+          {messages.settings.profile.UPLOAD_PICTURE}
         </Button>
       </div>
     </Card>

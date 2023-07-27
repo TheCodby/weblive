@@ -8,6 +8,7 @@ import { getProfile } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 import NextTopLoader from "nextjs-toploader";
+import Sidebar from "./components/sidebar";
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };
@@ -32,7 +33,10 @@ export default async function RootLayout(props: {
           <NextTopLoader showSpinner={false} color="#3366CC" />
           <main className="mb-auto min-h-[90vh] relative">
             <Header user={user} locale={locale} />
-            <div className="mt-14">{props.children}</div>
+            <div className="flex flex-row">
+              <Sidebar user={user} locale={locale} />
+              <div className="mt-14 lg:ms-64 w-full">{props.children}</div>
+            </div>
           </main>
           <footer className="text-white p-4">
             <Footer locale={locale} />

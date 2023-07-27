@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 const getLinks = (messages: any) => {
   return [
     {
-      href: `/settings/account`,
-      label: messages.settings.account.TITLE,
+      href: `/settings/profile`,
+      label: messages.settings.profile.TITLE,
+    },
+    {
+      href: `/settings/privacy`,
+      label: messages.settings.privacy.TITLE,
     },
     {
       href: `/settings/preferences`,

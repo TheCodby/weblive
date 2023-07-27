@@ -79,7 +79,7 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
             <Menu.Item>
               {({ active }) => (
                 <LocaleLink
-                  href={`/settings/account`}
+                  href={`/settings/profile`}
                   className={`group flex w-full items-center rounded-md px-2 py-2 transition-all duration-200 text-sm ${
                     active ? "bg-blue-500 dark:bg-blue-700 text-white" : ""
                   }`}

@@ -3,7 +3,7 @@ import Loading from "@/app/[locale]/components/loading";
 import Button from "@/app/[locale]/components/ui/button";
 import Card from "@/app/[locale]/components/ui/card";
 import TextInput from "@/app/[locale]/components/ui/text-input";
-import React, { useEffect } from "react";
+import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -21,12 +21,12 @@ const AddPassword = ({ messages }: { messages: any }) => {
   const formSchema = Yup.object().shape({
     password: Yup.string()
       .required("Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters"),
+      .min(6, "Password length should be at least 6 characters")
+      .max(32, "Password cannot exceed more than 32 characters"),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters")
+      .min(6, "Password length should be at least 6 characters")
+      .max(32, "Password cannot exceed more than 32 characters")
       .oneOf([Yup.ref("password")], "Passwords do not match"),
   });
   const [isLoading, setIsLoading] = React.useState(false);

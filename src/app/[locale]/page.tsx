@@ -1,7 +1,7 @@
 import { getDictionary } from "@/dictionaries";
 import React from "react";
 import PageWrapper from "./components/page-wrapper";
-import { getRooms } from "../utils/server/room";
+import { getRooms } from "../utils/room";
 import { Room } from "../interfaces/room";
 import TopRooms from "./components/top-rooms";
 import Button from "./components/ui/button";

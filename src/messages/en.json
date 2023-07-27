@@ -50,22 +50,25 @@
   },
   "settings": {
     "TITLE": "Settings",
-    "account": {
-      "TITLE": "Account",
-      "PROFILE_SETTINGS": "Profile Settings",
-      "PROFILE_PICTURE": "Profile Picture",
+    "privacy": {
+      "TITLE": "Privacy",
       "CHANGE_PASSWORD": "Change Password",
-      "USERNAME_REQUIRED": "Username is required",
-      "BIO": "Bio",
-      "UPLOAD_PICTURE_DESCRIPTION": "Upload a picture from your computer",
-      "UPLOAD_PICTURE": "Upload Picture",
-      "PIRCTURE_FORMATS": "Only JPG, PNG and GIF formats are allowed",
       "CURRENT_PASSWORD": "Current Password",
       "NEW_PASSWORD": "New Password",
       "CONFIRM_PASSWORD": "Confirm Password"
     },
     "preferences": {
       "TITLE": "Preferences"
+    },
+    "profile": {
+      "TITLE": "Profile",
+      "PROFILE_SETTINGS": "Profile Settings",
+      "PROFILE_PICTURE": "Profile Picture",
+      "USERNAME_REQUIRED": "Username is required",
+      "BIO": "Bio",
+      "UPLOAD_PICTURE_DESCRIPTION": "Upload a picture from your computer",
+      "UPLOAD_PICTURE": "Upload Picture",
+      "PIRCTURE_FORMATS": "Only JPG, PNG and GIF formats are allowed"
     }
   },
   "join_room": {

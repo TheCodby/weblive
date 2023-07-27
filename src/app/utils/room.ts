@@ -1,7 +1,6 @@
-import "server-only";
-import { cookies } from "next/headers";
-import { ApiError } from "../errors/api-errors";
+import { ApiError } from "./errors/api-errors";
 import { Room } from "@/app/interfaces/room";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { notFound } from "next/navigation";
 
 export const getRooms = async (page: string = "1") => {
@@ -17,12 +16,13 @@ export const getRooms = async (page: string = "1") => {
   }
   return data;
 };
-export const getRoom = async (id: string): Promise<Room> => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")!;
+export const getRoom = async (
+  id: string,
+  token: string | RequestCookie
+): Promise<Room> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}/rooms/${id}`, {
     headers: {
-      Authorization: `Bearer ${token.value}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   const data = await res.json();

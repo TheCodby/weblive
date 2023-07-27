@@ -1,13 +1,14 @@
-import { getRoom } from "@/app/utils/server/room";
+import { getRoom } from "@/app/utils/room";
 import React from "react";
 import { getDictionary } from "@/dictionaries";
-import { getProfile } from "@/app/utils/server/user";
+import { getProfile, getUserToken } from "@/app/utils/server/user";
 import LiveViewer from "./components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import LocaleLink from "@/app/[locale]/components/locale-link";
 import { AiFillCaretLeft } from "react-icons/ai";
 import RoomPassword from "../components/room-password";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 interface Props {
   params: { locale: string; id: string };
 }
@@ -16,7 +17,9 @@ export async function generateMetadata({
 }: Props): Promise<Metadata | void> {
   const dict = await getDictionary(params.locale);
   try {
-    const room = await getRoom(params.id);
+    const cookieStore = cookies();
+    const token = cookieStore.get("token")!;
+    const room = await getRoom(params.id, token);
     if (room)
       return {
         title: room.name,
@@ -31,8 +34,10 @@ export async function generateMetadata({
   }
 }
 const RoomPage = async ({ params }: Props) => {
+  const token = await getUserToken();
   const dict = await getDictionary(params.locale);
-  const room = await getRoom(params.id);
+  console.log(token);
+  const room = await getRoom(params.id, token);
   if (!room)
     return (
       <div className="flex flex-row items-center justify-center">

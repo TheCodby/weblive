@@ -1,7 +1,7 @@
 import Button from "@/app/[locale]/components/ui/button";
 import Link from "next/link";
 import React from "react";
-type Social = "Facebook" | "Twitter" | "Discord" | "Twitch" | "Google";
+type Social = "Discord" | "Google";
 interface Props {
   social: Social;
   link: string;

@@ -87,7 +87,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
       >
         <label className="block">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.CURRENT_PASSWORD}
+            {messages.settings.privacy.CURRENT_PASSWORD}
           </span>
           <TextInput
             value={formData.currentPassword}
@@ -99,7 +99,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         </label>
         <label className="block">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.NEW_PASSWORD}
+            {messages.settings.privacy.NEW_PASSWORD}
           </span>
           <TextInput
             value={formData.newPassword}
@@ -111,7 +111,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
         </label>
         <label className="block">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.CONFIRM_PASSWORD}
+            {messages.settings.privacy.CONFIRM_PASSWORD}
           </span>
           <TextInput
             value={formData.confirmPassword}
@@ -127,7 +127,7 @@ const ChangePassword = ({ messages }: { messages: any }) => {
               <Loading /> {messages.main.LOADING}
             </>
           ) : (
-            messages.settings.account.CHANGE_PASSWORD
+            messages.settings.privacy.CHANGE_PASSWORD
           )}
         </Button>
       </form>

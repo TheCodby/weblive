@@ -12,34 +12,66 @@ import Card from "../../../components/ui/card";
 import { BsDiscord, BsGoogle } from "react-icons/bs";
 import Link from "next/link";
 import { handleLogin } from "@/app/utils/user";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+interface Inputs {
+  username: string;
+  password: string;
+}
 const LoginCard = ({ messages }: { messages: any }) => {
+  const formSchema = Yup.object().shape({
+    username: Yup.string()
+      .required("Username is required")
+      .min(3, "Username length should be at least 3 characters")
+      .max(32, "Username cannot exceed more than 32 characters"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password length should be at least 6 characters")
+      .max(32, "Password cannot exceed more than 32 characters"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+    watch,
+  } = useForm<Inputs>({
+    values: {
+      username: "",
+      password: "",
+    },
+    resolver: yupResolver(formSchema),
+  });
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState();
   const router = useRouter();
-
-  const sendLoginRequest = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      handleLogin(data, router, locale);
+      const resData = await res.json();
+      if (!res.ok) throw new Error(resData.message);
+      handleLogin(resData, router, locale);
     } catch (err: any) {
-      setError(err.message);
+      setError("username", {
+        type: "manual",
+        message: err.message,
+      });
     }
     setIsLoading(false);
   };
   return (
     <div>
-      <Card className="p-6 rounded-3xl justify-center text-center m-4">
+      <Card className="p-6 rounded-3xl justify-center text-center m-4 w-full">
         <h1 className="text-2xl font-black tracking-tight">
           {messages.login.WELCOME_MESSAGE}{" "}
           <span className="dark:text-blue-700 text-blue-500 tracking-tighter">
@@ -52,36 +84,41 @@ const LoginCard = ({ messages }: { messages: any }) => {
         </p>
         <form
           className="flex flex-col mt-6 gap-4"
-          onSubmit={sendLoginRequest}
+          onSubmit={handleSubmit(onSubmit)}
           autoComplete="on"
         >
           <TextInput
             icon={<FaUserAlt />}
             autoComplete="username"
-            value={username}
-            name="username"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
             type="text"
             placeholder={messages.user.USERNAME}
-            className={`${error ? "invalid" : ""}`}
-            disabled={isLoading}
-            error={error}
-            required
+            error={errors.username?.message}
+            value={watch("username")}
             animatedPlaceholder
+            {...register("username", {
+              required: true,
+              disabled: isLoading,
+              minLength: 3,
+              maxLength: 20,
+              pattern: /^[a-zA-Z0-9]+$/,
+            })}
           />
           <TextInput
             icon={<RiLockPasswordFill />}
             autoComplete="current-password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             type="password"
             placeholder={messages.user.PASSWORD}
-            disabled={isLoading}
             required
+            error={errors.password?.message}
+            value={watch("password")}
             animatedPlaceholder
+            {...register("password", {
+              required: true,
+              disabled: isLoading,
+              minLength: 3,
+              maxLength: 20,
+              pattern: /^[a-zA-Z0-9]+$/,
+            })}
           />
           <div>
             <Button type="submit" className="w-1/2" disabled={isLoading}>

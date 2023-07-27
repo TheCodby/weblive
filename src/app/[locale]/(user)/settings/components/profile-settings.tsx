@@ -64,12 +64,12 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
             type="text"
           />
           <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
-            {messages.settings.account.USERNAME_REQUIRED}
+            {messages.settings.profile.USERNAME_REQUIRED}
           </p>
         </label>
         <label className="block w-full">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.BIO}
+            {messages.settings.profile.BIO}
           </span>
           <Textarea
             value={bio}
