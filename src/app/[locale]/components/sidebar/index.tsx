@@ -5,15 +5,14 @@ import { getRooms } from "@/app/utils/room";
 import RoomsList from "./rooms-list";
 import { GoSidebarExpand } from "react-icons/go";
 import { AnimatePresence, motion } from "framer-motion";
-import Button from "../ui/button";
 const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
   const [showSidebar, setShowSidebar] = React.useState(false);
   return (
-    <div className="relative z-[9]">
+    <div className="relative z-[9] lg:block hidden">
       <div
         className={`h-full dark:bg-neutral-900 ${
           showSidebar ? "w-64" : "w-14"
-        } bg-white lg:flex flex-col hidden overflow-hidden py-3 px-4 transition-all`}
+        } bg-white flex flex-col overflow-hidden py-3 px-4 transition-all`}
       >
         <div
           className={`flex flex-col gap-2 mb-2 ${
