@@ -45,16 +45,18 @@ export default async function RootLayout(props: {
                     className={`relative h-full w-full grow overflow-hidden`}
                   >
                     <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
-                      <div className="overflow-hidden">{props.children}</div>
+                      <div className="overflow-hidden">
+                        {props.children}
+                        <footer className="text-white p-4">
+                          <Footer locale={locale} />
+                        </footer>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </main>
-          {/* <footer className="text-white p-4">
-            <Footer locale={locale} />
-          </footer> */}
           <ToastContainer />
         </Context>
       </body>

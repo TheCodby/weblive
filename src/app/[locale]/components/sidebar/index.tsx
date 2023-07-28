@@ -5,8 +5,28 @@ import { getRooms } from "@/app/utils/room";
 import RoomsList from "./rooms-list";
 import { GoSidebarExpand } from "react-icons/go";
 import { AnimatePresence, motion } from "framer-motion";
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
 const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
   const [showSidebar, setShowSidebar] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    setIsMobile(detectMob());
+  }, []);
+  if (isMobile) return null;
   return (
     <div className="relative z-[9] lg:block hidden">
       <div
