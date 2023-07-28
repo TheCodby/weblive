@@ -10,7 +10,7 @@ interface Props {
 const RoomsGrid: React.FC<Props> = ({ rooms }) => {
   if (!rooms || rooms?.length === 0) {
     return (
-      <div className="flex flex-col gap-4 items-center justify-center">
+      <div className="flex flex-col gap-4 items-center justify-center w-full">
         <p className="text-xl font-bold inline-flex items-center gap-2">
           No Rooms Found
         </p>

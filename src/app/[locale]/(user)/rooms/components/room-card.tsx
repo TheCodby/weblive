@@ -26,7 +26,7 @@ const RoomCard: React.FC<Props> = ({ room }) => {
             />
           </div>
           <div className="flex flex-col gap-1 text-start">
-            <p className="text-xl font-bold inline-flex items-center gap-2">
+            <p className="lg:text-xl text-md font-bold inline-flex items-center gap-2">
               {room.name} {room.type === 1 ? <FaLock /> : null}
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -37,7 +37,7 @@ const RoomCard: React.FC<Props> = ({ room }) => {
           </div>
         </div>
         {room.onlineUsers >= 0 ? (
-          <div className="flex flex-row gap-4 items-center">
+          <div className="lg:flex hidden flex-row gap-4 items-center">
             <p className="text-sm dark:text-gray-300 rounded-full bg-green-500/50 px-5 py-2 font-bold shadow-xl shadow-green-600/20">
               {room.onlineUsers}/{room.capacity}
             </p>
