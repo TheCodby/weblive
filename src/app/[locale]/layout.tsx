@@ -40,7 +40,7 @@ export default async function RootLayout(props: {
               <div className="flex h-full w-full flex-col overflow-hidden">
                 <Header user={user} locale={locale} />
                 <div className="flex grow overflow-hidden">
-                  {user ? <Sidebar user={user} locale={locale} /> : null}
+                  <Sidebar user={user} locale={locale} />
                   <div
                     className={`relative h-full w-full grow overflow-hidden`}
                   >

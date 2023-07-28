@@ -16,7 +16,7 @@ const ToggleTheme = dynamic(() => import("./toggle-theme"), {
 const Header = async ({ user, locale }: { user: User; locale: string }) => {
   const dict = await getDictionary(locale);
   return (
-    <nav className="flex flex-row p-2 justify-between items-center bg-white dark:bg-neutral-900 shadow-sm w-full z-10 h-14">
+    <nav className="flex flex-row p-2 justify-between items-center bg-white dark:bg-neutral-900 shadow-sm w-full z-[11] h-14">
       <div className="flex flex-row gap-4 items-center">
         <LocaleLink
           href="/"

@@ -9,9 +9,6 @@
     @apply bg-[#f1f1f1] dark:bg-[#111111];
   }
 }
-:root {
-  --vh: 7.46px;
-}
 *::-webkit-scrollbar {
   width: 6px;
   height: 6px;

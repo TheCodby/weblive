@@ -15,6 +15,8 @@ import { handleLogin } from "@/app/utils/user";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { getUserTheme } from "@/app/utils/theme";
 interface Inputs {
   username: string;
   password: string;
@@ -61,6 +63,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
       const resData = await res.json();
       if (!res.ok) throw new Error(resData.message);
       handleLogin(resData, router, locale);
+      toast.success(messages.login.LOGIN_SUCCESS, {
+        theme: getUserTheme(),
+      });
     } catch (err: any) {
       setError("username", {
         type: "manual",
@@ -71,7 +76,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
   };
   return (
     <div>
-      <Card className="p-6 rounded-3xl justify-center text-center m-4 w-full">
+      <Card className="p-6 rounded-3xl justify-center text-center m-4">
         <h1 className="text-2xl font-black tracking-tight">
           {messages.login.WELCOME_MESSAGE}{" "}
           <span className="dark:text-blue-700 text-blue-500 tracking-tighter">
