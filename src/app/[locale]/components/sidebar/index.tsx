@@ -39,16 +39,18 @@ const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
             !showSidebar ? "justify-center" : ""
           } w-full`}
         >
-          <button
-            className="text-xl font-bold"
-            onClick={() => setShowSidebar(!showSidebar)}
-          >
-            <GoSidebarExpand
-              className={`transition ${
-                !showSidebar ? "transform rotate-180" : ""
-              }`}
-            />
-          </button>
+          <div>
+            <button
+              className="text-xl font-bold"
+              onClick={() => setShowSidebar(!showSidebar)}
+            >
+              <GoSidebarExpand
+                className={`transition ${
+                  !showSidebar ? "transform rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
         <AnimatePresence>
           {showSidebar && (

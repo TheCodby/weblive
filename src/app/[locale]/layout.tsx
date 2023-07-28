@@ -23,7 +23,7 @@ export default async function RootLayout(props: {
       <body
         className={`${
           locale == "ar" ? IBMar.className : inter.className
-        } overflow-hidden`}
+        } lg:overflow-hidden`}
       >
         <div
           className="m-0 w-full h-full absolute -z-10 opacity-10 bg-blend-lighten"
@@ -35,17 +35,17 @@ export default async function RootLayout(props: {
         ></div>
         <Context>
           <NextTopLoader showSpinner={false} color="#3366CC" />
-          <main className="flex h-screen w-screen flex-col overflow-hidden">
+          <main className="flex lg:h-screen w-screen flex-col lg:overflow-hidden">
             <div className="relative grow overflow-hidden">
-              <div className="flex h-full w-full flex-col overflow-hidden">
+              <div className="flex h-full w-full flex-col lg:overflow-hidden">
                 <Header user={user} locale={locale} />
                 <div className="flex grow overflow-hidden">
                   <Sidebar user={user} locale={locale} />
                   <div
-                    className={`relative h-full w-full grow overflow-hidden`}
+                    className={`relative h-full w-full grow lg:overflow-hidden`}
                   >
-                    <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
-                      <div className="overflow-hidden">
+                    <div className="relative z-10 h-full lg:overflow-y-auto overflow-x-hidden">
+                      <div className="lg:overflow-hidden mt-14 lg:mt-0">
                         {props.children}
                         <footer className="text-white p-4">
                           <Footer locale={locale} />
