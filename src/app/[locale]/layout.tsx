@@ -35,7 +35,7 @@ export default async function RootLayout(props: {
         ></div>
         <Context>
           <NextTopLoader showSpinner={false} color="#3366CC" />
-          <main className="flex lg:h-screen w-screen flex-col lg:overflow-hidden">
+          <div className="flex lg:h-screen w-screen flex-col lg:overflow-hidden">
             <div className="relative grow overflow-hidden">
               <div className="flex h-full w-full flex-col lg:overflow-hidden">
                 <Header user={user} locale={locale} />
@@ -46,7 +46,9 @@ export default async function RootLayout(props: {
                   >
                     <div className="relative z-10 h-full lg:overflow-y-auto overflow-x-hidden">
                       <div className="lg:overflow-hidden mt-14 lg:mt-0">
-                        {props.children}
+                        <main className="min-h-[85vh] lg:min-h-full">
+                          {props.children}
+                        </main>
                         <footer className="text-white p-4">
                           <Footer locale={locale} />
                         </footer>
@@ -56,7 +58,7 @@ export default async function RootLayout(props: {
                 </div>
               </div>
             </div>
-          </main>
+          </div>
           <ToastContainer />
         </Context>
       </body>
