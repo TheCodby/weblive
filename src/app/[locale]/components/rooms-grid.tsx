@@ -18,7 +18,7 @@ const RoomsGrid: React.FC<Props> = ({ rooms }) => {
     );
   }
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid lg:grid-cols-3 gap-4">
       {rooms.map((room: Room) => (
         <RoomCard room={room} key={room.id} />
       ))}

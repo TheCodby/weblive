@@ -17,8 +17,7 @@ export async function generateMetadata({
 }: Props): Promise<Metadata | void> {
   const dict = await getDictionary(params.locale);
   try {
-    const cookieStore = cookies();
-    const token = cookieStore.get("token")!;
+    const token = await getUserToken();
     const room = await getRoom(params.id, token);
     if (room)
       return {
@@ -36,7 +35,6 @@ export async function generateMetadata({
 const RoomPage = async ({ params }: Props) => {
   const token = await getUserToken();
   const dict = await getDictionary(params.locale);
-  console.log(token);
   const room = await getRoom(params.id, token);
   if (!room)
     return (

@@ -9,14 +9,17 @@
     @apply bg-[#f1f1f1] dark:bg-[#111111];
   }
 }
+:root {
+  --vh: 7.46px;
+}
 *::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 *::-webkit-scrollbar-thumb {
   border-radius: 15px;
-  background-clip: padding-box;
   border: 5px solid rgba(255, 255, 255, 0.25);
+  @apply bg-neutral-400 dark:bg-neutral-700;
 }
 *::-webkit-scrollbar-track {
   background: transparent;

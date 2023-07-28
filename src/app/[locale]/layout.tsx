@@ -20,7 +20,11 @@ export default async function RootLayout(props: {
   }
   return (
     <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} className="dark">
-      <body className={locale == "ar" ? IBMar.className : inter.className}>
+      <body
+        className={`${
+          locale == "ar" ? IBMar.className : inter.className
+        } overflow-hidden`}
+      >
         <div
           className="m-0 w-full h-full absolute -z-10 opacity-10 bg-blend-lighten"
           style={{
@@ -31,16 +35,26 @@ export default async function RootLayout(props: {
         ></div>
         <Context>
           <NextTopLoader showSpinner={false} color="#3366CC" />
-          <main className="mb-auto min-h-[90vh] relative">
-            <Header user={user} locale={locale} />
-            <div className="flex flex-row">
-              <Sidebar user={user} locale={locale} />
-              <div className="mt-14 lg:ms-64 w-full">{props.children}</div>
+          <main className="flex h-screen w-screen flex-col overflow-hidden">
+            <div className="relative grow overflow-hidden">
+              <div className="flex h-full w-full flex-col overflow-hidden">
+                <Header user={user} locale={locale} />
+                <div className="flex grow overflow-hidden">
+                  {user ? <Sidebar user={user} locale={locale} /> : null}
+                  <div
+                    className={`relative h-full w-full grow overflow-hidden`}
+                  >
+                    <div className="relative z-10 h-full overflow-y-auto overflow-x-hidden">
+                      <div className="overflow-hidden">{props.children}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </main>
-          <footer className="text-white p-4">
+          {/* <footer className="text-white p-4">
             <Footer locale={locale} />
-          </footer>
+          </footer> */}
           <ToastContainer />
         </Context>
       </body>

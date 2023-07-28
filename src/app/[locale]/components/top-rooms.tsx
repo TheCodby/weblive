@@ -15,7 +15,7 @@ const TopRooms: React.FC<Props> = ({ dict, rooms }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h1 className="font-black text-3xl"> {dict.home.TOP_ROOMS}</h1>
+      <h1 className="font-black text-3xl mb-2"> {dict.home.TOP_ROOMS}</h1>
       <RoomsGrid rooms={rooms.slice(0, 6)} />
     </motion.div>
   );

@@ -1,33 +1,24 @@
-"use client";
-import { User } from "@/app/interfaces/user";
-import React, { use, useEffect } from "react";
-import LocaleLink from "./locale-link";
-import { getRooms } from "@/app/utils/room";
 import { Room } from "@/app/interfaces/room";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import React from "react";
+import Loading from "../loading";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "./loading";
-
-const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
-  const router = useRouter();
-  const { data, error, isLoading } = useQuery(
-    ["rooms", 1],
-    () => getRooms("1"),
-    {
-      refetchInterval: 10000,
-    }
-  );
-  if (isLoading) return <Loading />;
-  if (error) {
-    throw error;
+import LocaleLink from "../locale-link";
+import Image from "next/image";
+interface Props {
+  fetcher: () => Promise<{ rooms: Room[] }>;
+}
+const RoomsList: React.FC<Props> = ({ fetcher }) => {
+  const query = useQuery(["rooms", 1], fetcher, {
+    refetchInterval: 10000,
+  });
+  if (query.isLoading) return <Loading />;
+  if (query.error) {
+    throw query.error;
   }
-
   return (
-    <div className="fixed h-full w-64 dark:bg-neutral-900 bg-neutral-200 pt-16 lg:flex flex-col hidden">
-      <p className="text-xl font-bold px-4">Rooms</p>
-      <div className="flex flex-col gap-3 overflow-y-auto p-2">
-        {data.rooms.map((room: Room) => (
+    <div className="flex flex-col gap-3 overflow-y-auto p-2 shadow-lg">
+      {query.data!.rooms.length > 0 ? (
+        query.data?.rooms.map((room: Room) => (
           <LocaleLink href={`/rooms/${room.id}`} key={room.id}>
             <div className="flex flex-row items-center gap-2 w-full hover:dark:bg-neutral-800 hover:bg-neutral-200 p-3 rounded-lg">
               <div className="w-8 h-8 relative overflow-hidden">
@@ -57,10 +48,12 @@ const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
               </div>
             </div>
           </LocaleLink>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>No rooms found.</p>
+      )}
     </div>
   );
 };
 
-export default Sidebar;
+export default RoomsList;
