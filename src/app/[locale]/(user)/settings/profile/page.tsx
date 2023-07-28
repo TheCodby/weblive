@@ -4,7 +4,7 @@ import { getDictionary } from "@/dictionaries";
 import ProfileSettings from "../components/profile-settings";
 import ProfilePicture from "../components/profile-picture";
 import { Metadata } from "next";
-import { getProfile } from "@/app/utils/server/user";
+import { getMyProfile } from "@/app/utils/server/user";
 import ProfileVisibility from "../components/profile-visibility";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const AccountPage = async ({ params }: { params: { locale: string } }) => {
   const [dict, user] = await Promise.all([
     getDictionary(params.locale),
-    getProfile(),
+    getMyProfile(),
   ]);
   return (
     <PageWrapper>

@@ -6,7 +6,6 @@ import { IoMdLogOut } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
 import { IoRadioOutline } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
 import { MdAdminPanelSettings } from "react-icons/md";
 import LocaleLink from "../../components/locale-link";
 import Image from "next/image";
@@ -48,7 +47,7 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
           <Card className="flex flex-col gap-1 p-1">
             <Menu.Item>
               <LocaleLink
-                href="/me"
+                href={`/profile/${user.username}`}
                 className="border-b dark:border-neutral-700 pb-1"
               >
                 <div className="flex flex-row items-center gap-2 p-2 dark:hover:bg-neutral-700 transition-all duration-200 rounded-md ">

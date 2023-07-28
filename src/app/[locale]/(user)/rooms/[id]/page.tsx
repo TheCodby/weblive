@@ -1,7 +1,7 @@
 import { getRoom } from "@/app/utils/room";
 import React from "react";
 import { getDictionary } from "@/dictionaries";
-import { getProfile, getUserToken } from "@/app/utils/server/user";
+import { getMyProfile, getUserToken } from "@/app/utils/server/user";
 import LiveViewer from "./components/live-viewer";
 import PageWrapper from "@/app/[locale]/components/page-wrapper";
 import LocaleLink from "@/app/[locale]/components/locale-link";
@@ -42,7 +42,7 @@ const RoomPage = async ({ params }: Props) => {
         <RoomPassword messages={dict} />
       </div>
     );
-  const user: any = await getProfile();
+  const user: any = await getMyProfile();
   return (
     <PageWrapper className="flex flex-col gap-6 p-6">
       <LocaleLink

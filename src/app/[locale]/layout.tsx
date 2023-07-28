@@ -4,7 +4,7 @@ import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
 import { notFound } from "next/navigation";
 import Header from "./components/header";
-import { getProfile } from "@/app/utils/server/user";
+import { getMyProfile } from "@/app/utils/server/user";
 import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 import NextTopLoader from "nextjs-toploader";
@@ -14,7 +14,7 @@ export default async function RootLayout(props: {
   params: { locale: string };
 }) {
   const locale = props.params.locale;
-  const user = await getProfile();
+  const user = await getMyProfile();
   if (!locale) {
     notFound();
   }
