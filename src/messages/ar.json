@@ -24,7 +24,8 @@
     "LOGIN_FIRST": "الرجاء تسجيل الدخول أولاً للإكمال",
     "LOGIN": "تسجيل الدخول",
     "DONT_HAVE_ACCOUNT": "ليس لديك حساب؟",
-    "SIGNUP_NOW": "سجل الآن"
+    "SIGNUP_NOW": "سجل الآن",
+    "LOGIN_SUCCESS": "تم تسجيل الدخول بنجاح"
   },
   "room_passwrod": {
     "TITLE": "كلمة مرور الغرفة",

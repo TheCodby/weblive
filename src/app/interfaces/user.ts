@@ -8,3 +8,7 @@ export interface User {
   admin?: boolean;
   rooms: Room[];
 }
+export interface IAuth {
+  username: string;
+  password: string;
+}

@@ -120,7 +120,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
     setIsLive(false);
   };
   return (
-    <Card className="flex flex-col w-full basis-2/3 md:order-2 min-h-min text-center">
+    <Card className="flex flex-col w-full basis-2/3 lg:order-2 min-h-min text-center">
       <div className="flex flex-col gap-4 p-5">
         <TimerCounter isLive={isLive} />
         {isLive ? (

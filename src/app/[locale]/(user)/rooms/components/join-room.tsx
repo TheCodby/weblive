@@ -16,7 +16,7 @@ const JoinRoom = ({ messages }: { messages: any }) => {
   };
 
   return (
-    <Card className="p-6 rounded-3xl justify-center text-center m-4">
+    <Card className="p-6 rounded-3xl justify-center text-center m-4 lg:w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <p className="text-2xl font-black dark:text-slate-200 text-slate-900 tracking-tight">
           {messages.join_room.TITLE}

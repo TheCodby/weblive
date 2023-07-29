@@ -5,14 +5,16 @@ import { User } from "@/app/interfaces/user";
 import { ApiError } from "../errors/api-errors";
 import { notFound } from "next/navigation";
 
-export const getUserByToken = (token: string): User | false => {
+export const decodeUser = (token: string): User | false => {
   try {
-    return jwt.verify(token, process.env.JWT_SECRET as string) as User;
+    const userData = jwt.decode(token) as User;
+    console.log(userData);
+    return userData;
   } catch (err) {
     return false;
   }
 };
-export const getUserToken = async () => {
+export const getUserToken = () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
   return token.value;

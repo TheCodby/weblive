@@ -14,42 +14,28 @@ import Link from "next/link";
 import { handleLogin } from "@/app/utils/user";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
-interface Inputs {
-  username: string;
-  password: string;
-}
+import { authSchema } from "@/app/utils/validations/auth";
+import { IAuth } from "@/app/interfaces/user";
 const LoginCard = ({ messages }: { messages: any }) => {
-  const formSchema = Yup.object().shape({
-    username: Yup.string()
-      .required("Username is required")
-      .min(3, "Username length should be at least 3 characters")
-      .max(32, "Username cannot exceed more than 32 characters"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(6, "Password length should be at least 6 characters")
-      .max(32, "Password cannot exceed more than 32 characters"),
-  });
-
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
     watch,
-  } = useForm<Inputs>({
+  } = useForm<IAuth>({
     values: {
       username: "",
       password: "",
     },
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(authSchema),
   });
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<IAuth> = async (data) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {

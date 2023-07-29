@@ -52,8 +52,8 @@ const RoomPage = async ({ params }: Props) => {
         <AiFillCaretLeft className="rtl:rotate-180" />
         {dict.room.BACK_TO_ROOMS}
       </LocaleLink>
-      <p className="text-2xl md:text-3xl font-black">{room.name}</p>
-      <div className="flex flex-col md:flex-row gap-10 items-start h-full w-full">
+      <p className="text-2xl lg:text-3xl font-black">{room.name}</p>
+      <div className="flex flex-col lg:flex-row gap-10 items-start h-full w-full">
         <LiveViewer dict={dict} room={room} user={user} />
       </div>
     </PageWrapper>

@@ -34,7 +34,7 @@ const HomePage = async ({
         <p className="h1 text-4xl xl:h-40 xl:text-5xl font-black leading-tight tracking-tighter text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
           {dict.home.MAIN_MESSAGE}
         </p>
-        <p className={`text-md md:text-xl font-light text-center`}>
+        <p className={`text-md lg:text-xl font-light text-center`}>
           {dict.home.MESSAGE2}
         </p>
         <div className="flex flex-row gap-4 justify-center">

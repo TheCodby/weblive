@@ -12,70 +12,96 @@ import Button from "@/app/[locale]/components/ui/button";
 import TextInput from "@/app/[locale]/components/ui/text-input";
 import Card from "@/app/[locale]/components/ui/card";
 import { getUserTheme } from "@/app/utils/theme";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { authSchema } from "@/app/utils/validations/auth";
+import { IAuth } from "@/app/interfaces/user";
 const SignupCard = ({ messages }: { messages: any }) => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+    watch,
+  } = useForm<IAuth>({
+    values: {
+      username: "",
+      password: "",
+    },
+    resolver: yupResolver(authSchema),
+  });
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState();
   const router = useRouter();
-  const sendSignupRequest = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendSignupRequest: SubmitHandler<IAuth> = async (data) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      toast(data.message, {
+      const resData = await res.json();
+      if (!res.ok) throw new Error(resData.message);
+      toast(resData.message, {
         type: "success",
         theme: getUserTheme(),
       });
-      router.push(`/${locale}/login`);
+      router.push(`/${locale}/en/auth/login`);
     } catch (err: any) {
-      setError(err.message);
+      setError("username", {
+        type: "manual",
+        message: err.message,
+      });
     }
     setIsLoading(false);
   };
   return (
     <div>
-      <Card className="p-6 rounded-3xl justify-center text-center m-4 md:w-96">
+      <Card className="p-6 rounded-3xl justify-center text-center m-4 lg:w-96">
         <p className="dark:text-slate-200 tracking-tight font-black text-slate-900 mt-1 text-3xl">
           {messages.signup.JOIN_NOW}
         </p>
         <form
           autoComplete="off"
           className="flex flex-col mt-6 gap-4"
-          onSubmit={sendSignupRequest}
+          onSubmit={handleSubmit(sendSignupRequest)}
         >
           <TextInput
             icon={<FaUserAlt />}
-            value={username}
-            name="username"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
             type="text"
             placeholder={messages.user.USERNAME}
-            className={`${error ? "invalid" : ""}`}
             disabled={isLoading}
-            error={error}
-            required
+            error={errors.username?.message}
+            value={watch("username")}
             animatedPlaceholder
+            {...register("username", {
+              required: true,
+              disabled: isLoading,
+              minLength: 3,
+              maxLength: 20,
+              pattern: /^[a-zA-Z0-9]+$/,
+            })}
           />
           <TextInput
             icon={<RiLockPasswordFill />}
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             type="password"
             placeholder={messages.user.PASSWORD}
             disabled={isLoading}
             required
+            value={watch("password")}
+            error={errors.password?.message}
             animatedPlaceholder
+            {...register("password", {
+              required: true,
+              disabled: isLoading,
+              minLength: 3,
+              maxLength: 20,
+              pattern: /^[a-zA-Z0-9]+$/,
+            })}
           />
           <div>
             <Button className="w-1/2" disabled={isLoading}>

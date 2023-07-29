@@ -79,7 +79,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
     }, 100);
   };
   return (
-    <Card className="w-full order-last md:order-1 h-[calc(100vh-30vh)]">
+    <Card className="w-full order-last lg:order-1 h-[calc(100vh-30vh)]">
       <div className="flex flex-col h-full">
         {isConnected ? (
           <div className="flex flex-col h-full justify-between gap-2">

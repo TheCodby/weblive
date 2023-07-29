@@ -34,8 +34,8 @@ const RoomsPage = async ({
     getRooms(page),
   ]);
   return (
-    <PageWrapper className="flex flex-col md:flex-row gap-4 justify-center">
-      <aside className="basis-1/2 w-full md:w-1/2 p-6 md:p-0">
+    <PageWrapper className="flex flex-col lg:flex-row gap-4 justify-center lg:mt-6">
+      <aside className="basis-1/2 w-full lg:w-1/2 p-6 lg:p-0">
         <h1 className="text-2xl font-black">{dict.rooms.TITLE}</h1>
         <div className="flex flex-col gap-5">
           {data.rooms.length > 0 ? (

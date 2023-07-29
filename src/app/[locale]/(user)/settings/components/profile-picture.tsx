@@ -61,7 +61,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
     }
   };
   return (
-    <Card className="flex flex-col items-center md:flex-row gap-3 p-5">
+    <Card className="flex flex-col items-center lg:flex-row gap-3 p-5">
       <div className="basis-1/4">
         <div className="w-32 h-32 relative overflow-hidden ">
           <Image
@@ -78,7 +78,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
         </div>
       </div>
 
-      <div className="text-md flex flex-col md:flex-row justify-between items-center w-full gap-3">
+      <div className="text-md flex flex-col lg:flex-row justify-between items-center w-full gap-3">
         <div>
           <p className="dark:text-neutral-100">
             {messages.settings.profile.UPLOAD_PICTURE_DESCRIPTION}

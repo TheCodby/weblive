@@ -19,12 +19,12 @@ export default async function RootLayout(props: {
     notFound();
   }
   return (
-    <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"} className="dark">
-      <body
-        className={`${
-          locale == "ar" ? IBMar.className : inter.className
-        } lg:overflow-hidden`}
-      >
+    <html
+      lang={locale}
+      dir={locale == "ar" ? "rtl" : "ltr"}
+      className={`dark ${locale === "ar" ? IBMar.className : inter.className}`}
+    >
+      <body className="lg:overflow-hidden">
         <div
           className="m-0 w-full h-full absolute -z-10 opacity-10 bg-blend-lighten"
           style={{

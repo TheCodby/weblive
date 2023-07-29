@@ -27,7 +27,8 @@
     "SIGNUP_NOW": "Signup now",
     "JOIN_ROOM": "Join Room",
     "ROOM_ID": "Room ID",
-    "JOIN": "Join"
+    "JOIN": "Join",
+    "LOGIN_SUCCESS": "Login success, welcome back"
   },
   "signup": {
     "TITLE": "Signup",
