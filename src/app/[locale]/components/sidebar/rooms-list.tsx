@@ -12,7 +12,7 @@ const RoomsList: React.FC<Props> = ({ fetcher }) => {
     refetchInterval: 10000,
   });
   if (query.isLoading) return <Loading />;
-  if (query.error) {
+  if (query.isError) {
     throw query.error;
   }
   return (

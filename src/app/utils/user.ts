@@ -32,3 +32,30 @@ export const oauthLogin = async (provider: string, code: string) => {
   if (!res.ok) throw new ApiError(data.message, res.status);
   return data;
 };
+export const followUser = async (id: number) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/users/${id}/follow`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
+export const unfollowUser = async (id: number) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/users/${id}/unfollow`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};

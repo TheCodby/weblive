@@ -7,6 +7,7 @@ export interface User {
   avatar: string;
   admin?: boolean;
   rooms: Room[];
+  isFollowing?: boolean;
 }
 export interface IAuth {
   username: string;

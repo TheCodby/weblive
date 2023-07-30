@@ -39,7 +39,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-1 text-start w-1/2">
+            <div className="flex flex-col gap-1 text-start w-full">
               <p className="text-xl font-bold inline-flex items-center gap-2">
                 {user.username}{" "}
                 <span className="relative flex h-3 w-3">
@@ -52,7 +52,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
           </div>
           {!selfProfile ? (
             <div className="w-full lg:w-auto">
-              <FollowButton userId={user.id} />
+              <FollowButton userId={user.id} isFollowing={user.isFollowing} />
             </div>
           ) : null}
         </div>
