@@ -15,6 +15,7 @@ const socket: Socket = io(`${process.env.NEXT_PUBLIC_API}`, {
   autoConnect: false,
 });
 const LiveViewer: React.FC<Props> = ({ dict, room, user }) => {
+  console.log(room);
   useEffect(() => {
     socket.auth = { token: localStorage.getItem("token") };
     socket.io.opts.query = { roomId: room.id };

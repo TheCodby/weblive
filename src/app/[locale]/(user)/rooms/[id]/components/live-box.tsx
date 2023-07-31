@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import useLocale from "@/app/hooks/useLocale";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
+import RoomInfo from "./room-info";
 
 interface Props {
   messages: any;
@@ -94,24 +95,27 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     };
   }, [socket]);
   return (
-    <Card className="w-full lg:order-2 h-96 p-3">
-      {!isOffline ? (
-        <video
-          className="w-full h-full"
-          autoPlay
-          controls
-          ref={(video) => {
-            if (video && stream) {
-              video.srcObject = stream;
-            }
-          }}
-        />
-      ) : (
-        <div className="flex justify-center items-center h-full">
-          <p className="text-2xl">Live Offline</p>
-        </div>
-      )}
-    </Card>
+    <div className="flex flex-col gap-3 w-full lg:order-2 h-[30rem] p-3">
+      <Card className="w-full h-full">
+        {!isOffline ? (
+          <video
+            className="w-full h-full"
+            autoPlay
+            controls
+            ref={(video) => {
+              if (video && stream) {
+                video.srcObject = stream;
+              }
+            }}
+          />
+        ) : (
+          <div className="flex justify-center items-center h-full">
+            <p className="text-2xl">Live Offline</p>
+          </div>
+        )}
+      </Card>
+      <RoomInfo room={room} />
+    </div>
   );
 };
 

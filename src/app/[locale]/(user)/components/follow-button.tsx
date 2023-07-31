@@ -41,12 +41,7 @@ const FollowButton: React.FC<Props> = ({ userId, isFollowing }) => {
     }
   };
   return (
-    <motion.div
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-      className="flex flex-row gap-2 items-center justify-center"
-    >
+    <motion.div initial="rest" whileHover="hover" animate="rest">
       <Button
         onClick={toggleFollow}
         variant={status === "follow" ? "secondary" : "primary"}

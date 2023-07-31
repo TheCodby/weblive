@@ -10,6 +10,7 @@ export interface Room {
   owner: {
     username: string;
     avatar: string;
+    isFollowing?: boolean;
   };
   onlineUsers: number;
 }

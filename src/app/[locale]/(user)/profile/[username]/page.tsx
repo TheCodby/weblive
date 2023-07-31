@@ -1,17 +1,18 @@
 import { User } from "@/app/interfaces/user";
-import { decodeUser, getProfile, getUserToken } from "@/app/utils/server/user";
+import { decodeUser, getUserToken } from "@/app/utils/server/user";
 import Image from "next/image";
 import React from "react";
 import Card from "@/app/[locale]/components/ui/card";
 import RoomsGrid from "@/app/[locale]/components/rooms-grid";
 import { NextPage } from "next";
 import FollowButton from "../../components/follow-button";
+import { getProfile } from "@/app/utils/user";
 interface Props {
   params: { locale: string; username: string };
 }
 const ProfilePage: NextPage<Props> = async ({ params }) => {
-  const user: User = await getProfile(params.username);
   const token = getUserToken();
+  const user: User = await getProfile(params.username, token);
   const decodedUser: User = decodeUser(token) as User;
   const selfProfile = user.id === decodedUser.id;
   return (

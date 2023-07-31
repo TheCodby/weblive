@@ -1,6 +1,7 @@
 import { setCookie } from "cookies-next";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { ApiError } from "./errors/api-errors";
+import { notFound } from "next/navigation";
 export const handleLogin = async (
   data: any,
   router: AppRouterInstance,
@@ -57,5 +58,18 @@ export const unfollowUser = async (id: number) => {
   );
   const data = await res.json();
   if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
+export const getProfile = async (username: string, token: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/users/${username}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    if (res.status === 404) notFound();
+    throw new ApiError(data.message, res.status);
+  }
   return data;
 };

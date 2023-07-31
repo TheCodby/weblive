@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import * as jwt from "jsonwebtoken";
 import { User } from "@/app/interfaces/user";
 import { ApiError } from "../errors/api-errors";
-import { notFound } from "next/navigation";
 
 export const decodeUser = (token: string): User | false => {
   try {
@@ -30,19 +29,5 @@ export const getMyProfile = async () => {
   });
   const data = await res.json();
   if (!res.ok) throw new ApiError(data.message, res.status);
-  return data;
-};
-export const getProfile = async (username: string) => {
-  const token = await getUserToken();
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/users/${username}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    if (res.status === 404) notFound();
-    throw new ApiError(data.message, res.status);
-  }
   return data;
 };

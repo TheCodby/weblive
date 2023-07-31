@@ -33,7 +33,7 @@ export async function generateMetadata({
   }
 }
 const RoomPage = async ({ params }: Props) => {
-  const token = await getUserToken();
+  const token = getUserToken();
   const dict = await getDictionary(params.locale);
   const room = await getRoom(params.id, token);
   if (!room)
