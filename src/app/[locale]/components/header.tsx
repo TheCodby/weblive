@@ -35,7 +35,7 @@ const Header = async ({ user, locale }: { user: User; locale: string }) => {
       <div>
         {user ? (
           <div className="flex flex-row gap-4 items-center">
-            <Notifications />
+            <Notifications messages={dict} />
             <UserMenu messages={dict.user} user={user} />
           </div>
         ) : (
