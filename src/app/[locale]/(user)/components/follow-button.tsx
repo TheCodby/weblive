@@ -53,14 +53,14 @@ const FollowButton: React.FC<Props> = ({ userId, isFollowing }) => {
               <motion.div variants={slashMotion}>
                 <TbBellRinging />
               </motion.div>{" "}
-              Follow
+              <p className="hidden lg:block">Follow</p>
             </Fragment>
           ) : (
             <Fragment>
               <motion.div variants={slashMotion}>
                 <TbBellRingingFilled />
               </motion.div>{" "}
-              Following
+              <p className="hidden lg:block">Following</p>
             </Fragment>
           )}
         </AnimatePresence>

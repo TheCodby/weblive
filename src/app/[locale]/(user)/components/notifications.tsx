@@ -9,13 +9,15 @@ import {
   useNotificationNumbers,
   useNotifications,
 } from "@/app/hooks/useNotifications";
+import LocaleLink from "../../components/locale-link";
 interface Props {
   messages: any;
 }
 const Notifications = React.forwardRef(({ messages }: Props, ref) => {
   const notifications = useNotifications();
   const notificationNumbers = useNotificationNumbers();
-  const read = async (e: React.FormEvent) => {
+
+  const read = (e: React.FormEvent) => {
     notifications.refetch();
   };
   if (notifications.isError) return null;
@@ -39,7 +41,7 @@ const Notifications = React.forwardRef(({ messages }: Props, ref) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="dark:text-white absolute w-96 end-0 mt-4 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="dark:text-white absolute right-0 w-56 lg:w-96 lg:end-0 mt-4 lg:origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <Card className="flex flex-col gap-2 p-2">
             {notifications.isFetching || notifications.isLoading ? (
               <div className="self-center">
@@ -48,13 +50,18 @@ const Notifications = React.forwardRef(({ messages }: Props, ref) => {
             ) : null}
             {notifications.isSuccess ? (
               notifications.data!.length > 0 ? (
-                notifications.data!.map((notification: INotif) => (
-                  <Menu.Item key={notification.id}>
-                    <div className="p-4">
-                      <p>{notification.message}</p>
-                    </div>
-                  </Menu.Item>
-                ))
+                notifications.data!.map(
+                  (notification: INotif, index: number) => (
+                    <Menu.Item key={index}>
+                      <LocaleLink
+                        href={notification.url!}
+                        className="p-2 dark:bg-neutral-800 hover:dark:bg-neutral-700 hover:bg-neutral-300 rounded-lg transition-all duration-300  "
+                      >
+                        <p>{notification.message}</p>
+                      </LocaleLink>
+                    </Menu.Item>
+                  )
+                )
               ) : (
                 <p className="text-center p-3">No notifications found.</p>
               )
