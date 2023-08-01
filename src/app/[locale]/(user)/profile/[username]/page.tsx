@@ -37,6 +37,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
                   className="rounded-full"
                   src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`}
                   alt="user image"
+                  objectFit="cover"
                 />
               </div>
             </div>

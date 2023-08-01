@@ -7,7 +7,6 @@ import { ApiError } from "../errors/api-errors";
 export const decodeUser = (token: string): User | false => {
   try {
     const userData = jwt.decode(token) as User;
-    console.log(userData);
     return userData;
   } catch (err) {
     return false;
