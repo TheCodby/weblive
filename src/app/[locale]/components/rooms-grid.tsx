@@ -1,9 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import LocaleLink from "./locale-link";
 import { Room } from "@/app/interfaces/room";
-import Card from "./ui/card";
-import RoomCard from "../(user)/rooms/components/room-card";
+import RoomCard from "./room-card";
 interface Props {
   rooms: Room[];
 }

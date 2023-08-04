@@ -1,7 +1,7 @@
 import Card from "@/app/[locale]/components/ui/card";
 import { Room } from "@/app/interfaces/room";
 import React from "react";
-import FollowButton from "../../../components/follow-button";
+import FollowButton from "@/app/[locale]/(user)/components/follow-button";
 import Image from "next/image";
 interface Props {
   room: Room;

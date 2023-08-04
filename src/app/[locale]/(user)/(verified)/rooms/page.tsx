@@ -1,6 +1,6 @@
 import { getDictionary } from "@/dictionaries";
 import { Metadata } from "next";
-import RoomCard from "./components/room-card";
+import RoomCard from "../../../components/room-card";
 import JoinRoom from "./components/join-room";
 import CreateRoom from "./components/create-room";
 import { getRooms } from "@/app/utils/room";
