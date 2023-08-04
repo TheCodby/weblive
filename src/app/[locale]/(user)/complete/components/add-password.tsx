@@ -82,7 +82,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
       >
         <label className="block">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.NEW_PASSWORD}
+            {messages.settings.privacy.NEW_PASSWORD}
           </span>
           <TextInput
             type="password"
@@ -93,7 +93,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
         </label>
         <label className="block">
           <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.account.CONFIRM_PASSWORD}
+            {messages.settings.privacy.CONFIRM_PASSWORD}
           </span>
           <TextInput
             type="password"

@@ -40,6 +40,7 @@
   "user": {
     "USERNAME": "Username",
     "PASSWORD": "Password",
+    "EMAIL": "Email",
     "LOGOUT": "Logout",
     "FORGOT_PASSWORD": "Forgot Password?",
     "CREATE_ACCOUNT": "Create Account",
@@ -104,5 +105,10 @@
   "footer": {
     "POWERED_BY": "Powered by",
     "AUTHOR": "Ahmed Kotby"
+  },
+  "resendVerification": {
+    "TITLE": "Resend Verification",
+    "DESCRIPTION": "Would you like us to re-send the verification email to :email?",
+    "RESEND": "Resend"
   }
 }

@@ -3,7 +3,6 @@ import React from "react";
 import SocialConnect from "../components/social-connect";
 import { BsDiscord } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
-import ProfileVisibility from "../components/profile-visibility";
 const PreferencePage = () => {
   return (
     <PageWrapper className="w-full h-full flex flex-col gap-2">

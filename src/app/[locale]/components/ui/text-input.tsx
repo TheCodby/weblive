@@ -2,7 +2,6 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
-import { useController } from "react-hook-form";
 const textInputVariants = cva(
   "p-2 w-full outline-none transition-all duration-200",
   {
@@ -61,7 +60,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       <div>
         <div className="relative overflow-hidden">
           {icon ? (
-            <div className="absolute inset-y-0 ps-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 ms-2 flex items-center pointer-events-none">
               {icon}
             </div>
           ) : null}

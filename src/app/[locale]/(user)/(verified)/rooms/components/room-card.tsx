@@ -1,5 +1,5 @@
 import React from "react";
-import LocaleLink from "../../../components/locale-link";
+import LocaleLink from "@/app/[locale]/components/locale-link";
 import Image from "next/image";
 import { Room } from "@/app/interfaces/room";
 import Card from "@/app/[locale]/components/ui/card";

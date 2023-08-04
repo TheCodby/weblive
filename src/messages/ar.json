@@ -42,6 +42,7 @@
   "user": {
     "USERNAME": "اسم المستخدم",
     "PASSWORD": "كلمه السر",
+    "EMAIL": "البريد الإلكتروني",
     "LOGOUT": "تسجيل خروج",
     "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
     "CREATE_ACCOUNT": "إنشاء حساب",
@@ -101,5 +102,10 @@
   "footer": {
     "POWERED_BY": "مشغل بواسطة",
     "AUTHOR": "أحمد كتبي"
+  },
+  "resendVerification": {
+    "TITLE": "إعادة إرسال التحقق",
+    "DESCRIPTION": "هل ترغب في إعادة إرسال رسالة التحقق إلى :email؟",
+    "RESEND": "إعادة إرسال"
   }
 }

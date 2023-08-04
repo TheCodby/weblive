@@ -5,7 +5,7 @@ import React from "react";
 import Card from "@/app/[locale]/components/ui/card";
 import RoomsGrid from "@/app/[locale]/components/rooms-grid";
 import { NextPage } from "next";
-import FollowButton from "../../components/follow-button";
+import FollowButton from "@/app/[locale]/(user)/components/follow-button";
 import { getProfile } from "@/app/utils/user";
 interface Props {
   params: { locale: string; username: string };

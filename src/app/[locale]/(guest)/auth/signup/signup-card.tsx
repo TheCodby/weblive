@@ -14,8 +14,9 @@ import Card from "@/app/[locale]/components/ui/card";
 import { getUserTheme } from "@/app/utils/theme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { authSchema } from "@/app/utils/validations/auth";
-import { IAuth } from "@/app/interfaces/user";
+import { authRegisterSchema } from "@/app/utils/validations/auth";
+import { IAuth, IRegister } from "@/app/interfaces/user";
+import { HiOutlineMail } from "react-icons/hi";
 const SignupCard = ({ messages }: { messages: any }) => {
   const {
     register,
@@ -23,17 +24,18 @@ const SignupCard = ({ messages }: { messages: any }) => {
     setError,
     formState: { errors },
     watch,
-  } = useForm<IAuth>({
+  } = useForm<IRegister>({
     values: {
       username: "",
       password: "",
+      email: "",
     },
-    resolver: yupResolver(authSchema),
+    resolver: yupResolver(authRegisterSchema),
   });
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const sendSignupRequest: SubmitHandler<IAuth> = async (data) => {
+  const sendSignupRequest: SubmitHandler<IRegister> = async (data) => {
     setIsLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
@@ -41,6 +43,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: data.username,
+          email: data.email,
           password: data.password,
         }),
       });
@@ -50,7 +53,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
         type: "success",
         theme: getUserTheme(),
       });
-      router.push(`/${locale}/en/auth/login`);
+      router.push(`/${locale}/auth/login`);
     } catch (err: any) {
       setError("username", {
         type: "manual",
@@ -71,7 +74,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
           onSubmit={handleSubmit(sendSignupRequest)}
         >
           <TextInput
-            icon={<FaUserAlt />}
+            icon={<FaUserAlt size={20} />}
             type="text"
             placeholder={messages.user.USERNAME}
             disabled={isLoading}
@@ -87,7 +90,20 @@ const SignupCard = ({ messages }: { messages: any }) => {
             })}
           />
           <TextInput
-            icon={<RiLockPasswordFill />}
+            icon={<HiOutlineMail size={20} />}
+            type="text"
+            placeholder={messages.user.EMAIL}
+            disabled={isLoading}
+            error={errors.email?.message}
+            value={watch("email")}
+            animatedPlaceholder
+            {...register("email", {
+              required: true,
+              disabled: isLoading,
+            })}
+          />
+          <TextInput
+            icon={<RiLockPasswordFill size={20} />}
             type="password"
             placeholder={messages.user.PASSWORD}
             disabled={isLoading}

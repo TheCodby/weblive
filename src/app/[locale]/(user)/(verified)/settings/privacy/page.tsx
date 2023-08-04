@@ -3,7 +3,6 @@ import React from "react";
 import { getDictionary } from "@/dictionaries";
 import ChangePassword from "../components/change-password";
 import { Metadata } from "next";
-import { getMyProfile } from "@/app/utils/server/user";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";

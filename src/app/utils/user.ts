@@ -18,6 +18,20 @@ export const handleLogin = async (
   router.push(`/${locale}/rooms`);
   router.refresh();
 };
+export const verify = async (code: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/auth/verify?code=${code}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
 export const oauthLogin = async (provider: string, code: string) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/auth/callback/${provider}`,

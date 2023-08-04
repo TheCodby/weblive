@@ -1,12 +1,12 @@
 import { getDictionary } from "@/dictionaries";
 import { Metadata } from "next";
 import RoomCard from "./components/room-card";
-import JoinRoom from "@/app/[locale]/(user)/rooms/components/join-room";
+import JoinRoom from "./components/join-room";
 import CreateRoom from "./components/create-room";
 import { getRooms } from "@/app/utils/room";
 import type { Room } from "@/app/interfaces/room";
-import PageWrapper from "../../components/page-wrapper";
-import Pagination from "../../components/ui/pagination";
+import PageWrapper from "@/app/[locale]/components/page-wrapper";
+import Pagination from "@/app/[locale]/components/ui/pagination";
 type Props = {
   params: { locale: string };
 };

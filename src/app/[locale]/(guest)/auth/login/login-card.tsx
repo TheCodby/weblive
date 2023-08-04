@@ -16,7 +16,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
-import { authSchema } from "@/app/utils/validations/auth";
+import { authLoginSchema } from "@/app/utils/validations/auth";
 import { IAuth } from "@/app/interfaces/user";
 const LoginCard = ({ messages }: { messages: any }) => {
   const {
@@ -30,7 +30,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
       username: "",
       password: "",
     },
-    resolver: yupResolver(authSchema),
+    resolver: yupResolver(authLoginSchema),
   });
   const locale = useLocale();
   const [isLoading, setIsLoading] = React.useState(false);
