@@ -60,6 +60,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
       toast.success(data.message, {
         theme: getUserTheme(),
       });
+      router.refresh();
       router.push(`/${locale}/rooms`);
     } catch (e: any) {
       toast.error(e.message, {
@@ -70,7 +71,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
     }
   };
   return (
-    <Card className="w-1/2">
+    <Card className="lg:w-1/2">
       <p className="text-md bg-neutral-800 p-4">
         We noticed that you{`'`}ve chosen to log in using your [Discord/Google]
         account. To enhance the security of your account and allow you to access

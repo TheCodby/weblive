@@ -10,6 +10,11 @@ export interface User {
   isFollowing?: boolean;
   verified?: boolean;
   completed?: boolean;
+  _count?: {
+    follower: number;
+    following: number;
+    rooms: number;
+  };
 }
 export interface IAuth {
   username: string;

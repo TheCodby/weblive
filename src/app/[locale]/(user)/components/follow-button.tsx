@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
 import { TbBellRinging, TbBellRingingFilled } from "react-icons/tb";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 interface Props {
   userId: number;
   isFollowing?: boolean;
@@ -19,6 +20,7 @@ const FollowButton: React.FC<Props> = ({ userId, isFollowing }) => {
   const [status, setStatus] = React.useState<ButtonStatus>(
     isFollowing ? "unfollow" : "follow"
   );
+  const router = useRouter();
   const toggleFollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
@@ -26,10 +28,12 @@ const FollowButton: React.FC<Props> = ({ userId, isFollowing }) => {
         case "follow":
           setStatus("unfollow");
           await followUser(userId);
+          router.refresh();
           break;
         case "unfollow":
           setStatus("follow");
           await unfollowUser(userId);
+          router.refresh();
           break;
         default:
           break;

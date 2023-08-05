@@ -20,7 +20,7 @@ export default async function LoginPage({
 }) {
   const dict = await getDictionary(locale);
   return (
-    <PageWrapper className="flex flex-col gap-4 justify-center items-center absolute w-full h-full">
+    <PageWrapper className="flex flex-col gap-4 justify-center items-center p-4 w-full h-full">
       <LoginCard messages={dict} />
     </PageWrapper>
   );

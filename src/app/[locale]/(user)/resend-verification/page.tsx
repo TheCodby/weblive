@@ -12,7 +12,7 @@ const CompletePage = async ({ params }: { params: { locale: string } }) => {
     redirect(`/${params.locale}/rooms`);
   }
   return (
-    <div className="flex flex-col gap-4 justify-center items-center absolute w-full h-full">
+    <div className="flex flex-col gap-4 justify-center items-center absolute w-full h-full p-4 lg:p-0">
       <Card className="flex flex-col gap-4 lg:w-1/2">
         <h1 className="text-md bg-neutral-800 p-4 text-xl font-bold">
           {dict.resendVerification.TITLE}

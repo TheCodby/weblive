@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const page = async ({ params: { locale } }: { params: { locale: string } }) => {
   const dict = await getDictionary(locale);
   return (
-    <PageWrapper className="flex flex-col gap-4 justify-center items-center absolute w-full h-full">
+    <PageWrapper className="flex flex-col gap-4 justify-center items-center p-4 w-full h-full">
       <SignupCard messages={dict} />
     </PageWrapper>
   );

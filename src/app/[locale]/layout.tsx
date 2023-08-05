@@ -47,7 +47,7 @@ export default async function RootLayout(props: {
                     <div className="relative z-10 h-full lg:overflow-y-auto overflow-x-hidden">
                       <div className="lg:overflow-hidden mt-14 lg:mt-0">
                         <main className="min-h-[85vh]">{props.children}</main>
-                        <footer className="text-white p-4">
+                        <footer className="text-white p-4 text-center">
                           <Footer locale={locale} />
                         </footer>
                       </div>

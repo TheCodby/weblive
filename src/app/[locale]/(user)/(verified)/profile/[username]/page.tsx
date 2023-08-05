@@ -7,6 +7,7 @@ import RoomsGrid from "@/app/[locale]/components/rooms-grid";
 import { NextPage } from "next";
 import FollowButton from "@/app/[locale]/(user)/components/follow-button";
 import { getProfile } from "@/app/utils/user";
+import { formatCompactNumber } from "@/app/utils/main";
 interface Props {
   params: { locale: string; username: string };
 }
@@ -49,7 +50,9 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
               </p>
-              <p className="text-md text-gray-500">125K followers</p>
+              <p className="text-md text-gray-500">
+                {formatCompactNumber(user._count?.follower!)} followers
+              </p>
             </div>
           </div>
           {!selfProfile ? (
