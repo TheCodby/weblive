@@ -73,9 +73,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
   return (
     <Card className="lg:w-1/2">
       <p className="text-md bg-neutral-800 p-4">
-        We noticed that you{`'`}ve chosen to log in using your [Discord/Google]
-        account. To enhance the security of your account and allow you to access
-        your account independently, we require you to set a unique password.
+        {messages.completeAccount.DESCRIPTION}
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -111,7 +109,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
               <Loading /> {messages.main.LOADING}
             </>
           ) : (
-            messages.main.SAVE_CHANGES
+            messages.completeAccount.COMPLETE
           )}
         </Button>
       </form>

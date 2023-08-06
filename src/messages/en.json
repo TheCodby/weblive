@@ -110,5 +110,10 @@
     "TITLE": "Resend Verification",
     "DESCRIPTION": "Would you like us to re-send the verification email to :email?",
     "RESEND": "Resend"
+  },
+  "completeAccount": {
+    "TITLE": "Complete Account",
+    "DESCRIPTION": "We noticed that you've chosen to log in using your [Discord/Google] account. To enhance the security of your account and allow you to access your account independently, we require you to set a unique password.",
+    "COMPLETE": "Complete"
   }
 }
