@@ -26,7 +26,7 @@ export const getMyProfile = async () => {
       Authorization: `Bearer ${token.value}`,
     },
   });
+  if (!res.ok) return false;
   const data = await res.json();
-  if (!res.ok) throw new ApiError(data.message, res.status);
   return data;
 };
