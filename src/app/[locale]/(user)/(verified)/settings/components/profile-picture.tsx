@@ -8,9 +8,7 @@ import { User } from "@/app/interfaces/user";
 import Button from "@/app/[locale]/components/ui/button";
 import Card from "@/app/[locale]/components/ui/card";
 const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
-  const [imageUrl, setImage] = React.useState(
-    `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
-  );
+  const [imageUrl, setImage] = React.useState(user.avatar);
   const [isLoading, setLoading] = React.useState(false);
   const ref: any = useRef(null);
   const router = useRouter();
@@ -53,9 +51,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
         type: "error",
         theme: getUserTheme(),
       });
-      setImage(
-        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`
-      );
+      setImage(user.avatar);
     } finally {
       setLoading(false);
     }

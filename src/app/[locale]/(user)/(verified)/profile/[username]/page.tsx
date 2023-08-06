@@ -36,7 +36,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
                 <Image
                   fill
                   className="rounded-full"
-                  src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${user.avatar}`}
+                  src={user.avatar}
                   alt="user image"
                   objectFit="cover"
                 />
@@ -51,7 +51,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
                 </span>
               </p>
               <p className="text-md text-gray-500">
-                {formatCompactNumber(user._count?.follower!)} followers
+                {formatCompactNumber(user.followers!)} followers
               </p>
             </div>
           </div>
