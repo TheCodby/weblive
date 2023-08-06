@@ -37,13 +37,8 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
         type: "success",
         theme: getUserTheme(),
       });
-      setImage(
-        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${data.image_url}`
-      );
-      localStorage.setItem(
-        "picture",
-        `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${data?.image_url}`
-      );
+      setImage(data.image_url);
+      localStorage.setItem("picture", data.image_url);
 
       router.refresh();
     } catch (e: any) {

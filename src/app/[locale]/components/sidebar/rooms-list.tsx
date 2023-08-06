@@ -28,7 +28,7 @@ const RoomsList: React.FC<Props> = ({ fetcher }) => {
                   }}
                   quality={100}
                   fill
-                  src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${room.owner.avatar}`}
+                  src={room.owner.avatar}
                   className="rounded-full border border-neutral-200 dark:border-neutral-700"
                   alt="Top Room Avatar"
                 />
