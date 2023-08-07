@@ -22,7 +22,6 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
     deleteCookie("token");
     router.refresh();
   };
-  console.log(user.avatar);
   return (
     <Menu as="div" className="relative inline-block text-left z-20">
       <Menu.Button className="flex items-center rounded-full hover:opacity-40 hover:dark:bg-neutral-800 p-2 transition-all duration-300">
@@ -58,6 +57,7 @@ const UserMenu = React.forwardRef(({ messages, user }: Props, ref) => {
                       src={user.avatar}
                       className="rounded-full border border-neutral-200 dark:border-neutral-700"
                       alt=""
+                      objectFit="cover"
                     />
                   </div>
                   <p className="font-semibold text-md">{user.username}</p>

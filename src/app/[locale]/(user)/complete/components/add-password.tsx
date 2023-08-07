@@ -72,9 +72,7 @@ const AddPassword = ({ messages }: { messages: any }) => {
   };
   return (
     <Card className="lg:w-1/2">
-      <p className="text-md bg-neutral-800 p-4">
-        {messages.completeAccount.DESCRIPTION}
-      </p>
+      <Card.Header>{messages.completeAccount.DESCRIPTION}</Card.Header>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-3 p-5 justify-start items-start"

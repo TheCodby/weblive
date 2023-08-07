@@ -18,7 +18,7 @@ export async function generateMetadata({
     title: dict.resendVerification.TITLE,
   };
 }
-const CompletePage = async ({ params }: { params: { locale: string } }) => {
+const ResendPage = async ({ params }: { params: { locale: string } }) => {
   const dict = await getDictionary(params.locale);
   const profile = await getMyProfile();
   if (profile?.verified) {
@@ -27,9 +27,9 @@ const CompletePage = async ({ params }: { params: { locale: string } }) => {
   return (
     <div className="flex flex-col gap-4 justify-center items-center absolute w-full h-full p-4 lg:p-0">
       <Card className="flex flex-col gap-4 lg:w-1/2">
-        <h1 className="text-md bg-neutral-800 p-4 text-xl font-bold">
+        <Card.Header className="p-4 text-xl font-bold">
           {dict.resendVerification.TITLE}
-        </h1>
+        </Card.Header>
         <div className="p-4 flex flex-col gap-3">
           <p className="text-xl font-medium text-center">
             {dict.resendVerification.DESCRIPTION.replace(
@@ -46,4 +46,4 @@ const CompletePage = async ({ params }: { params: { locale: string } }) => {
   );
 };
 
-export default CompletePage;
+export default ResendPage;

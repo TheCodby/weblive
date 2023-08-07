@@ -3,6 +3,8 @@ import React from "react";
 import { getDictionary } from "@/dictionaries";
 import ChangePassword from "../components/change-password";
 import { Metadata } from "next";
+import ChangeEmail from "../components/change-email";
+import { getMyProfile } from "@/app/utils/server/user";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -19,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 const AccountPage = async ({ params }: { params: { locale: string } }) => {
   const dict = await getDictionary(params.locale);
+  const user = await getMyProfile();
   return (
     <PageWrapper>
       <div className="flex flex-col gap-4 lg:w-1/2">
@@ -28,6 +31,14 @@ const AccountPage = async ({ params }: { params: { locale: string } }) => {
           </dt>
           <dd>
             <ChangePassword messages={dict} />
+          </dd>
+        </dl>
+        <dl className="flex flex-col gap-2">
+          <dt className="font-bold text-3xl dark:text-neutral-100 text-neutral-800 flex flex-col">
+            <p>{dict.settings.privacy.CHANGE_EMAIL}</p>
+          </dt>
+          <dd>
+            <ChangeEmail messages={dict} email={user.email} />
           </dd>
         </dl>
       </div>

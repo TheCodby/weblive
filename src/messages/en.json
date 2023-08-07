@@ -57,7 +57,10 @@
       "CHANGE_PASSWORD": "Change Password",
       "CURRENT_PASSWORD": "Current Password",
       "NEW_PASSWORD": "New Password",
-      "CONFIRM_PASSWORD": "Confirm Password"
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "NEW_EMAIL": "New Email",
+      "CHANGE_EMAIL": "Change Email",
+      "CHANGE_EMAIL_DESCRIPTION": "Changing your email will require you to verify your new email address"
     },
     "preferences": {
       "TITLE": "Preferences"

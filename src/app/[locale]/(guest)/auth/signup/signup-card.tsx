@@ -15,7 +15,7 @@ import { getUserTheme } from "@/app/utils/theme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { authRegisterSchema } from "@/app/utils/validations/auth";
-import { IAuth, IRegister } from "@/app/interfaces/user";
+import { IRegister } from "@/app/interfaces/user";
 import { HiOutlineMail } from "react-icons/hi";
 const SignupCard = ({ messages }: { messages: any }) => {
   const {

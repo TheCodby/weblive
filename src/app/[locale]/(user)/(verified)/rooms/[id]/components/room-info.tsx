@@ -12,11 +12,7 @@ const RoomInfo: React.FC<Props> = ({ room }) => {
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex flex-row gap-2 items-center">
           <div className="w-8 h-8 rounded-full bg-gray-300 relative overflow-hidden">
-            <Image
-              fill
-              src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${room.owner.avatar}`}
-              alt=""
-            />
+            <Image fill src={room.owner.avatar} alt="" />
           </div>
           <p>{room.owner.username}</p>
         </div>

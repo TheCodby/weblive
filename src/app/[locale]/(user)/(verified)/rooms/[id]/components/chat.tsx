@@ -93,11 +93,7 @@ const Chat: React.FC<Props> = ({ messages, room, socket }) => {
                     <div className="flex flex-row items-center gap-2 ">
                       <div className="w-8 h-8 rounded-full bg-gray-300 relative overflow-hidden">
                         {message.picture ? (
-                          <Image
-                            fill
-                            src={`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.amazonaws.com/${message.picture}`}
-                            alt=""
-                          />
+                          <Image fill src={message.picture} alt="" />
                         ) : null}
                       </div>
                       {message.type === "system" ? (

@@ -87,3 +87,16 @@ export const getProfile = async (username: string, token: string) => {
   }
   return data;
 };
+export const changeEmail = async (email: string, token: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/me/change-email`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ email }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
