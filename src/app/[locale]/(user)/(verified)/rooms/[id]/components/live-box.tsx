@@ -70,6 +70,7 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
     };
     const onRoomDeleted = () => {
       router.push(`/${locale}/rooms`);
+      router.refresh();
       toast(messages.live.ROOM_DELETED, {
         type: "success",
         theme: getUserTheme(),

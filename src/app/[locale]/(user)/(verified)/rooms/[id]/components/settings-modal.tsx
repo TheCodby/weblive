@@ -51,6 +51,7 @@ const SettingsModal = React.forwardRef(
         const data = await res.json();
         if (!res.ok) throw new Error(data.message);
         router.push(`/${locale}/rooms`);
+        router.refresh();
         toast(data.message, {
           type: "success",
           theme: getUserTheme(),
