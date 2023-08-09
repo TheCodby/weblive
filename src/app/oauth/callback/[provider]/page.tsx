@@ -3,7 +3,7 @@ import "@/app/[locale]/globals.css";
 import LoadingComponent from "@/app/[locale]/loading";
 import { inter } from "@/app/fonts";
 import useLocale from "@/app/hooks/useLocale";
-import { handleLogin, oauthLogin } from "@/app/utils/user";
+import { handleLogin, oauthConnect, oauthLogin } from "@/app/utils/user";
 import { NextPage } from "next";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
@@ -23,14 +23,23 @@ const ProviderPage: NextPage<Props> = () => {
   const locale = useLocale();
   useEffect(() => {
     const login = async () => {
+      let data;
       try {
-        const data = await oauthLogin(
-          params.provider as string,
-          searchParams.get("code")!
-        );
-
+        if (localStorage.getItem("token")) {
+          data = await oauthConnect(
+            params.provider as string,
+            searchParams.get("code")!
+          );
+        } else {
+          data = await oauthLogin(
+            params.provider as string,
+            searchParams.get("code")!
+          );
+          handleLogin(data);
+        }
+        router.push(`/en/rooms`);
+        router.refresh();
         setIsLoading(false);
-        handleLogin(data, router, "en");
       } catch (e: any) {
         setIsLoading(false);
         setError(e.message);

@@ -11,12 +11,12 @@ const PreferencePage = () => {
         <SocialConnect
           social="Discord"
           icon={<BsDiscord size={42} />}
-          link=""
+          link={`https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_WEB}/oauth/callback/discord&response_type=code&scope=identify%20email`}
         />
         <SocialConnect
           social="Google"
           icon={<AiFillGoogleCircle size={42} />}
-          link=""
+          link={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_WEB}/oauth/callback/google&response_type=code&scope=openid%20profile%20email`}
         />
       </div>
     </PageWrapper>

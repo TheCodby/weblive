@@ -94,9 +94,9 @@ const LiveBox: React.FC<Props> = ({ messages, room, socket }) => {
       socket.off("candidate", onReceiveCandidate);
       connection.close();
     };
-  }, [socket]);
+  }, [socket, locale, router, messages]);
   return (
-    <div className="flex flex-col gap-3 w-full lg:order-2 h-[30rem] p-3">
+    <div className="flex flex-col gap-3 w-full lg:order-2 h-[30rem] p-3 sticky">
       <Card className="w-full h-full">
         {!isOffline ? (
           <video

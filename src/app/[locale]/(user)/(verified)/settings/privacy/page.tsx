@@ -22,17 +22,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const AccountPage = async ({ params }: { params: { locale: string } }) => {
   const dict = await getDictionary(params.locale);
   const user = await getMyProfile();
+  console.log(user);
   return (
     <PageWrapper>
       <div className="flex flex-col gap-4 lg:w-1/2">
-        <dl className="flex flex-col gap-2">
-          <dt className="font-bold text-3xl dark:text-neutral-100 text-neutral-800 flex flex-col">
-            <p>{dict.settings.privacy.CHANGE_PASSWORD}</p>
-          </dt>
-          <dd>
-            <ChangePassword messages={dict} />
-          </dd>
-        </dl>
+        {user.loginMethod === "Normal" ? (
+          <dl className="flex flex-col gap-2">
+            <dt className="font-bold text-3xl dark:text-neutral-100 text-neutral-800 flex flex-col">
+              <p>{dict.settings.privacy.CHANGE_PASSWORD}</p>
+            </dt>
+            <dd>
+              <ChangePassword messages={dict} />
+            </dd>
+          </dl>
+        ) : null}
         <dl className="flex flex-col gap-2">
           <dt className="font-bold text-3xl dark:text-neutral-100 text-neutral-800 flex flex-col">
             <p>{dict.settings.privacy.CHANGE_EMAIL}</p>

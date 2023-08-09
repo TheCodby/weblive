@@ -2,11 +2,7 @@ import { setCookie } from "cookies-next";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { ApiError } from "./errors/api-errors";
 import { notFound } from "next/navigation";
-export const handleLogin = async (
-  data: any,
-  router: AppRouterInstance,
-  locale: string
-) => {
+export const handleLogin = async (data: any) => {
   localStorage.setItem("token", data.token);
   setCookie("token", data.token, {
     expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
@@ -15,8 +11,6 @@ export const handleLogin = async (
     "picture",
     `${process.env.NEXT_PUBLIC_API}/${data?.user?.picture}`
   );
-  router.push(`/${locale}/rooms`);
-  router.refresh();
 };
 export const verify = async (code: string) => {
   const res = await fetch(
@@ -39,6 +33,22 @@ export const oauthLogin = async (provider: string, code: string) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code }),
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
+export const oauthConnect = async (provider: string, code: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/me/connect/${provider}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ code }),
     }

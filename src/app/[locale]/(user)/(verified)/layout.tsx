@@ -7,7 +7,6 @@ const Layout = async (props: {
   params: { locale: string };
 }) => {
   const user: User = await getMyProfile();
-  if (!user.completed) redirect(`/${props.params.locale}/complete`);
   if (!user.verified) redirect(`/${props.params.locale}/resend-verification`);
   return <>{props.children}</>;
 };

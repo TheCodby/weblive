@@ -48,7 +48,9 @@ const LoginCard = ({ messages }: { messages: any }) => {
       });
       const resData = await res.json();
       if (!res.ok) throw new Error(resData.message);
-      handleLogin(resData, router, locale);
+      handleLogin(resData);
+      router.push(`/${locale}/rooms`);
+      router.refresh();
       toast.success(messages.login.LOGIN_SUCCESS, {
         theme: getUserTheme(),
       });
@@ -132,7 +134,7 @@ const LoginCard = ({ messages }: { messages: any }) => {
               </Button>
             </Link>
             <Link
-              href={`https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_WEB}/oauth/callback/discord&response_type=code&scope=identify`}
+              href={`https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_WEB}/oauth/callback/discord&response_type=code&scope=identify%20email`}
             >
               <Button className="bg-[#5865F2] dark:bg-[#5865F2] hover:bg-[#4752c3] hover:dark:bg-[#4752c3] p-3 w-full">
                 Continue with Discord <BsDiscord size={24} />
