@@ -80,58 +80,56 @@ const ChangePassword = ({ messages }: { messages: any }) => {
     });
   };
   return (
-    <Card>
-      <form
-        onSubmit={handleChange}
-        className="flex flex-col gap-3 p-5 justify-start items-start"
-      >
-        <label className="block">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.privacy.CURRENT_PASSWORD}
-          </span>
-          <TextInput
-            value={formData.currentPassword}
-            name="currentPassword"
-            onChange={changeInput}
-            type="password"
-          />
-          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-        </label>
-        <label className="block">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.privacy.NEW_PASSWORD}
-          </span>
-          <TextInput
-            value={formData.newPassword}
-            name="newPassword"
-            onChange={changeInput}
-            type="password"
-          />
-          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-        </label>
-        <label className="block">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.privacy.CONFIRM_PASSWORD}
-          </span>
-          <TextInput
-            value={formData.confirmPassword}
-            name="confirmPassword"
-            onChange={changeInput}
-            type="password"
-          />
-          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-        </label>
-        <Button type="submit" disabled={isLoading} variant="primary">
-          {isLoading ? (
-            <>
-              <Loading /> {messages.main.LOADING}
-            </>
-          ) : (
-            messages.settings.privacy.CHANGE_PASSWORD
-          )}
-        </Button>
-      </form>
-    </Card>
+    <form
+      onSubmit={handleChange}
+      className="flex flex-col gap-3 justify-start items-start"
+    >
+      <label className="block">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.settings.privacy.CURRENT_PASSWORD}
+        </span>
+        <TextInput
+          value={formData.currentPassword}
+          name="currentPassword"
+          onChange={changeInput}
+          type="password"
+        />
+        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+      </label>
+      <label className="block">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.settings.privacy.NEW_PASSWORD}
+        </span>
+        <TextInput
+          value={formData.newPassword}
+          name="newPassword"
+          onChange={changeInput}
+          type="password"
+        />
+        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+      </label>
+      <label className="block">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.settings.privacy.CONFIRM_PASSWORD}
+        </span>
+        <TextInput
+          value={formData.confirmPassword}
+          name="confirmPassword"
+          onChange={changeInput}
+          type="password"
+        />
+        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+      </label>
+      <Button type="submit" disabled={isLoading} variant="primary">
+        {isLoading ? (
+          <>
+            <Loading /> {messages.main.LOADING}
+          </>
+        ) : (
+          messages.settings.privacy.CHANGE_PASSWORD
+        )}
+      </Button>
+    </form>
   );
 };
 

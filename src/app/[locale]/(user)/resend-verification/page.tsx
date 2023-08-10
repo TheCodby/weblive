@@ -5,6 +5,7 @@ import { getMyProfile } from "@/app/utils/server/user";
 import Card from "../../components/ui/card";
 import ResendButton from "../components/resend-button";
 import { Metadata } from "next";
+import ChangeEmailModal from "../../components/change-email-modal";
 export async function generateMetadata({
   params,
 }: {
@@ -37,8 +38,13 @@ const ResendPage = async ({ params }: { params: { locale: string } }) => {
               profile?.email
             )}
           </p>
-          <div className="flex flex-row justify-center">
+          <div className="flex flex-row justify-center gap-3">
             <ResendButton dict={dict} />
+            <ChangeEmailModal messages={dict} user={profile}>
+              <button className="text-blue-500 hover:underline">
+                {dict.resendVerification.CHANGE_EMAIL}
+              </button>
+            </ChangeEmailModal>
           </div>
         </div>
       </Card>

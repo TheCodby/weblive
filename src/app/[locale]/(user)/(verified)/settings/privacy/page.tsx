@@ -5,6 +5,7 @@ import ChangePassword from "../components/change-password";
 import { Metadata } from "next";
 import ChangeEmail from "../components/change-email";
 import { getMyProfile } from "@/app/utils/server/user";
+import Card from "@/app/[locale]/components/ui/card";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const fetchCache = "force-no-store";
@@ -32,7 +33,14 @@ const AccountPage = async ({ params }: { params: { locale: string } }) => {
               <p>{dict.settings.privacy.CHANGE_PASSWORD}</p>
             </dt>
             <dd>
-              <ChangePassword messages={dict} />
+              <Card>
+                <Card.Header>
+                  {dict.settings.privacy.CHANGE_PASSWORD_DESCRIPTION}
+                </Card.Header>
+                <Card.Body>
+                  <ChangePassword messages={dict} />
+                </Card.Body>
+              </Card>
             </dd>
           </dl>
         ) : null}
@@ -41,7 +49,14 @@ const AccountPage = async ({ params }: { params: { locale: string } }) => {
             <p>{dict.settings.privacy.CHANGE_EMAIL}</p>
           </dt>
           <dd>
-            <ChangeEmail messages={dict} email={user.email} />
+            <Card>
+              <Card.Header>
+                {dict.settings.privacy.CHANGE_EMAIL_DESCRIPTION}
+              </Card.Header>
+              <Card.Body>
+                <ChangeEmail messages={dict} email={user.email} />
+              </Card.Body>
+            </Card>
           </dd>
         </dl>
       </div>

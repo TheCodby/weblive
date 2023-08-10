@@ -109,7 +109,8 @@
   "resendVerification": {
     "TITLE": "إعادة إرسال التحقق",
     "DESCRIPTION": "هل ترغب في إعادة إرسال رسالة التحقق إلى :email؟",
-    "RESEND": "إعادة إرسال"
+    "RESEND": "إعادة إرسال",
+    "CHANGE_EMAIL": "تغيير البريد الإلكتروني"
   },
   "completeAccount": {
     "TITLE": "إكمال الحساب",

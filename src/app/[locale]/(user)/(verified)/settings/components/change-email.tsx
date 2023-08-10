@@ -47,36 +47,31 @@ const ChangeEmail = ({ messages, email }: { messages: any; email: string }) => {
     }
   };
   return (
-    <Card>
-      <Card.Header>
-        {messages.settings.privacy.CHANGE_EMAIL_DESCRIPTION}
-      </Card.Header>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-3 p-5 justify-start items-start"
-      >
-        <label className="block">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.user.EMAIL}
-          </span>
-          <TextInput
-            error={errors.email?.message}
-            {...register("email", { required: true })}
-            type="email"
-          />
-          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
-        </label>
-        <Button type="submit" disabled={isLoading} variant="primary">
-          {isLoading ? (
-            <>
-              <Loading /> {messages.main.LOADING}
-            </>
-          ) : (
-            messages.settings.privacy.CHANGE_EMAIL
-          )}
-        </Button>
-      </form>
-    </Card>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-3 justify-start items-start"
+    >
+      <label className="block">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.user.EMAIL}
+        </span>
+        <TextInput
+          error={errors.email?.message}
+          {...register("email", { required: true })}
+          type="email"
+        />
+        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs"></p>
+      </label>
+      <Button type="submit" disabled={isLoading} variant="primary">
+        {isLoading ? (
+          <>
+            <Loading /> {messages.main.LOADING}
+          </>
+        ) : (
+          messages.settings.privacy.CHANGE_EMAIL
+        )}
+      </Button>
+    </form>
   );
 };
 

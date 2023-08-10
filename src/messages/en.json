@@ -55,6 +55,7 @@
     "privacy": {
       "TITLE": "Privacy",
       "CHANGE_PASSWORD": "Change Password",
+      "CHANGE_PASSWORD_DESCRIPTION": "Changing your password will log you out of all your devices",
       "CURRENT_PASSWORD": "Current Password",
       "NEW_PASSWORD": "New Password",
       "CONFIRM_PASSWORD": "Confirm Password",
@@ -112,7 +113,8 @@
   "resendVerification": {
     "TITLE": "Resend Verification",
     "DESCRIPTION": "Would you like us to re-send the verification email to :email?",
-    "RESEND": "Resend"
+    "RESEND": "Resend",
+    "CHANGE_EMAIL": "Change Email"
   },
   "completeAccount": {
     "TITLE": "Complete Account",

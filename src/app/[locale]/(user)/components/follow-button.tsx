@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment } from "react";
 import Button from "../../components/ui/button";
 import { followUser, unfollowUser } from "@/app/utils/user";
 import { toast } from "react-toastify";

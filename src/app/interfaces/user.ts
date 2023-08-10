@@ -3,6 +3,7 @@ import { Room } from "./room";
 export interface User {
   id: number;
   username: string;
+  email?: string;
   bio?: string;
   avatar: string;
   admin?: boolean;
@@ -10,7 +11,7 @@ export interface User {
   isFollowing?: boolean;
   verified?: boolean;
   completed?: boolean;
-  followers?: number
+  followers?: number;
 }
 export interface IAuth {
   username: string;

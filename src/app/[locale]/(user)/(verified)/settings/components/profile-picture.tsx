@@ -52,7 +52,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
     }
   };
   return (
-    <Card className="flex flex-col items-center lg:flex-row gap-3 p-5">
+    <div className="flex flex-col items-center lg:flex-row gap-3 p-5">
       <div className="basis-1/4">
         <div className="w-32 h-32 relative overflow-hidden ">
           <Image
@@ -92,7 +92,7 @@ const ProfilePicture = ({ messages, user }: { messages: any; user: User }) => {
           {messages.settings.profile.UPLOAD_PICTURE}
         </Button>
       </div>
-    </Card>
+    </div>
   );
 };
 

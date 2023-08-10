@@ -41,7 +41,9 @@ const UserMenu: React.FC<Props> = ({ messages, user }) => {
                     src={user.avatar}
                     className="rounded-full border border-neutral-200 dark:border-neutral-700"
                     alt=""
-                    objectFit="cover"
+                    style={{
+                      objectFit: "cover",
+                    }}
                   />
                 </div>
                 <p className="font-semibold text-md">{user.username}</p>
@@ -71,8 +73,8 @@ const UserMenu: React.FC<Props> = ({ messages, user }) => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem className="cursor-pointer" asChild>
-            <LogoutButton className="w-full">
+          <DropdownMenuItem className="cursor-pointer">
+            <LogoutButton className="w-full flex flex-row items-center">
               <LogOut className="mr-2 h-4 w-4" /> {messages.LOGOUT}
             </LogoutButton>
           </DropdownMenuItem>

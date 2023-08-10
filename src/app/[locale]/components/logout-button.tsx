@@ -6,9 +6,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 const LogoutButton = React.forwardRef<HTMLButtonElement, Props>(
-  ({ children, ...props }) => {
+  ({ children, ...props }, ref) => {
     const router = useRouter();
     const handleLogout = async () => {
+      console.log("fvdvfdvfdg");
       localStorage.removeItem("token");
       deleteCookie("token");
       router.refresh();

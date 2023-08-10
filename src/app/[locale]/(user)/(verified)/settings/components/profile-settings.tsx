@@ -48,41 +48,39 @@ const ProfileSettings = ({ messages, user }: { messages: any; user: User }) => {
     }
   };
   return (
-    <Card>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3 p-5 justify-start items-start"
-      >
-        <label className="block">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.user.USERNAME}
-          </span>
-          <TextInput
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            required
-            type="text"
-          />
-          <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
-            {messages.settings.profile.USERNAME_REQUIRED}
-          </p>
-        </label>
-        <label className="block w-full">
-          <span className="block text-sm font-medium text-neutral-400">
-            {messages.settings.profile.BIO}
-          </span>
-          <Textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            className="w-full dark:bg-neutral-800 mt-1"
-            rows={6}
-          />
-        </label>
-        <Button type="submit" variant="primary" disabled={isLoading}>
-          {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
-        </Button>
-      </form>
-    </Card>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 justify-start items-start"
+    >
+      <label className="block">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.user.USERNAME}
+        </span>
+        <TextInput
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+          required
+          type="text"
+        />
+        <p className="mt-2 invisible peer-invalid:visible text-red-600 text-xs">
+          {messages.settings.profile.USERNAME_REQUIRED}
+        </p>
+      </label>
+      <label className="block w-full">
+        <span className="block text-sm font-medium text-neutral-400">
+          {messages.settings.profile.BIO}
+        </span>
+        <Textarea
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          className="w-full dark:bg-neutral-800 mt-1"
+          rows={6}
+        />
+      </label>
+      <Button type="submit" variant="primary" disabled={isLoading}>
+        {isLoading ? messages.main.LOADING : messages.main.SAVE_CHANGES}
+      </Button>
+    </form>
   );
 };
 

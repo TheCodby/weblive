@@ -21,6 +21,14 @@ const CardHeader: React.FC<CardHeaderProps> = ({
     </p>
   );
 };
+const CardBody: React.FC<CardProps> = ({ children, className, ...props }) => {
+  const mergedClassName = twMerge("p-4", className);
+  return (
+    <div {...props} className={mergedClassName}>
+      {children}
+    </div>
+  );
+};
 const CardComponent: React.FC<CardProps> = ({
   children,
   className = "",
@@ -37,5 +45,8 @@ const CardComponent: React.FC<CardProps> = ({
   );
 };
 
-const Card = Object.assign(CardComponent, { Header: CardHeader });
+const Card = Object.assign(CardComponent, {
+  Header: CardHeader,
+  Body: CardBody,
+});
 export default Card;
