@@ -126,6 +126,7 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
         {isLive ? (
           <video
             className="w-full h-full"
+            muted
             autoPlay
             ref={(video) => {
               if (video) {
