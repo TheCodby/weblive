@@ -5,17 +5,21 @@ import { UserMedia, useUserMedia } from "@/app/hooks/useUserMedia";
 import { Socket } from "socket.io-client";
 import { MdFiberManualRecord } from "react-icons/md";
 import { BsFillStopFill } from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
 import TimerCounter from "./timer-counter";
 import SettingsModal from "./settings-modal";
 import Card from "@/app/[locale]/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/app/[locale]/components/ui/tooltip";
 interface Props {
   messages: any;
   room: Room;
   socket: Socket;
 }
 const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLive, setIsLive] = useState(false);
   const { stream, error, start, close } = useUserMedia({
     audio: true,
@@ -144,58 +148,41 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
       </div>
       <div className="flex flex-row gap-5 items-center justify-center bg-white/50 dark:bg-black/20 p-2 rounded-t-full shadow-2xl">
         {isLive ? (
-          <div className="group flex relative">
-            <button
-              onClick={() => stopLive()}
-              className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 peer hover:bg-neutral-200 rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
-            >
-              <BsFillStopFill size={32} />
-            </button>
-            <span
-              className="peer-hover:flex transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
-              -translate-x-1/2 translate-y-[-150%] hidden m-4 p-2 mx-auto"
-            >
-              Stop
-            </span>
-          </div>
+          <TooltipProvider delayDuration={100}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => stopLive()}
+                  className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 peer hover:bg-neutral-200 rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
+                >
+                  <BsFillStopFill size={32} />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Stop</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ) : (
-          <div className="group flex relative">
-            <button
-              disabled={isLive}
-              onClick={() => startLive()}
-              className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 hover:bg-neutral-200 peer rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
-            >
-              <MdFiberManualRecord size={32} />
-            </button>
-            <span
-              className="peer-hover:flex transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
-  -translate-x-1/2 translate-y-[-150%] hidden m-4 p-2 mx-auto"
-            >
-              Start
-            </span>
-          </div>
+          <TooltipProvider delayDuration={100}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  disabled={isLive}
+                  onClick={() => startLive()}
+                  className="text-red-500 dark:text-red-700 hover:dark:bg-neutral-800 hover:bg-neutral-200 peer rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent"
+                >
+                  <MdFiberManualRecord size={32} />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Start</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         )}
-        <div className="group flex relative">
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-2 transition-all peer duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent text-neutral-800 dark:text-white`}
-          >
-            <FiSettings size={24} />
-          </button>
-          <span
-            className="peer-hover:flex hidden transition-all bg-gray-200 dark:bg-gray-800 text-sm text-black dark:text-gray-100 rounded-md absolute left-1/2 
-    -translate-x-1/2 translate-y-[-150%] m-4 p-2 mx-auto"
-          >
-            Settings
-          </span>
-        </div>
+        <SettingsModal room={room} messages={messages} />
       </div>
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        setIsOpen={setIsSettingsOpen}
-        room={room}
-        messages={messages}
-      />
     </Card>
   );
 };

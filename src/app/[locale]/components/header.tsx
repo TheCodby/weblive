@@ -6,12 +6,7 @@ import { getDictionary } from "@/dictionaries";
 import Button from "./ui/button";
 import Notifications from "../(user)/components/notifications";
 import { User } from "@/app/interfaces/user";
-const UserMenu = dynamic(() => import("../(user)/components/user-menu"), {
-  ssr: false,
-  loading: () => (
-    <div className="animate-pulse w-6 h-6 dark:bg-slate-700 bg-gray-300 rounded-full m-2"></div>
-  ),
-});
+import UserMenu from "../(user)/components/user-menu";
 const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (

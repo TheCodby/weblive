@@ -1,27 +1,25 @@
 "use client";
-import { Switch } from "@headlessui/react";
+import { Switch } from "@/app/[locale]/components/ui/switch";
+import { Label } from "@/app/[locale]/components/ui/label";
 import React from "react";
+import Card from "@/app/[locale]/components/ui/card";
 
 const ProfileVisibility = () => {
   const [enabled, setEnabled] = React.useState(false);
   return (
-    <div className="inline-flex gap-3">
+    <Card className="flex flex-row items-center justify-between p-3">
+      <div className="space-y-0.5 flex flex-col gap-3">
+        <Label>Public Profile</Label>
+        <Label className="text-gray-400">
+          Your profile will be visible to everyone
+        </Label>
+      </div>
       <Switch
         checked={enabled}
-        onChange={setEnabled}
-        className={`${
-          enabled ? "bg-blue-600" : "bg-neutral-300 dark:bg-neutral-700"
-        } relative inline-flex h-6 w-11 items-center rounded-full`}
-      >
-        <span className="sr-only">Public Profile</span>
-        <span
-          className={`${
-            enabled ? "translate-x-6" : "translate-x-1"
-          } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-        />
-      </Switch>
-      <p className="text-md">Public Profile</p>
-    </div>
+        onCheckedChange={setEnabled}
+        id="profile-visiblity"
+      />
+    </Card>
   );
 };
 
