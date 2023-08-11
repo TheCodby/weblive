@@ -25,9 +25,13 @@ export const verify = async (code: string) => {
   if (!res.ok) throw new ApiError(data.message, res.status);
   return data;
 };
-export const oauthLogin = async (provider: string, code: string) => {
+export const oauthLogin = async (
+  provider: string,
+  locale: string,
+  code: string
+) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/auth/callback/${provider}`,
+    `${process.env.NEXT_PUBLIC_API}/auth/callback/${provider}?locale=${locale}`,
     {
       method: "POST",
       headers: {
@@ -42,11 +46,12 @@ export const oauthLogin = async (provider: string, code: string) => {
 };
 export const oauthConnect = async (
   provider: string,
+  locale: string,
   code: string,
   token: string
 ) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/me/connect/${provider}`,
+    `${process.env.NEXT_PUBLIC_API}/me/connect/${provider}?locale=${locale}`,
     {
       method: "POST",
       headers: {

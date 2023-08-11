@@ -9,7 +9,9 @@ const ProfileVisibility = () => {
   return (
     <div className="flex flex-row items-center justify-between p-3">
       <div className="flex flex-row gap-3 items-center">
-        <Eye size={36} />
+        <div className="p-2 bg-neutral-800 rounded-full">
+          <Eye size={36} color="#ffffff" />
+        </div>
         <div className="flex flex-col gap-3">
           <Label>Public Profile</Label>
           <Label className="text-gray-400">
