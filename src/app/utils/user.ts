@@ -38,23 +38,27 @@ export const oauthLogin = async (provider: string, code: string) => {
     }
   );
   const data = await res.json();
-  if (!res.ok) throw new ApiError(data.message, res.status);
+  if (!res.ok) return false;
   return data;
 };
-export const oauthConnect = async (provider: string, code: string) => {
+export const oauthConnect = async (
+  provider: string,
+  code: string,
+  token: string
+) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/me/connect/${provider}`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: token,
       },
       body: JSON.stringify({ code }),
     }
   );
   const data = await res.json();
-  if (!res.ok) throw new ApiError(data.message, res.status);
+  if (!res.ok) return false;
   return data;
 };
 export const followUser = async (id: number) => {
