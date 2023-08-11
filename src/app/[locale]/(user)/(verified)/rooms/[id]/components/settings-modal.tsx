@@ -20,19 +20,17 @@ import {
   DialogTrigger,
 } from "@/app/[locale]/components/ui/dialog";
 import { Separator } from "@/app/[locale]/components/ui/separator";
-import { FiSettings } from "react-icons/fi";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/app/[locale]/components/ui/tooltip";
 interface Props {
   room: Room;
   messages: any;
+  children: React.ReactNode;
 }
 
-const SettingsModal: React.FC<Props> = ({ room, messages }: Props) => {
+const SettingsModal: React.FC<Props> = ({
+  room,
+  messages,
+  children,
+}: Props) => {
   const router = useRouter();
   const locale = useLocale();
   const [roomName, setRoomName] = React.useState(room.name);
@@ -110,20 +108,7 @@ const SettingsModal: React.FC<Props> = ({ room, messages }: Props) => {
   };
   return (
     <Dialog>
-      <DialogTrigger
-        className={`hover:dark:bg-neutral-800 hover:bg-neutral-200 rounded-full p-2 transition-all peer duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent text-neutral-800 dark:text-white`}
-      >
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <FiSettings size={24} />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Settings</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit room</DialogTitle>

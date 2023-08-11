@@ -14,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/[locale]/components/ui/tooltip";
+import { FiSettings } from "react-icons/fi";
 interface Props {
   messages: any;
   room: Room;
@@ -181,7 +182,18 @@ const LiveOwnerBox: React.FC<Props> = ({ messages, room, socket }) => {
             </Tooltip>
           </TooltipProvider>
         )}
-        <SettingsModal room={room} messages={messages} />
+        <SettingsModal room={room} messages={messages}>
+          <TooltipProvider delayDuration={100}>
+            <Tooltip>
+              <TooltipTrigger className="hover:dark:bg-neutral-800 hover:bg-neutral-200 peer rounded-full p-2 transition-all duration-200 disabled:dark:hover:bg-transparent disabled:hover:bg-transparent">
+                <FiSettings size={24} />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Settings</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </SettingsModal>
       </div>
     </Card>
   );

@@ -46,16 +46,23 @@ const Notifications: React.FC<any> = ({ messages }) => {
               <Loading />
             </div>
           ) : null}
-          {notifications.isSuccess ? (
+          {notifications.isSuccess &&
+          !notifications.isFetching &&
+          !notifications.isLoading ? (
             notifications.data!.length > 0 ? (
               notifications.data!.map((notification: INotif, index: number) => (
                 <>
-                  <DropdownMenuItem key={index} asChild className="p-3">
+                  {index > 0 ? <DropdownMenuSeparator /> : null}
+                  <DropdownMenuItem
+                    key={index}
+                    asChild
+                    className="p-3 flex flex-row items-center space-x-2"
+                  >
                     <LocaleLink href={notification.url!}>
+                      <span className="flex h-2 w-2 rounded-full bg-green-500" />
                       <p>{notification.message}</p>
                     </LocaleLink>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
                 </>
               ))
             ) : (
