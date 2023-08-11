@@ -2,7 +2,6 @@ import "server-only";
 import { cookies } from "next/headers";
 import * as jwt from "jsonwebtoken";
 import { User } from "@/app/interfaces/user";
-import { ApiError } from "../errors/api-errors";
 
 export const decodeUser = (token: string): User | false => {
   try {
@@ -15,7 +14,7 @@ export const decodeUser = (token: string): User | false => {
 export const getUserToken = () => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")!;
-  return token.value;
+  return cookieStore.has("token") ? token.value : "";
 };
 export const getMyProfile = async () => {
   const cookieStore = cookies();
