@@ -38,7 +38,7 @@ export const oauthLogin = async (provider: string, code: string) => {
     }
   );
   const data = await res.json();
-  if (!res.ok) return false;
+  if (!res.ok) throw new ApiError(data.message, res.status);
   return data;
 };
 export const oauthConnect = async (
@@ -58,7 +58,7 @@ export const oauthConnect = async (
     }
   );
   const data = await res.json();
-  if (!res.ok) return false;
+  if (!res.ok) throw new ApiError(data.message, res.status);
   return data;
 };
 export const followUser = async (id: number) => {

@@ -1,20 +1,25 @@
 "use client";
-import { User } from "@/app/interfaces/user";
 import { handleLogin } from "@/app/utils/user";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { ImCheckmark } from "react-icons/im";
 
 interface Props {
-  user: any;
+  data: any;
   type: "login" | "connect";
   error: string;
 }
-const LoginComponent: React.FC<Props> = ({ user, type, error }) => {
+const LoginComponent: React.FC<Props> = ({ data, type, error }) => {
   const router = useRouter();
   useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        router.push("/en/auth/login");
+      }, 3000);
+      return;
+    }
     if (type === "login") {
-      handleLogin(user);
+      handleLogin(data);
     }
 
     setTimeout(() => {

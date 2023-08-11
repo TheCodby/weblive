@@ -15,11 +15,13 @@ const ProviderPage: NextPage<Props> = async ({ params, searchParams }) => {
   let error: string = "";
   const user = await getMyProfile();
   const token = getUserToken();
-  if (user)
-    data = await oauthConnect(params.provider, searchParams.code, token);
-  else data = await oauthLogin(params.provider, searchParams.code);
-
-  if (!data) error = "An error occured.";
+  try {
+    if (user)
+      data = await oauthConnect(params.provider, searchParams.code, token);
+    else data = await oauthLogin(params.provider, searchParams.code);
+  } catch (e: any) {
+    error = e.message;
+  }
   return (
     <html>
       <body
