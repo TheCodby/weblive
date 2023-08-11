@@ -1,5 +1,4 @@
 import { setCookie } from "cookies-next";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { ApiError } from "./errors/api-errors";
 import { notFound } from "next/navigation";
 export const handleLogin = async (data: any) => {
@@ -52,7 +51,7 @@ export const oauthConnect = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ code }),
     }

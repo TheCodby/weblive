@@ -7,17 +7,10 @@ import { ImCheckmark } from "react-icons/im";
 interface Props {
   data: any;
   type: "login" | "connect";
-  error: string;
 }
-const LoginComponent: React.FC<Props> = ({ data, type, error }) => {
+const LoginComponent: React.FC<Props> = ({ data, type }) => {
   const router = useRouter();
   useEffect(() => {
-    if (error) {
-      setTimeout(() => {
-        router.push("/en/auth/login");
-      }, 3000);
-      return;
-    }
     if (type === "login") {
       handleLogin(data);
     }
@@ -29,20 +22,11 @@ const LoginComponent: React.FC<Props> = ({ data, type, error }) => {
   }, []);
   return (
     <div className="flex flex-col gap-2">
-      {error ? (
-        <div className="flex flex-col gap-2 text-center justify-center items-center">
-          <p className="text-4xl font-black">{error}</p>
-          <p className="text-2xl">
-            You{`'`}ll be redirected to the login page in 3 seconds.
-          </p>
-        </div>
-      ) : (
-        <div className="flex flex-col gap-2 text-center justify-center items-center">
-          <ImCheckmark size={128} color="#03bc03" />
-          <p className="text-4xl font-black">Authorized</p>
-          <p className="text-2xl">You{`'`}ll be redirected in 3 seconds.</p>
-        </div>
-      )}
+      <div className="flex flex-col gap-2 text-center justify-center items-center">
+        <ImCheckmark size={128} color="#03bc03" />
+        <p className="text-4xl font-black">Authorized</p>
+        <p className="text-2xl">You{`'`}ll be redirected in 3 seconds.</p>
+      </div>
     </div>
   );
 };

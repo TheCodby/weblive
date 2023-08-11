@@ -1,5 +1,3 @@
-import "@/app/[locale]/globals.css";
-import { inter } from "@/app/fonts";
 import { getMyProfile, getUserToken } from "@/app/utils/server/user";
 import { oauthConnect, oauthLogin } from "@/app/utils/user";
 import { NextPage } from "next";
@@ -12,29 +10,12 @@ interface Props {
 }
 const ProviderPage: NextPage<Props> = async ({ params, searchParams }) => {
   let data;
-  let error: string = "";
   const user = await getMyProfile();
   const token = getUserToken();
-  try {
-    if (user)
-      data = await oauthConnect(params.provider, searchParams.code, token);
-    else data = await oauthLogin(params.provider, searchParams.code);
-  } catch (e: any) {
-    error = e.message;
-  }
-  return (
-    <html>
-      <body
-        className={`h-full w-full bg-neutral-900 flex flex-col justify-center items-center text-white ${inter.className}`}
-      >
-        <LoginComponent
-          data={data}
-          type={user ? "connect" : "login"}
-          error={error}
-        />
-      </body>
-    </html>
-  );
+  if (user)
+    data = await oauthConnect(params.provider, searchParams.code, token);
+  else data = await oauthLogin(params.provider, searchParams.code);
+  return <LoginComponent data={data} type={user ? "connect" : "login"} />;
 };
 
 export default ProviderPage;
