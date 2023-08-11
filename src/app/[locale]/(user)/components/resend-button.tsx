@@ -3,15 +3,17 @@ import React from "react";
 import Button from "../../components/ui/button";
 import { toast } from "react-toastify";
 import { getUserTheme } from "@/app/utils/theme";
+import useLocale from "@/app/hooks/useLocale";
 
 type status = "idle" | "loading";
 const ResendButton: React.FC<{ dict: any }> = ({ dict }) => {
   const [status, setLoading] = React.useState<status>("idle");
+  const locale = useLocale();
   const handleResend = async () => {
     try {
       setLoading("loading");
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/me/resend-verification`,
+        `${process.env.NEXT_PUBLIC_API}/me/resend-verification?locale=${locale}`,
         {
           method: "POST",
           headers: {

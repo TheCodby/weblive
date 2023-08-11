@@ -11,9 +11,9 @@ export const handleLogin = async (data: any) => {
     `${process.env.NEXT_PUBLIC_API}/${data?.user?.picture}`
   );
 };
-export const verify = async (code: string, language: string) => {
+export const verify = async (code: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/auth/verify?code=${code}&locale=${language}`,
+    `${process.env.NEXT_PUBLIC_API}/auth/verify?code=${code}`,
     {
       method: "POST",
       headers: {

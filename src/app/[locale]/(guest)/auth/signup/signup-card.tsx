@@ -45,6 +45,7 @@ const SignupCard = ({ messages }: { messages: any }) => {
           username: data.username,
           email: data.email,
           password: data.password,
+          locale: locale,
         }),
       });
       const resData = await res.json();

@@ -11,7 +11,7 @@ interface Props {
 }
 const VerifyPage: NextPage<Props> = async ({ params, searchParams }) => {
   try {
-    await verify(searchParams.code, params.locale);
+    await verify(searchParams.code);
   } catch (e) {
     console.log(e);
   }
