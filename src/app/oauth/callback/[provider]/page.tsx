@@ -28,7 +28,7 @@ const ProviderPage: NextPage<Props> = async ({ params, searchParams }) => {
         className={`h-full w-full bg-neutral-900 flex flex-col justify-center items-center text-white ${inter.className}`}
       >
         <LoginComponent
-          user={data}
+          data={data}
           type={user ? "connect" : "login"}
           error={error}
         />
