@@ -5,7 +5,13 @@ import { INotif } from "../interfaces/notification";
 
 export const useNotifications = () => {
   const queryClient = useQueryClient();
-  return useQuery<INotif[]>({
+  return useQuery<
+    any,
+    {
+      message: string;
+    },
+    INotif[]
+  >({
     queryKey: ["notifications"],
     queryFn: async () => {
       const data = await getNotifications(localStorage.getItem("token")!);
@@ -20,7 +26,7 @@ export const useNotifications = () => {
   });
 };
 export const useNotificationNumbers = () => {
-  return useQuery<number>({
+  return useQuery<any, { message: string }, number>({
     queryKey: ["notifications-number"],
     queryFn: async () =>
       await getNotificationNumbers(localStorage.getItem("token")!),

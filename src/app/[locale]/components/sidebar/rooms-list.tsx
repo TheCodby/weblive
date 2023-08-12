@@ -6,10 +6,18 @@ import LocaleLink from "../locale-link";
 import Image from "next/image";
 interface Props {
   fetcher: () => Promise<{ rooms: Room[] }>;
+  initialRooms: Room[];
 }
-const RoomsList: React.FC<Props> = ({ fetcher }) => {
-  const query = useQuery(["rooms", 1], fetcher, {
+const RoomsList: React.FC<Props> = ({ fetcher, initialRooms }) => {
+  const query = useQuery<
+    any,
+    { message: string },
+    { rooms: Room[]; pages: number }
+  >({
+    queryKey: ["rooms", 1],
+    queryFn: fetcher,
     refetchInterval: 10000,
+    initialData: initialRooms,
   });
   if (query.isLoading) return <Loading />;
   if (query.isError) {

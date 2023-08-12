@@ -7,6 +7,8 @@ import Button from "./ui/button";
 import Notifications from "../(user)/components/notifications";
 import { User } from "@/app/interfaces/user";
 import UserMenu from "../(user)/components/user-menu";
+import SearchRooms from "./search-rooms";
+import { getRooms } from "@/app/utils/room";
 const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (
@@ -15,6 +17,7 @@ const ToggleTheme = dynamic(() => import("./toggle-theme"), {
 });
 const Header = async ({ user, locale }: { user: User; locale: string }) => {
   const dict = await getDictionary(locale);
+  const rooms = await getRooms("1");
   return (
     <nav className="flex flex-row p-2 justify-between items-center bg-white dark:bg-neutral-900 shadow-sm w-full z-[11] h-14 fixed lg:sticky">
       <div className="flex flex-row gap-4 items-center">
@@ -27,12 +30,13 @@ const Header = async ({ user, locale }: { user: User; locale: string }) => {
         <ToggleTheme />
         <LocalesMenu />
       </div>
-      <div>
+      <div className="flex flex-row gap-4 items-center">
+        <SearchRooms messages={dict} initialRooms={rooms} />
         {user ? (
-          <div className="flex flex-row gap-4 items-center">
+          <>
             <Notifications messages={dict} />
             <UserMenu messages={dict.user} user={user} />
-          </div>
+          </>
         ) : (
           <LocaleLink href="/auth/login">
             <Button variant="primary">{dict.login.LOGIN}</Button>

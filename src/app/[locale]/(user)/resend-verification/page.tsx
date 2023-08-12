@@ -31,22 +31,24 @@ const ResendPage = async ({ params }: { params: { locale: string } }) => {
         <Card.Header className="p-4 text-xl font-bold">
           {dict.resendVerification.TITLE}
         </Card.Header>
-        <div className="p-4 flex flex-col gap-3">
-          <p className="text-xl font-medium text-center">
-            {dict.resendVerification.DESCRIPTION.replace(
-              ":email",
-              profile?.email
-            )}
-          </p>
-          <div className="flex flex-row justify-center gap-3">
-            <ResendButton dict={dict} />
-            <ChangeEmailModal messages={dict} user={profile}>
-              <button className="text-blue-500 hover:underline">
-                {dict.resendVerification.CHANGE_EMAIL}
-              </button>
-            </ChangeEmailModal>
+        <Card.Body>
+          <div className="flex flex-col gap-3">
+            <p className="text-xl font-medium text-center">
+              {dict.resendVerification.DESCRIPTION.replace(
+                ":email",
+                profile?.email
+              )}
+            </p>
+            <div className="flex flex-row justify-center gap-3">
+              <ResendButton dict={dict} />
+              <ChangeEmailModal messages={dict} user={profile}>
+                <button className="text-blue-500 hover:underline">
+                  {dict.resendVerification.CHANGE_EMAIL}
+                </button>
+              </ChangeEmailModal>
+            </div>
           </div>
-        </div>
+        </Card.Body>
       </Card>
     </div>
   );

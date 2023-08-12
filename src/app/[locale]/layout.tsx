@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { IBMar, inter } from "../fonts";
 import NextTopLoader from "nextjs-toploader";
 import Sidebar from "./components/sidebar";
+import { getRooms } from "../utils/room";
 export default async function RootLayout(props: {
   children: React.ReactNode;
   params: { locale: string };
@@ -18,6 +19,7 @@ export default async function RootLayout(props: {
   if (!locale) {
     notFound();
   }
+  const rooms = await getRooms("1");
   return (
     <html
       lang={locale}
@@ -40,7 +42,7 @@ export default async function RootLayout(props: {
               <div className="flex h-full w-full flex-col lg:overflow-hidden">
                 <Header user={user} locale={locale} />
                 <div className="flex grow overflow-hidden">
-                  <Sidebar user={user} locale={locale} />
+                  <Sidebar user={user} locale={locale} initialRooms={rooms} />
                   <div
                     className={`relative h-full w-full grow lg:overflow-hidden`}
                   >

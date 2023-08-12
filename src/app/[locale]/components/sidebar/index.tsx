@@ -5,6 +5,7 @@ import { getRooms } from "@/app/utils/room";
 import RoomsList from "./rooms-list";
 import { GoSidebarExpand } from "react-icons/go";
 import { AnimatePresence, motion } from "framer-motion";
+import { Room } from "@/app/interfaces/room";
 function detectMob() {
   const toMatch = [
     /Android/i,
@@ -20,7 +21,15 @@ function detectMob() {
     return navigator.userAgent.match(toMatchItem);
   });
 }
-const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
+const Sidebar = ({
+  user,
+  locale,
+  initialRooms,
+}: {
+  user: User;
+  locale: string;
+  initialRooms: Room[];
+}) => {
   const [showSidebar, setShowSidebar] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
   React.useEffect(() => {
@@ -63,7 +72,10 @@ const Sidebar = ({ user, locale }: { user: User; locale: string }) => {
               className="overflow-y-auto"
             >
               <p className="text-xl font-bold">Rooms</p>
-              <RoomsList fetcher={() => getRooms("1")} />
+              <RoomsList
+                fetcher={() => getRooms("1")}
+                initialRooms={initialRooms}
+              />
             </motion.div>
           )}
         </AnimatePresence>

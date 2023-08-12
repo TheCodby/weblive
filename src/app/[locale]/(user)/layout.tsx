@@ -1,5 +1,4 @@
 import { getMyProfile } from "@/app/utils/server/user";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
 const Layout = async (props: {
