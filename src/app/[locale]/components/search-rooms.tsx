@@ -48,7 +48,7 @@ const SearchRooms = ({
           readOnly
         />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
         <DialogHeader>
           <TextInput
             placeholder="Room name"
