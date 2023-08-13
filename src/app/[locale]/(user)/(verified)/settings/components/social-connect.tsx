@@ -6,12 +6,26 @@ interface Props {
   social: Social;
   link: string;
   icon: React.ReactNode;
+  isConnected: boolean;
 }
-const SocialConnect: React.FC<Props> = ({ social, link, icon }) => {
+const SocialConnect: React.FC<Props> = ({
+  social,
+  link,
+  icon,
+  isConnected,
+}) => {
   return (
-    <Link href={link}>
-      <Button className="inline-flex gap-2 w-full">
-        {icon} Connect to {social}
+    <Link href={isConnected ? "#" : link}>
+      <Button
+        className="inline-flex gap-2 w-full disabled:animate-none"
+        disabled={isConnected}
+      >
+        {icon}
+        {isConnected ? (
+          <p className="font-bold text-lg">{social} Connected</p>
+        ) : (
+          <p className="font-bold text-lg">Connect {social}</p>
+        )}
       </Button>
     </Link>
   );
