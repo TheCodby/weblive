@@ -8,14 +8,27 @@ import { NextPage } from "next";
 import FollowButton from "@/app/[locale]/(user)/components/follow-button";
 import { getProfile } from "@/app/utils/user";
 import { formatCompactNumber } from "@/app/utils/main";
+import { Lock } from "lucide-react";
 interface Props {
   params: { locale: string; username: string };
 }
 const ProfilePage: NextPage<Props> = async ({ params }) => {
   const token = getUserToken();
-  const user: User = await getProfile(params.username, token);
+  const user = await getProfile(params.username, token);
   const decodedUser: User = decodeUser(token) as User;
-  const selfProfile = user.id === decodedUser.id;
+  const selfProfile = user?.id === decodedUser.id;
+  if (!user) {
+    return (
+      <div className="pt-6">
+        <div className="flex flex-col gap-3 justify-center items-center">
+          <p className="text-3xl font-black">
+            Oops! The profile {`you're`} trying to view is set to private.
+          </p>
+          <Lock size={128} />
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="w-full h-[70vh] relative">

@@ -12,6 +12,7 @@ export interface User {
   verified?: boolean;
   completed?: boolean;
   followers?: number;
+  public: boolean;
 }
 export interface IAuth {
   username: string;

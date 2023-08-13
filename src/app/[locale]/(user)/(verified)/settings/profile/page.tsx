@@ -22,10 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 const AccountPage = async ({ params }: { params: { locale: string } }) => {
-  const [dict, user] = await Promise.all([
-    getDictionary(params.locale),
-    getMyProfile(),
-  ]);
+  const dict = await getDictionary(params.locale);
+  const user = await getMyProfile();
   return (
     <PageWrapper>
       <div className="flex flex-col gap-4 lg:w-1/2">
@@ -56,7 +54,7 @@ const AccountPage = async ({ params }: { params: { locale: string } }) => {
         <p className="font-bold text-3xl mt-4">Profile Visibility</p>
         <Card className="dark:bg-neutral-900/80">
           <Card.Body>
-            <ProfileVisibility />
+            <ProfileVisibility isPublic={user.public} />
           </Card.Body>
         </Card>
       </div>

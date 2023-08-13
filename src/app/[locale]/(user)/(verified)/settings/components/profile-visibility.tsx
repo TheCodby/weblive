@@ -3,9 +3,45 @@ import { Switch } from "@/app/[locale]/components/ui/switch";
 import { Label } from "@/app/[locale]/components/ui/label";
 import React from "react";
 import { Eye } from "lucide-react";
+import { toast } from "react-toastify";
+import { getUserTheme } from "@/app/utils/theme";
 
-const ProfileVisibility = () => {
-  const [enabled, setEnabled] = React.useState(false);
+interface Props {
+  isPublic: boolean;
+}
+const ProfileVisibility: React.FC<Props> = ({ isPublic }) => {
+  const [enabled, setEnabled] = React.useState(isPublic);
+  const handleChange = async (value: boolean) => {
+    console.log(value);
+    setEnabled(value);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/me/profile-visibility`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
+      setEnabled(data.public);
+      toast(data.message, {
+        type: "success",
+        theme: getUserTheme(),
+      });
+    } catch (err: any) {
+      toast(err.message, {
+        type: "error",
+        theme: getUserTheme(),
+      });
+    }
+  };
+
   return (
     <div className="flex flex-row items-center justify-between p-3">
       <div className="flex flex-row gap-3 items-center">
@@ -21,7 +57,7 @@ const ProfileVisibility = () => {
       </div>
       <Switch
         checked={enabled}
-        onCheckedChange={setEnabled}
+        onCheckedChange={handleChange}
         id="profile-visiblity"
       />
     </div>
