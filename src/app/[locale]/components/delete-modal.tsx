@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/app/[locale]/components/ui/button";
 import {
   Dialog,

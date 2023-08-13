@@ -24,7 +24,7 @@ const RoomsList: React.FC<Props> = ({ fetcher, initialRooms }) => {
     throw query.error;
   }
   return (
-    <div className="flex flex-col gap-3 overflow-y-auto pe-2 shadow-lg">
+    <div className="flex flex-col gap-3 overflow-y-auto pe-2">
       {query.data!.rooms.length > 0 ? (
         query.data?.rooms.map((room: Room) => (
           <LocaleLink href={`/rooms/${room.id}`} key={room.id}>

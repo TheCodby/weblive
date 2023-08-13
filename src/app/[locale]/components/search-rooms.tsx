@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 import TextInput from "./ui/text-input";
 import {
@@ -14,6 +14,7 @@ import RoomCard from "./room-card";
 import Loading from "./loading";
 import { Room } from "@/app/interfaces/room";
 import { useDebounce } from "@/app/hooks/useDebounce";
+import { Separator } from "./ui/separator";
 
 const SearchRooms = ({
   messages,
@@ -43,43 +44,50 @@ const SearchRooms = ({
     <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
       <DialogTrigger>
         <TextInput
-          placeholder="Search rooms..."
-          className="cursor-pointer"
+          placeholder="Search..."
+          className="cursor-pointer hidden lg:block w-96"
+          icon={<Search size={20} strokeWidth={3} />}
           readOnly
         />
+        <div className="lg:hidden">
+          <Search size={18} />
+        </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px] p-0 overflow-hidden">
+      <DialogContent className="w-[90vw] lg:w-full lg:max-w-[800px] p-0 overflow-hidden rounded-lg gap-0">
         <DialogHeader>
           <TextInput
-            placeholder="Room name"
+            placeholder="Search..."
             onChange={(e) => setSearch(e.target.value)}
             value={search}
-            icon={<Search size={16} />}
-            className="rounded-b-none"
+            icon={<Search size={16} strokeWidth={3} />}
+            className="rounded-lg rounded-b-none h-full p-3"
           />
         </DialogHeader>
-        <div className="p-4">
-          {isLoading ? (
-            <Loading />
-          ) : error ? (
-            <div>{error.message}</div>
-          ) : isSuccess ? (
-            <div>
-              <div className="flex flex-col gap-2">
-                {data.rooms.length > 0 ? (
-                  data.rooms.map((room: Room) => (
-                    <RoomCard room={room} key={room.id} />
-                  ))
-                ) : (
-                  <div className="text-center text-gray-500 dark:text-gray-400">
-                    There is no rooms
-                  </div>
-                )}
+        {isLoading ? (
+          <Loading />
+        ) : error ? (
+          <div>{error.message}</div>
+        ) : isSuccess ? (
+          <div className="flex flex-col">
+            {data.rooms.length > 0 ? (
+              data.rooms.map((room: Room, index: number) => (
+                <>
+                  {index > 0 ? <Separator /> : null}
+                  <RoomCard
+                    key={room.id}
+                    room={room}
+                    className="rounded-none"
+                  />
+                </>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 dark:text-gray-400 p-3">
+                There is no rooms
               </div>
-            </div>
-          ) : null}
-          {isFetching && !isLoading && <Loading />}
-        </div>
+            )}
+          </div>
+        ) : null}
+        {isFetching && !isLoading && <Loading />}
       </DialogContent>
     </Dialog>
   );

@@ -6,7 +6,13 @@ import { Socket } from "socket.io-client";
 import { MdFiberManualRecord } from "react-icons/md";
 import { BsFillStopFill } from "react-icons/bs";
 import TimerCounter from "./timer-counter";
-import SettingsModal from "./settings-modal";
+const SettingsModal = dynamic(() => import("./settings-modal"), {
+  ssr: false,
+  loading: () => (
+    <div className="animate-pulse w-6 h-6 dark:bg-slate-700 bg-gray-300 rounded-full m-2"></div>
+  ),
+});
+
 import Card from "@/app/[locale]/components/ui/card";
 import {
   Tooltip,
@@ -15,6 +21,7 @@ import {
   TooltipTrigger,
 } from "@/app/[locale]/components/ui/tooltip";
 import { FiSettings } from "react-icons/fi";
+import dynamic from "next/dynamic";
 interface Props {
   messages: any;
   room: Room;

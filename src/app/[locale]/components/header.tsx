@@ -9,6 +9,7 @@ import { User } from "@/app/interfaces/user";
 import UserMenu from "../(user)/components/user-menu";
 import SearchRooms from "./search-rooms";
 import { getRooms } from "@/app/utils/room";
+import { User as UserIcon } from "lucide-react";
 const ToggleTheme = dynamic(() => import("./toggle-theme"), {
   ssr: false,
   loading: () => (
@@ -38,9 +39,21 @@ const Header = async ({ user, locale }: { user: User; locale: string }) => {
             <UserMenu messages={dict.user} user={user} />
           </>
         ) : (
-          <LocaleLink href="/auth/login">
-            <Button variant="primary">{dict.login.LOGIN}</Button>
-          </LocaleLink>
+          <>
+            <LocaleLink href="/auth/login" className="flex items-center">
+              <Button variant="primary" className="hidden lg:block">
+                {dict.login.LOGIN}
+              </Button>
+              <button className="lg:hidden">
+                <UserIcon size={20} />
+              </button>
+            </LocaleLink>
+            {/* <LocaleLink href="/auth/login" className="hidden lg:block">
+              <button className="lg:hidden">
+                <UserIcon size={20} />
+              </button>
+            </LocaleLink> */}
+          </>
         )}
       </div>
     </nav>

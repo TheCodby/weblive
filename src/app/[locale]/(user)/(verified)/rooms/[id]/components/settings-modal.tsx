@@ -1,3 +1,4 @@
+"use client";
 import DeleteModal from "@/app/[locale]/components/delete-modal";
 import Loading from "@/app/[locale]/components/loading";
 import Button from "@/app/[locale]/components/ui/button";

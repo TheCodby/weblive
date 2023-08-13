@@ -4,14 +4,19 @@ import Image from "next/image";
 import { Room } from "@/app/interfaces/room";
 import Card from "@/app/[locale]/components/ui/card";
 import { FaLock } from "react-icons/fa";
-interface Props {
+import { cn } from "@/app/utils/styles";
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   room: Room;
 }
 
-const RoomCard: React.FC<Props> = ({ room }) => {
+const RoomCard: React.FC<Props> = ({ room, ...props }) => {
+  const className = cn(
+    "flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5 hover:dark:bg-neutral-800 hover:bg-neutral-200",
+    props.className
+  );
   return (
     <LocaleLink href={`/rooms/${room.id}`}>
-      <Card className="flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5 hover:dark:bg-neutral-800 hover:bg-neutral-200">
+      <Card className={className}>
         <div className="flex flex-row gap-4 items-center">
           <div className="w-16 h-16 relative overflow-hidden">
             <Image
