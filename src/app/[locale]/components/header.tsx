@@ -48,11 +48,6 @@ const Header = async ({ user, locale }: { user: User; locale: string }) => {
                 <UserIcon size={20} />
               </button>
             </LocaleLink>
-            {/* <LocaleLink href="/auth/login" className="hidden lg:block">
-              <button className="lg:hidden">
-                <UserIcon size={20} />
-              </button>
-            </LocaleLink> */}
           </>
         )}
       </div>

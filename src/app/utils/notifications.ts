@@ -9,9 +9,9 @@ export const getNotificationNumbers = async (
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    credentials: "same-origin",
   });
   const data = await res.json();
-  console.log(res.ok);
   if (!res.ok) {
     if (res.status === 404) notFound();
     throw new ApiError(data.message, res.status);

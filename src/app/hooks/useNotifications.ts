@@ -1,35 +1,24 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getNotifications } from "../utils/notifications";
-import { getNotificationNumbers } from "../utils/notifications";
+import { useEffect, useState } from "react";
 import { INotif } from "../interfaces/notification";
 
 export const useNotifications = () => {
-  const queryClient = useQueryClient();
-  return useQuery<
-    any,
-    {
-      message: string;
-    },
-    INotif[]
-  >({
-    queryKey: ["notifications"],
-    queryFn: async () => {
-      const data = await getNotifications(localStorage.getItem("token")!);
-      queryClient.setQueryData(["notifications-number"], 0);
-      return data;
-    },
-    enabled: false,
-    refetchInterval: 60000,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
-};
-export const useNotificationNumbers = () => {
-  return useQuery<any, { message: string }, number>({
-    queryKey: ["notifications-number"],
-    queryFn: async () =>
-      await getNotificationNumbers(localStorage.getItem("token")!),
-    refetchInterval: 10000,
-  });
+  const [notifications, setNotifications] = useState<INotif[]>([]);
+  const [isShown, setIsShown] = useState<boolean>(true); // check if the notification is shown or not
+  useEffect(() => {
+    const eventSource = new EventSource(
+      `${process.env.NEXT_PUBLIC_API}/me/notifications`,
+      {
+        withCredentials: true,
+      }
+    );
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setNotifications((currentNotifications) => [
+        ...currentNotifications,
+        ...data.notifications,
+      ]);
+      if (data.notifications.length > 0) setIsShown(false);
+    };
+  }, []);
+  return { notifications, isShown, setIsShown };
 };
