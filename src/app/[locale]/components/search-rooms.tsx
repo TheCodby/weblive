@@ -75,6 +75,7 @@ const SearchRooms = ({
                   {index > 0 ? <Separator /> : null}
                   <RoomCard
                     key={room.id}
+                    owner={room.owner}
                     room={room}
                     className="rounded-none"
                   />

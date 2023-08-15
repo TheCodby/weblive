@@ -7,9 +7,13 @@ import { FaLock } from "react-icons/fa";
 import { cn } from "@/app/utils/styles";
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   room: Room;
+  owner: {
+    username: string;
+    avatar: string;
+  }
 }
 
-const RoomCard: React.FC<Props> = ({ room, ...props }) => {
+const RoomCard: React.FC<Props> = ({ room, owner, ...props }) => {
   const className = cn(
     "flex flex-row gap-4 items-center justify-between border-b-2 dark:border-neutral-900 p-5 hover:dark:bg-neutral-800 hover:bg-neutral-200",
     props.className
@@ -25,7 +29,7 @@ const RoomCard: React.FC<Props> = ({ room, ...props }) => {
               }}
               quality={100}
               fill
-              src={room.owner.avatar}
+              src={owner.avatar}
               className="rounded-full border border-neutral-200 dark:border-neutral-700"
               alt="Top Room Avatar"
             />
@@ -38,7 +42,7 @@ const RoomCard: React.FC<Props> = ({ room, ...props }) => {
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
               </span>
             </p>
-            <p className="text-sm text-gray-500">{room.owner.username}</p>
+            <p className="text-sm text-gray-500">{owner.username}</p>
           </div>
         </div>
         {room.onlineUsers >= 0 ? (

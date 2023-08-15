@@ -40,7 +40,7 @@ const RoomsPage = async ({
         <div className="flex flex-col gap-5">
           {data.rooms.length > 0 ? (
             data.rooms.map((room: Room) => (
-              <RoomCard room={room} key={room.id} />
+              <RoomCard room={room} owner={room.owner} key={room.id} />
             ))
           ) : (
             <p className="text-xl font-semibold text-center">
