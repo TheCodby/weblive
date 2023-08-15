@@ -82,7 +82,7 @@ const ProfilePage: NextPage<Props> = async ({ params }) => {
         </Card>
         <div className="flex flex-col gap-3">
           <p className="text-3xl font-bold">Rooms</p>
-          <RoomsGrid rooms={user.rooms} ownerData={user} />
+          <RoomsGrid rooms={user.rooms} owner={user} />
         </div>
       </div>
     </div>

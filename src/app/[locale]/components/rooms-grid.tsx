@@ -3,12 +3,12 @@ import { Room } from "@/app/interfaces/room";
 import RoomCard from "./room-card";
 interface Props {
   rooms: Room[];
-  ownerData: {
+  owner?: {
     username: string;
     avatar: string;
   };
 }
-const RoomsGrid: React.FC<Props> = ({ rooms, ownerData }) => {
+const RoomsGrid: React.FC<Props> = ({ rooms, owner }) => {
   if (!rooms || rooms?.length === 0) {
     return (
       <div className="flex flex-col gap-4 items-center justify-center w-full">
@@ -21,7 +21,7 @@ const RoomsGrid: React.FC<Props> = ({ rooms, ownerData }) => {
   return (
     <div className="grid lg:grid-cols-3 gap-4">
       {rooms.map((room: Room) => (
-        <RoomCard room={room} owner={ownerData} key={room.id} />
+        <RoomCard room={room} owner={owner || room.owner} key={room.id} />
       ))}
     </div>
   );
