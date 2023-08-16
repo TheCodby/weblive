@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   owner: {
     username: string;
     avatar: string;
-  }
+  };
 }
 
 const RoomCard: React.FC<Props> = ({ room, owner, ...props }) => {

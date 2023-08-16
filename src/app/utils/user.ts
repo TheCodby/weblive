@@ -5,7 +5,7 @@ import { User } from "../interfaces/user";
 export const handleLogin = async (data: any) => {
   localStorage.setItem("token", data.token);
   setCookie("token", data.token, {
-    expires: new Date(Date.now() + 1000 * 60 * 60 * 24), //
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24), // 1 day
   });
   localStorage.setItem(
     "picture",
