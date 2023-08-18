@@ -49,16 +49,17 @@ const SignupCard = ({ messages }: { messages: any }) => {
         }),
       });
       const resData = await res.json();
-      if (!res.ok) throw new Error(resData.message);
+      if (!res.ok) throw new Error(JSON.stringify(resData));
       toast(resData.message, {
         type: "success",
         theme: getUserTheme(),
       });
       router.push(`/${locale}/auth/login`);
     } catch (err: any) {
-      setError("username", {
+      const error = JSON.parse(err.message);
+      setError(error.field || "username", {
         type: "manual",
-        message: err.message,
+        message: error.message,
       });
     }
     setIsLoading(false);
