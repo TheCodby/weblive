@@ -11,7 +11,7 @@ import TextInput from "../../../components/ui/text-input";
 import Card from "../../../components/ui/card";
 import { BsDiscord, BsGoogle } from "react-icons/bs";
 import Link from "next/link";
-import { handleLogin } from "@/app/utils/user";
+import { handleLogin, login } from "@/app/utils/user";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -39,17 +39,8 @@ const LoginCard = ({ messages }: { messages: any }) => {
   const onSubmit: SubmitHandler<IAuth> = async (data) => {
     setIsLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: data.username,
-          password: data.password,
-        }),
-      });
-      const resData = await res.json();
-      if (!res.ok) throw new Error(resData.message);
-      handleLogin(resData);
+      const res = await login(data.username, data.password);
+      handleLogin(res);
       router.push(`/${locale}/rooms`);
       router.refresh();
       toast.success(messages.login.LOGIN_SUCCESS, {

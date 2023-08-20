@@ -2,6 +2,7 @@ import { setCookie } from "cookies-next";
 import { ApiError } from "./errors/api-errors";
 import { notFound } from "next/navigation";
 import { User } from "../interfaces/user";
+import { TLocale } from "../types/locale";
 export const handleLogin = async (data: any) => {
   localStorage.setItem("token", data.token);
   setCookie("token", data.token, {
@@ -118,6 +119,46 @@ export const changeEmail = async (email: string, token: string) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ email }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new ApiError(data.message, res.status);
+  return data;
+};
+export const signup = async (
+  username: string,
+  email: string,
+  password: string,
+  locale: TLocale
+) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username,
+      email: email,
+      password: password,
+      locale: locale,
+    }),
+  });
+  const data = await res.json();
+  if (!res.ok)
+    throw new ApiError(data.message, res.status, {
+      field: data.field,
+    });
+  return data;
+};
+export const login = async (username: string, password: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
   });
   const data = await res.json();
   if (!res.ok) throw new ApiError(data.message, res.status);

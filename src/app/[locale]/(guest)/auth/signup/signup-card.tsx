@@ -17,6 +17,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { authRegisterSchema } from "@/app/utils/validations/auth";
 import { IRegister } from "@/app/interfaces/user";
 import { HiOutlineMail } from "react-icons/hi";
+import { signup } from "@/app/utils/user";
+import { ApiError } from "@/app/utils/errors/api-errors";
 const SignupCard = ({ messages }: { messages: any }) => {
   const {
     register,
@@ -38,28 +40,21 @@ const SignupCard = ({ messages }: { messages: any }) => {
   const sendSignupRequest: SubmitHandler<IRegister> = async (data) => {
     setIsLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: data.username,
-          email: data.email,
-          password: data.password,
-          locale: locale,
-        }),
-      });
-      const resData = await res.json();
-      if (!res.ok) throw new Error(JSON.stringify(resData));
-      toast(resData.message, {
+      const res = await signup(
+        data.username,
+        data.email,
+        data.password,
+        locale
+      );
+      toast(res.message, {
         type: "success",
         theme: getUserTheme(),
       });
       router.push(`/${locale}/auth/login`);
     } catch (err: any) {
-      const error = JSON.parse(err.message);
-      setError(error.field || "username", {
+      setError(err.data?.field || "username", {
         type: "manual",
-        message: error.message,
+        message: err.message,
       });
     }
     setIsLoading(false);
@@ -114,7 +109,6 @@ const SignupCard = ({ messages }: { messages: any }) => {
             error={errors.password?.message}
             animatedPlaceholder
             {...register("password", {
-              required: true,
               disabled: isLoading,
               minLength: 3,
               maxLength: 20,
